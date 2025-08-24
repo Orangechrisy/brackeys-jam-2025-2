@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnd8cyp88dacp"]
+
+[ext_resource type="Texture2D" uid="uid://c6i4yvdijufoe" path="res://assets/surgeon shop.png" id="1_lx5au"]
+
+[node name="shop" type="Node2D"]
+
+[node name="SurgeonShop" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_lx5au")
