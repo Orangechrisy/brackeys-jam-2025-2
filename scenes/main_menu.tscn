@@ -1,0 +1,137 @@
+[gd_scene load_steps=2 format=3 uid="uid://vnmrxbjra12c"]
+
+[ext_resource type="Script" uid="uid://cbwuoo0qfocs4" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_l6cm7")
+
+[node name="Title" type="Label" parent="."]
+offset_right = 1920.0
+offset_bottom = 500.0
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 200
+text = "to be determined"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_top = 500.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MenuButtons" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="start" type="Button" parent="CenterContainer/MenuButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "START"
+
+[node name="settings" type="Button" parent="CenterContainer/MenuButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "SETTINGS"
+
+[node name="credits" type="Button" parent="CenterContainer/MenuButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "CREDITS"
+
+[node name="quit" type="Button" parent="CenterContainer/MenuButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "QUIT"
+
+[node name="SettingsMenu" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="back" type="Button" parent="CenterContainer/SettingsMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "BACK"
+
+[node name="fullscreen" type="CheckBox" parent="CenterContainer/SettingsMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Fullscreen"
+expand_icon = true
+
+[node name="mainvolume" type="HSlider" parent="CenterContainer/SettingsMenu"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/SettingsMenu/mainvolume"]
+custom_minimum_size = Vector2(400, 55)
+layout_mode = 0
+offset_top = -16.0
+offset_right = 400.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 40
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="musicvolume" type="HSlider" parent="CenterContainer/SettingsMenu"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/SettingsMenu/musicvolume"]
+custom_minimum_size = Vector2(400, 55)
+layout_mode = 0
+offset_top = -16.0
+offset_right = 400.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 40
+text = "Music"
+horizontal_alignment = 1
+
+[node name="sfxvolume" type="HSlider" parent="CenterContainer/SettingsMenu"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="Label" type="Label" parent="CenterContainer/SettingsMenu/sfxvolume"]
+custom_minimum_size = Vector2(400, 55)
+layout_mode = 0
+offset_top = -16.0
+offset_right = 400.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 40
+text = "Sound Effects"
+horizontal_alignment = 1
+
+[node name="CreditsMenu" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CenterContainer/CreditsMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Orangechrisy
+JakeWalrusWhale
+NopeCopter"
+horizontal_alignment = 1
+
+[node name="back" type="Button" parent="CenterContainer/CreditsMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "BACK"
+
+[connection signal="pressed" from="CenterContainer/MenuButtons/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/MenuButtons/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CenterContainer/MenuButtons/credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="CenterContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CenterContainer/SettingsMenu/back" to="." method="_on_back_pressed"]
+[connection signal="toggled" from="CenterContainer/SettingsMenu/fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="value_changed" from="CenterContainer/SettingsMenu/mainvolume" to="." method="_on_mainvolume_value_changed"]
+[connection signal="value_changed" from="CenterContainer/SettingsMenu/musicvolume" to="." method="_on_musicvolume_value_changed"]
+[connection signal="value_changed" from="CenterContainer/SettingsMenu/sfxvolume" to="." method="_on_sfxvolume_value_changed"]
+[connection signal="pressed" from="CenterContainer/CreditsMenu/back" to="." method="_on_back_pressed"]

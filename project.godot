@@ -11,5 +11,13 @@ config_version=5
 [application]
 
 config/name="brackeys jam 2025-2"
+run/main_scene="uid://vnmrxbjra12c"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+window/stretch/mode="canvas_items"
