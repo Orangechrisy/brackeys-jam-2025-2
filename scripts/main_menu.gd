@@ -3,14 +3,14 @@ extends Node2D
 func _ready() -> void:
 	#$CenterContainer/MenuButtons/start.grab_focus()
 	# useful for controller support, can do on the other button bits too for when going to each menu/back to main
+	# TODO starting value of volume should probably be .5 i think? or maybe make it go up to 2? idk
 	$CenterContainer/SettingsMenu/fullscreen.button_pressed = true if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN else false
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("Master"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("MUSIC"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
-	#do this when we have a first level
+	get_tree().change_scene_to_file("res://scenes/shop.tscn")
 
 
 func _on_settings_pressed() -> void:

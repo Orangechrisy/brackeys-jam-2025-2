@@ -5,6 +5,7 @@ const BODY_PART = preload("res://scenes/body_part.tscn")
 func _ready():
 	create_enemy()
 	create_hand()
+	set_body()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -21,14 +22,17 @@ func create_enemy():
 var current_parts = []
 
 func create_hand():
-	for i in range(5):
+	GameManager.body_parts.shuffle()
+	for i in range(min(5, GameManager.body_parts.size())):
+		var partID = GameManager.body_parts[i]
+		# TODO determine which image to show based on partID instead of just default heart 
 		var part = BODY_PART.instantiate()
 		$"Organ holder".add_child(part)
 		current_parts.append(part)
 		part.position = Vector2(0, get_viewport().size.y - get_viewport().size.y / 6)
 		update_part_positions()
 
-# updates the parts so they are in the right positions
+# updates the parts so they are in the right positions in the "hand"
 func update_part_positions():
 	var x_pos = get_viewport().size.x / 2
 	var y_pos = get_viewport().size.y - get_viewport().size.y / 6
@@ -75,14 +79,16 @@ func connect_part_signals(part: Area2D):
 
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
-	print("entered")
 	$"body/Parts".get_child(part.partID).modulate = Color("#ff00ff")
 
 func body_part_part_exited(part: Area2D) -> void:
-	$"body/Parts".get_child(part.partID).modulate = Color("#ffffff")
+	if GameManager.body_parts.count(part.partID) == 0:
+		$"body/Parts".get_child(part.partID).modulate = Color("#404040")
+	else:
+		$"body/Parts".get_child(part.partID).modulate = Color("#ffffff")
 	if hovered_part==part:
 		hovered_part=null
-	elif hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
+	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
 		$"body/Parts".get_child(part.partID).modulate = Color("#ff00ff")
 
 func play_part(part: Area2D):
@@ -91,7 +97,13 @@ func play_part(part: Area2D):
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 	await tween.finished
 	
+	# this may need to be different if we want different types of the same part
+	# TODO also this should just be in the lose part bit probably... but here for now since thats not set up
+	GameManager.body_parts.erase(part.partID)
+	update_part_count(part.partID)
 	current_parts.erase(part)
+	
+	
 	update_part_positions()
 	part.position = Vector2(960.0, 540.0)
 	
@@ -104,3 +116,20 @@ func play_part(part: Area2D):
 	
 func activate_part(partID: int):
 	pass
+
+# sets the little body at the start of the encounter
+func set_body():
+	for part in GameManager.body_parts:
+		update_part_count(part)
+
+# TODO we may need to change things if we have different types of parts for the same slot, but thats for later
+# TODO also dunno if label under the sprite works cause the modulate effects it too
+# updates the part counts on the little body
+func update_part_count(partID: int):
+	var num = GameManager.body_parts.count(partID)
+	if num > 1:
+		$"body/Parts".get_child(partID).get_child(0).text = "x" + str(num)
+	elif num == 1:
+		$"body/Parts".get_child(partID).get_child(0).text = ""
+	else:
+		$"body/Parts".get_child(partID).modulate = Color("#404040")

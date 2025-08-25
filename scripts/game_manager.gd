@@ -25,11 +25,17 @@ func _ready() -> void:
 func game_over():
 	pass
 
+func _input(event):
+	if event.is_action_pressed("escape"):
+		if get_tree().get_current_scene().get_name() != "MainMenu":
+			get_tree().paused = !get_tree().paused
 
 func _reset():
 	body_parts.clear()
-	for i in range(numbodyparts):
-		body_parts.append(i)
+	for i in range(5):
+		body_parts.append(0)
+	#for i in range(numbodyparts):
+		#body_parts.append(i)
 
 func lose_part(index: int):
 	var partID = body_parts[index]
