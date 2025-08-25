@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsvf6lqslsu2t"]
+[gd_scene load_steps=5 format=3 uid="uid://dsvf6lqslsu2t"]
 
 [ext_resource type="Texture2D" uid="uid://bgrdr5iiyvh1t" path="res://assets/body.png" id="1_jmcoc"]
 [ext_resource type="Script" uid="uid://pbk08wawiydj" path="res://scripts/body.gd" id="1_veluv"]
 [ext_resource type="PackedScene" uid="uid://wsl2rcamd0fy" path="res://scenes/game_manager.tscn" id="2_lgxe7"]
+[ext_resource type="Texture2D" uid="uid://jc3jhakn7mi" path="res://assets/heart.png" id="4_lgxe7"]
 
 [node name="body" type="Node2D"]
 script = ExtResource("1_veluv")
@@ -10,3 +11,10 @@ game_manager = ExtResource("2_lgxe7")
 
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("1_jmcoc")
+
+[node name="Parts" type="Node2D" parent="."]
+
+[node name="Heart" type="Sprite2D" parent="Parts"]
+position = Vector2(11, -97)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_lgxe7")
