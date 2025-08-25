@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxho170gbbxx1"]
+[gd_scene load_steps=6 format=3 uid="uid://bxho170gbbxx1"]
 
 [ext_resource type="Script" uid="uid://ca0qjmx55oaai" path="res://scripts/battlefield.gd" id="1_j68fe"]
 [ext_resource type="Texture2D" uid="uid://baf2itf7ghc8g" path="res://assets/Battlefield.png" id="2_21s54"]
+[ext_resource type="PackedScene" uid="uid://d3p661ve0hw2e" path="res://scenes/enemy_bug.tscn" id="3_21s54"]
 [ext_resource type="PackedScene" uid="uid://cew51fx3ei34t" path="res://scenes/player_bug.tscn" id="3_jsyt3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixbtv"]
@@ -58,6 +59,7 @@ rotation = -0.523599
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="PlayerBug" parent="." instance=ExtResource("3_jsyt3")]
+position = Vector2(-68, 69)
 scale = Vector2(0.3, 0.3)
 
 [node name="Button" type="Button" parent="."]
@@ -67,5 +69,9 @@ offset_right = -220.0
 offset_bottom = -82.0
 theme_override_font_sizes/font_size = 30
 text = "fight"
+
+[node name="EnemyBug" parent="." instance=ExtResource("3_21s54")]
+position = Vector2(40, -78)
+scale = Vector2(0.3, 0.3)
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
