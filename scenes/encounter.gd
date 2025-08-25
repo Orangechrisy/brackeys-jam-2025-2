@@ -3,7 +3,7 @@ extends Node2D
 const BODY_PART = preload("res://scenes/body_part.tscn")
 
 func _ready():
-	create_enemy()
+	#create_enemy()
 	create_hand()
 	set_body()
 
