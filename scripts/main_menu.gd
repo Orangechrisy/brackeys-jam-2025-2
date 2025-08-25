@@ -9,8 +9,7 @@ func _ready() -> void:
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
 
 func _on_start_pressed() -> void:
-	pass # Replace with function body.
-	#get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
 	#do this when we have a first level
 
 
