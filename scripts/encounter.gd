@@ -3,6 +3,8 @@ extends Node2D
 const BODY_PART = preload("res://scenes/body_part.tscn")
 
 func _ready():
+	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
+	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
 	#create_enemy()
 	create_hand()
 	set_body()
@@ -12,12 +14,12 @@ func _process(_delta: float) -> void:
 		if hovered_part != null:
 			play_part(hovered_part)
 
-const FROG = preload("res://scenes/enemy/frog.tscn")
 
 func create_enemy():
-	var enemy = FROG.instantiate()
-	enemy.position = Vector2(960.0, 270.0)
-	add_child(enemy)
+	pass
+	#var enemy = FROG.instantiate()
+	#enemy.position = Vector2(960.0, 270.0)
+	#add_child(enemy)
 
 var current_parts = []
 
@@ -133,3 +135,12 @@ func update_part_count(partID: int):
 		$"body/Parts".get_child(partID).get_child(0).text = ""
 	else:
 		$"body/Parts".get_child(partID).modulate = Color("#404040")
+
+
+#health bars
+func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
+	if player:
+		$UI/Player/HealthBar.value = health
+	else:
+		print("here")
+		$UI/Enemy/HealthBar.value = health

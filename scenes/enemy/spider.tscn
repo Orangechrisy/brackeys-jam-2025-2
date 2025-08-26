@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkf2pjaov6uw8"]
+
+[ext_resource type="PackedScene" uid="uid://cr8xrltsof2us" path="res://scenes/enemy/bug.tscn" id="1_xtqu1"]
+
+[node name="Spider" instance=ExtResource("1_xtqu1")]
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0.214353, 0.26826, 0.267616, 1)

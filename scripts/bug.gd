@@ -2,12 +2,35 @@ extends CharacterBody2D
 
 class_name Bug
 
+@export var ID: int
+@export var health: int = 50
+@export var damage: int = 5
+@export var speed: int = 200
+var direction: Vector2 
+
+signal lose_health(bug: CharacterBody2D, newhealth: int)
+signal next_level()
+
 func start_movement():
 	rotation = randf_range(0, deg_to_rad(360))
-	velocity = Vector2(150, 0).rotated(rotation)
+	direction = Vector2(1,0).rotated(rotation)
+	velocity = direction*speed
 
 func _physics_process(delta: float) -> void:
+	enemy_process(delta)
 	
-	var collision_info = move_and_collide(velocity * delta)
-	if collision_info:
-		velocity = velocity.bounce(collision_info.get_normal())
+	if health <= 0:
+		death()
+
+func enemy_process(_delta):
+	velocity = direction * speed
+	pass
+
+func hit(dmg: int):
+	health -= dmg
+	lose_health.emit(self, health)
+	if dmg <= 0:
+		death()
+
+func death():
+	next_level.emit()
