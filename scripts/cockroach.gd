@@ -4,7 +4,7 @@ func enemy_process(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
-		look_at(velocity/speed)
+		#look_at(velocity/speed)
 
 
 func _on_direction_timer_timeout() -> void:
@@ -14,3 +14,4 @@ func _on_direction_timer_timeout() -> void:
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if "health" in body:
 		body.hit(damage)
+		# TODO this should totally cause the little portrait to have an effect

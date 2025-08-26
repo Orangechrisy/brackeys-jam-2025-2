@@ -28,6 +28,7 @@ func _ready() -> void:
 	_reset()
 
 func game_over():
+	print("game over :(")
 	pass
 
 func _input(event):
@@ -42,9 +43,9 @@ func _reset():
 	#for i in range(numbodyparts):
 		#body_parts.append(i)
 
-func lose_part(index: int):
-	var partID = body_parts[index]
-	body_parts.remove_at(index)
+func lose_part(partID: int):
+	#var partID = body_parts[index]
+	#body_parts.remove_at(index)
 	match partID:
 		BODYPARTS.HEART:
 			game_over()

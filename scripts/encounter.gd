@@ -5,7 +5,6 @@ const BODY_PART = preload("res://scenes/body_part.tscn")
 func _ready():
 	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
 	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
-	#create_enemy()
 	create_hand()
 	set_body()
 
@@ -13,13 +12,6 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		if hovered_part != null:
 			play_part(hovered_part)
-
-
-func create_enemy():
-	pass
-	#var enemy = FROG.instantiate()
-	#enemy.position = Vector2(960.0, 270.0)
-	#add_child(enemy)
 
 var current_parts = []
 
@@ -95,6 +87,8 @@ func body_part_part_exited(part: Area2D) -> void:
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
 		$"body/Parts".get_child(part.partID).modulate = Color("#ff00ff")
 
+var played_parts = []
+
 func play_part(part: Area2D):
 	# fades the part away
 	var tween = create_tween()
@@ -107,6 +101,7 @@ func play_part(part: Area2D):
 	GameManager.body_parts.erase(part.partID)
 	update_part_count(part.partID)
 	current_parts.erase(part)
+	played_parts.append(part)
 	
 	update_part_positions()
 	#part.position = Vector2(960.0, 540.0)
@@ -165,5 +160,12 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 		$UI/Enemy/HealthBar.value = health
 
 
-func _on_battlefield_reset() -> void:
-	pass # Replace with function body.
+func _on_battlefield_reset(won: bool) -> void:
+	for part in played_parts:
+		print(part.partID)
+		if won:
+			GameManager.body_parts.append(part.partID)
+			update_part_count(part.partID)
+		else:
+			GameManager.lose_part(part.partID)
+	played_parts.clear()

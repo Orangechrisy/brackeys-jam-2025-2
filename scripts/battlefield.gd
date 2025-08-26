@@ -3,7 +3,7 @@ extends Node2D
 const COCKROACH = preload("res://scenes/enemy/cockroach.tscn")
 
 signal update_health_bar(player: bool, health: int)
-signal reset()
+signal reset(won: bool)
 
 var player_bug
 var enemy_bug
@@ -38,19 +38,22 @@ func health_change(bug: CharacterBody2D, health: int):
 
 # if rounds left, reset, otherwise end the encounter
 func round_change(bug: CharacterBody2D):
+	var won = false
 	if bug == player_bug:
 		print("enemy win!")
 	else:
 		print("player win!")
+		won = true
 	round += 1
 	if round < num_rounds:
 		print("resetting")
+		reset.emit(won) # reset the encounter scene including losing parts
 		reset_battlefield()
-		reset.emit() # reset the encounter scene
 	else:
 		print("fight finished")
 		player_bug.queue_free()
 		enemy_bug.queue_free()
+		reset.emit(won)
 		get_tree().change_scene_to_file("res://scenes/shop.tscn")
 
 func reset_battlefield():
