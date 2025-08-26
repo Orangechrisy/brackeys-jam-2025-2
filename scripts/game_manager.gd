@@ -2,7 +2,7 @@ extends Node2D
 
 @export var body_parts = []
 
-enum {
+enum BODYPARTS {
 	HEART,
 	BRAIN,
 	LUNG,
@@ -17,7 +17,7 @@ enum {
 	BLADDER
 }
 
-const numbodyparts: int = BLADDER+1
+const numbodyparts: int = BODYPARTS.BLADDER+1
 
 func _ready() -> void:
 	_reset()
@@ -33,7 +33,7 @@ func _input(event):
 func _reset():
 	body_parts.clear()
 	for i in range(5):
-		body_parts.append(0)
+		body_parts.append(randi_range(0, 1))
 	#for i in range(numbodyparts):
 		#body_parts.append(i)
 
@@ -41,17 +41,25 @@ func lose_part(index: int):
 	var partID = body_parts[index]
 	body_parts.remove_at(index)
 	match partID:
-		HEART:
+		BODYPARTS.HEART:
 			game_over()
-		BRAIN:
+		BODYPARTS.BRAIN:
 			#make stupid
 			pass
-		LUNG:
+		BODYPARTS.LUNG:
 			#timer
 			pass
-		EYES:
+		BODYPARTS.EYES:
 			#obsucre vision
 			pass
-		LEFTARM:
+		BODYPARTS.LEFTARM:
 			pass
-		
+
+const BODY_PART = preload("res://scenes/body_part.tscn")
+var partImages = ["res://assets/heart.png", "res://assets/brain.png"]
+
+func create_part(partID: int) -> Node2D:
+	var part = BODY_PART.instantiate()
+	part.partID = partID
+	part.get_node("Sprite2D").texture = load(partImages[partID])
+	return part

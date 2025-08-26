@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsvf6lqslsu2t"]
+[gd_scene load_steps=6 format=3 uid="uid://dsvf6lqslsu2t"]
 
 [ext_resource type="Texture2D" uid="uid://bgrdr5iiyvh1t" path="res://assets/body.png" id="1_jmcoc"]
 [ext_resource type="Script" uid="uid://pbk08wawiydj" path="res://scripts/body.gd" id="1_veluv"]
 [ext_resource type="PackedScene" uid="uid://wsl2rcamd0fy" path="res://scenes/game_manager.tscn" id="2_lgxe7"]
 [ext_resource type="Texture2D" uid="uid://jc3jhakn7mi" path="res://assets/heart.png" id="4_lgxe7"]
+[ext_resource type="Texture2D" uid="uid://dab4llmxvmxgo" path="res://assets/brain.png" id="5_glwu3"]
 
 [node name="body" type="Node2D"]
 script = ExtResource("1_veluv")
@@ -24,5 +25,18 @@ offset_left = 10.0
 offset_top = 26.6667
 offset_right = 66.0
 offset_bottom = 95.6667
+theme_override_font_sizes/font_size = 50
+text = "x2"
+
+[node name="Brain" type="Sprite2D" parent="Parts"]
+position = Vector2(-1, -207)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_glwu3")
+
+[node name="Label" type="Label" parent="Parts/Brain"]
+offset_left = 3.33333
+offset_top = -63.3333
+offset_right = 59.3333
+offset_bottom = 5.66666
 theme_override_font_sizes/font_size = 50
 text = "x2"

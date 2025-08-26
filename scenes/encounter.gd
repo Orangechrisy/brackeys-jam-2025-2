@@ -26,8 +26,9 @@ func create_hand():
 	for i in range(min(5, GameManager.body_parts.size())):
 		var partID = GameManager.body_parts[i]
 		# TODO determine which image to show based on partID instead of just default heart 
-		var part = BODY_PART.instantiate()
-		$"Organ holder".add_child(part)
+		var part = GameManager.create_part(partID)
+		#var part = BODY_PART.instantiate()
+		$"OrganHolder".add_child(part)
 		current_parts.append(part)
 		part.position = Vector2(0, get_viewport().size.y - get_viewport().size.y / 6)
 		update_part_positions()
