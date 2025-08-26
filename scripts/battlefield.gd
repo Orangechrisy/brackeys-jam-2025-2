@@ -3,9 +3,12 @@ extends Node2D
 const COCKROACH = preload("res://scenes/enemy/cockroach.tscn")
 
 signal update_health_bar(player: bool, health: int)
+signal reset()
 
 var player_bug
 var enemy_bug
+@export var round = 0
+@export var num_rounds = 3
 
 func _ready() -> void:
 	player_bug = COCKROACH.instantiate()
@@ -13,12 +16,15 @@ func _ready() -> void:
 	player_bug.position = Vector2(-150.0, 0.0)
 	player_bug.modulate = Color("#00b6ff")
 	player_bug.connect("lose_health", health_change)
+	player_bug.connect("next_level", round_change)
 	$Bugs.add_child(player_bug)
 	
 	enemy_bug = COCKROACH.instantiate()
 	GameManager.enemy_bug = enemy_bug
 	enemy_bug.position = Vector2(150.0, 0.0)
 	enemy_bug.modulate = Color("#ea003e")
+	enemy_bug.connect("lose_health", health_change)
+	enemy_bug.connect("next_level", round_change)
 	$Bugs.add_child(enemy_bug)
 	
 	for bug in $Bugs.get_children():
@@ -29,6 +35,29 @@ func health_change(bug: CharacterBody2D, health: int):
 		update_health_bar.emit(true, health)
 	else:
 		update_health_bar.emit(false, health)
+
+# if rounds left, reset, otherwise end the encounter
+func round_change(bug: CharacterBody2D):
+	if bug == player_bug:
+		print("enemy win!")
+	else:
+		print("player win!")
+	round += 1
+	if round < num_rounds:
+		print("resetting")
+		reset_battlefield()
+		reset.emit() # reset the encounter scene
+	else:
+		print("fight finished")
+		player_bug.queue_free()
+		enemy_bug.queue_free()
+		get_tree().change_scene_to_file("res://scenes/shop.tscn")
+
+func reset_battlefield():
+	player_bug.queue_free()
+	enemy_bug.queue_free()
+	await get_tree().create_timer(1).timeout
+	_ready()
 
 func _on_button_pressed() -> void:
 	$PlayerBug.start_movement()

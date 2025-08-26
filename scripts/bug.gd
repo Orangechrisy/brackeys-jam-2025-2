@@ -9,7 +9,7 @@ class_name Bug
 var direction: Vector2 
 
 signal lose_health(bug: CharacterBody2D, newhealth: int)
-signal next_level()
+signal next_level(bug: CharacterBody2D)
 
 func start_movement():
 	rotation = randf_range(0, deg_to_rad(360))
@@ -28,9 +28,11 @@ func enemy_process(_delta):
 
 func hit(dmg: int):
 	health -= dmg
+	print("health after hit: ", health, " ", dmg)
 	lose_health.emit(self, health)
-	if dmg <= 0:
-		death()
+	#if dmg <= 0:
+		#death()
 
 func death():
-	next_level.emit()
+	print(self, " died!")
+	next_level.emit(self)

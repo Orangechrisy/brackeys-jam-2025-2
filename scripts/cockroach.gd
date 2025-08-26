@@ -4,7 +4,7 @@ func enemy_process(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
-		#look_at(velocity/speed)
+		look_at(velocity/speed)
 
 
 func _on_direction_timer_timeout() -> void:

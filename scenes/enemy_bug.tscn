@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1b6apbv4oi0y"]
+
+[ext_resource type="Script" path="res://scripts/player_bug.gd" id="1_d7p6f"]
+[ext_resource type="Texture2D" uid="uid://c1463vedwu8i" path="res://icon.svg" id="1_jb013"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d7p6f"]
+radius = 63.3877
+
+[node name="EnemyBug" type="CharacterBody2D"]
+script = ExtResource("1_d7p6f")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_jb013")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_d7p6f")

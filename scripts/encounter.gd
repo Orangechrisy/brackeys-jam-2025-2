@@ -76,6 +76,7 @@ func next_turn():
 
 var hovered_part: Area2D = null
 
+# TODO these should probably connect to the body specifically rather than adjusting here so the body can be used in other places
 func connect_part_signals(part: Area2D):
 	part.connect("part_entered", body_part_part_entered)
 	part.connect("part_exited", body_part_part_exited)
@@ -95,6 +96,7 @@ func body_part_part_exited(part: Area2D) -> void:
 		$"body/Parts".get_child(part.partID).modulate = Color("#ff00ff")
 
 func play_part(part: Area2D):
+	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
@@ -106,19 +108,36 @@ func play_part(part: Area2D):
 	update_part_count(part.partID)
 	current_parts.erase(part)
 	
-	
 	update_part_positions()
-	part.position = Vector2(960.0, 540.0)
-	
-	var tween2 = create_tween()
-	tween2.tween_property(part, "modulate", Color("#ffffff"), 0.2)
-	tween2.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
-	await tween2.finished
+	#part.position = Vector2(960.0, 540.0)
+	#
+	#var tween2 = create_tween()
+	#tween2.tween_property(part, "modulate", Color("#ffffff"), 0.2)
+	#tween2.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+	#await tween2.finished
 	
 	activate_part(part.partID)
 	
 func activate_part(partID: int):
-	pass
+	print("activate: ", partID)
+	print(GameManager.BODYPARTS.HEART)
+	var bug
+	if player_turn:
+		bug = $Battlefield.player_bug
+	else:
+		bug = $Battlefield.enemy_bug
+	match partID:
+		GameManager.BODYPARTS.HEART:
+			# TODO do in a more direct way probs
+			bug.hit(-100)
+		GameManager.BODYPARTS.BRAIN:
+			bug.damage += 10
+		GameManager.BODYPARTS.LUNG:
+			pass
+		GameManager.BODYPARTS.EYES:
+			pass
+		GameManager.BODYPARTS.LEFTARM:
+			pass
 
 # sets the little body at the start of the encounter
 func set_body():
@@ -126,7 +145,7 @@ func set_body():
 		update_part_count(part)
 
 # TODO we may need to change things if we have different types of parts for the same slot, but thats for later
-# TODO also dunno if label under the sprite works cause the modulate effects it too
+# TODO also dunno if label under the sprite works cause the modulate effects it too, but that should all be different anyways
 # updates the part counts on the little body
 func update_part_count(partID: int):
 	var num = GameManager.body_parts.count(partID)
@@ -143,5 +162,8 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 	if player:
 		$UI/Player/HealthBar.value = health
 	else:
-		print("here")
 		$UI/Enemy/HealthBar.value = health
+
+
+func _on_battlefield_reset() -> void:
+	pass # Replace with function body.

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkf2pjaov6uw8"]
+[gd_scene load_steps=2 format=3 uid="uid://1w40r4kv1mqt"]
 
-[ext_resource type="PackedScene" uid="uid://cr8xrltsof2us" path="res://scenes/enemy/bug.tscn" id="1_xtqu1"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/enemy.tscn" id="1_xtqu1"]
 
 [node name="Spider" instance=ExtResource("1_xtqu1")]
 
