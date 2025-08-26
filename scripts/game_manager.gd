@@ -7,6 +7,7 @@ enum BODYPARTS {
 	BRAIN,
 	LUNG,
 	EYES,
+	TONGUE,
 	LEFTARM,
 	RIGHTARM,
 	LEFTLEG,
@@ -18,6 +19,10 @@ enum BODYPARTS {
 }
 
 const numbodyparts: int = BODYPARTS.BLADDER+1
+
+
+var player_bug: CharacterBody2D
+var enemy_bug: CharacterBody2D
 
 func _ready() -> void:
 	_reset()

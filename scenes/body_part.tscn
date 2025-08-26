@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://df0egfto1tkjr"]
 
-[ext_resource type="Script" uid="uid://bs711bncijoyg" path="res://scenes/body_part.gd" id="1_0dmsj"]
+[ext_resource type="Script" uid="uid://bs711bncijoyg" path="res://scripts/body_part.gd" id="1_0dmsj"]
 [ext_resource type="Texture2D" uid="uid://jc3jhakn7mi" path="res://assets/heart.png" id="2_law5b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_law5b"]
