@@ -2,6 +2,7 @@ extends Node2D
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 
+
 func _ready():
 	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
 	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
@@ -15,6 +16,10 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		if hovered_part != null:
 			play_part(hovered_part)
+	var mouse_pos = get_global_mouse_position()
+	# can maybe instead do this by viewport size instead of hardcoded...
+	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 900, 1080))
+	
 
 var current_parts = []
 
@@ -84,6 +89,8 @@ var played_parts = []
 
 func play_part(part: Area2D):
 	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
+	
+	$"Hand/AnimatedSprite2D".frame = 1
 	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
@@ -102,6 +109,7 @@ func play_part(part: Area2D):
 	
 	activate_part(part.partID)
 	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
+	$"Hand/AnimatedSprite2D".frame = 0
 	
 func activate_part(partID: int):
 	print("activate: ", partID)
@@ -123,6 +131,22 @@ func activate_part(partID: int):
 		GameManager.BODYPARTS.EYES:
 			pass
 		GameManager.BODYPARTS.LEFTARM:
+			pass
+		GameManager.BODYPARTS.RIGHTARM:
+			pass
+		GameManager.BODYPARTS.LEFTLEG:
+			pass
+		GameManager.BODYPARTS.RIGHTLEG:
+			pass
+		GameManager.BODYPARTS.STOMACH:
+			pass
+		GameManager.BODYPARTS.LIVER:
+			pass
+		GameManager.BODYPARTS.LEFTKIDNEY:
+			pass
+		GameManager.BODYPARTS.RIGHTKIDNEY:
+			pass
+		GameManager.BODYPARTS.BLADDER:
 			pass
 
 # sets the little body at the start of the encounter
