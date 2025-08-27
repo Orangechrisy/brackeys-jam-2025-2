@@ -1,6 +1,7 @@
 extends Node2D
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
+var can_click = true
 
 func _ready():
 	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
@@ -12,9 +13,13 @@ func _ready():
 	$Battlefield.place_bugs(player, enemy)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("left_click"):
+	if can_click and Input.is_action_just_pressed("left_click"):
 		if hovered_part != null:
 			play_part(hovered_part)
+	var mouse_pos = get_global_mouse_position()
+	# can maybe instead do this by viewport size instead of hardcoded...
+	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 900, 1080))
+	
 
 
 
@@ -84,6 +89,8 @@ func body_part_part_exited(part: Area2D) -> void:
 
 func play_part(part: Area2D):
 	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
+	$"Hand/AnimatedSprite2D".frame = 1
+
 	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
@@ -102,6 +109,7 @@ func play_part(part: Area2D):
 	
 	activate_part(part.partID)
 	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
+	$"Hand/AnimatedSprite2D".frame = 0
 	
 func activate_part(partID: int):
 	print("activate: ", partID)
@@ -123,6 +131,22 @@ func activate_part(partID: int):
 		GameManager.BODYPARTS.EYES:
 			pass
 		GameManager.BODYPARTS.LEFTARM:
+			pass
+		GameManager.BODYPARTS.RIGHTARM:
+			pass
+		GameManager.BODYPARTS.LEFTLEG:
+			pass
+		GameManager.BODYPARTS.RIGHTLEG:
+			pass
+		GameManager.BODYPARTS.STOMACH:
+			pass
+		GameManager.BODYPARTS.LIVER:
+			pass
+		GameManager.BODYPARTS.LEFTKIDNEY:
+			pass
+		GameManager.BODYPARTS.RIGHTKIDNEY:
+			pass
+		GameManager.BODYPARTS.BLADDER:
 			pass
 
 # sets the little body at the start of the encounter
@@ -157,6 +181,7 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 
 
 func _on_battlefield_reset(won: bool) -> void:
+	can_click = true
 	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	for part in GameManager.played_parts:
 		print(part.partID)
@@ -175,3 +200,7 @@ func _on_battlefield_reset(won: bool) -> void:
 		update_part_count(part)
 	await get_tree().create_timer(2).timeout
 	create_hand()
+
+
+func _on_battlefield_allow_clicking(allow: bool) -> void:
+	can_click = allow

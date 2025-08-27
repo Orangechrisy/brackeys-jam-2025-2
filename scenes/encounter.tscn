@@ -1,11 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=9 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
 [ext_resource type="PackedScene" uid="uid://bxho170gbbxx1" path="res://scenes/battlefield.tscn" id="3_ensgf"]
 [ext_resource type="Texture2D" uid="uid://dnf8heq3gfksq" path="res://assets/cockroach_reaction.png" id="3_kb58x"]
+[ext_resource type="Texture2D" uid="uid://c0x2cgeflwr2k" path="res://assets/hand_open.png" id="5_75kek"]
+[ext_resource type="Texture2D" uid="uid://c5cixqhk35u2i" path="res://assets/hand_closed.png" id="6_woaxd"]
 
 [sub_resource type="Theme" id="Theme_75kek"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2dnca"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_75kek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_woaxd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="encounter" type="Node2D"]
 script = ExtResource("1_kb58x")
@@ -65,7 +81,15 @@ position = Vector2(1757, 848)
 z_index = 4
 
 [node name="Battlefield" parent="." instance=ExtResource("3_ensgf")]
-position = Vector2(976, 498)
+position = Vector2(967, 385)
 
+[node name="Hand" type="Node2D" parent="."]
+z_index = 20
+position = Vector2(976, 992)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Hand"]
+sprite_frames = SubResource("SpriteFrames_2dnca")
+
+[connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
 [connection signal="update_health_bar" from="Battlefield" to="." method="_on_battlefield_update_health_bar"]
