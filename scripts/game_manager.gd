@@ -67,6 +67,22 @@ func lose_part(partID: int):
 			pass
 		BODYPARTS.LEFTARM:
 			pass
+		BODYPARTS.RIGHTARM:
+			pass
+		BODYPARTS.LEFTLEG:
+			pass
+		BODYPARTS.RIGHTLEG:
+			pass
+		BODYPARTS.STOMACH:
+			pass
+		BODYPARTS.LIVER:
+			pass
+		BODYPARTS.LEFTKIDNEY:
+			pass
+		BODYPARTS.RIGHTKIDNEY:
+			pass
+		BODYPARTS.BLADDER:
+			pass
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 

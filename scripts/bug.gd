@@ -22,10 +22,12 @@ func _physics_process(delta: float) -> void:
 	if health <= 0:
 		death()
 
+# define the ai of the bug by overwriting this function with movement and other things
 func enemy_process(_delta):
 	velocity = direction * speed
 	pass
 
+# TODO fix hitbox and own hurtbox triggering this
 func hit(dmg: int):
 	health -= dmg
 	print("health after hit: ", health, " ", dmg)

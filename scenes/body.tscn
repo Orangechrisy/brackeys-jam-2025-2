@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsvf6lqslsu2t"]
+[gd_scene load_steps=18 format=3 uid="uid://dsvf6lqslsu2t"]
 
 [ext_resource type="Texture2D" uid="uid://bgrdr5iiyvh1t" path="res://assets/body.png" id="1_jmcoc"]
 [ext_resource type="Script" uid="uid://pbk08wawiydj" path="res://scripts/body.gd" id="1_veluv"]
 [ext_resource type="PackedScene" uid="uid://wsl2rcamd0fy" path="res://scenes/game_manager.tscn" id="2_lgxe7"]
-[ext_resource type="Texture2D" uid="uid://jc3jhakn7mi" path="res://assets/bodyparts/heart.png" id="4_lgxe7"]
-[ext_resource type="Texture2D" uid="uid://dab4llmxvmxgo" path="res://assets/bodyparts/brain.png" id="5_glwu3"]
+[ext_resource type="Texture2D" uid="uid://bs75i7aktuo8x" path="res://assets/bodypart_places/brain.png" id="5_at8vq"]
+[ext_resource type="Texture2D" uid="uid://l7ilrh3r08sw" path="res://assets/bodypart_places/heart.png" id="5_xc2jm"]
+[ext_resource type="Texture2D" uid="uid://bba07rurgjqfq" path="res://assets/bodypart_places/lungs.png" id="6_s1tan"]
+[ext_resource type="Texture2D" uid="uid://b63x25fil6c8" path="res://assets/bodypart_places/eyes.png" id="7_t2tfn"]
+[ext_resource type="Texture2D" uid="uid://bh8cgspp6dkdj" path="res://assets/bodypart_places/tongue.png" id="8_0qxxb"]
+[ext_resource type="Texture2D" uid="uid://dxiy64cm7lmgl" path="res://assets/bodypart_places/left_arm.png" id="9_8h7mj"]
+[ext_resource type="Texture2D" uid="uid://d36y6l3hh6ul" path="res://assets/bodypart_places/right_arm.png" id="10_psnx4"]
+[ext_resource type="Texture2D" uid="uid://bdos8ch7oeje" path="res://assets/bodypart_places/left_leg.png" id="11_0iaya"]
+[ext_resource type="Texture2D" uid="uid://bgeexcxmdwq7a" path="res://assets/bodypart_places/right_leg.png" id="12_k6tsx"]
+[ext_resource type="Texture2D" uid="uid://ctw8x044jk47x" path="res://assets/bodypart_places/stomach.png" id="13_ctqij"]
+[ext_resource type="Texture2D" uid="uid://exfrxix7wf66" path="res://assets/bodypart_places/liver.png" id="14_6apu0"]
+[ext_resource type="Texture2D" uid="uid://d1hrl6nmgvkw2" path="res://assets/bodypart_places/left_kidney.png" id="15_oxak8"]
+[ext_resource type="Texture2D" uid="uid://cpfgu3dfnyd5t" path="res://assets/bodypart_places/right_kidney.png" id="16_e33bh"]
+[ext_resource type="Texture2D" uid="uid://j4jed1p0q8h4" path="res://assets/bodypart_places/bladder.png" id="17_4e3dv"]
 
 [node name="body" type="Node2D"]
 script = ExtResource("1_veluv")
@@ -15,28 +27,94 @@ texture = ExtResource("1_jmcoc")
 
 [node name="Parts" type="Node2D" parent="."]
 
-[node name="Heart" type="Sprite2D" parent="Parts"]
-position = Vector2(11, -97)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_lgxe7")
+[node name="Heart" type="Node2D" parent="Parts"]
 
-[node name="Label" type="Label" parent="Parts/Heart"]
-offset_left = 10.0
-offset_top = 26.6667
-offset_right = 66.0
-offset_bottom = 95.6667
-theme_override_font_sizes/font_size = 50
-text = "x2"
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Heart"]
+position = Vector2(10, -92)
+texture = ExtResource("5_xc2jm")
+offset = Vector2(0.5, 0)
 
-[node name="Brain" type="Sprite2D" parent="Parts"]
-position = Vector2(-1, -207)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("5_glwu3")
+[node name="Brain" type="Node2D" parent="Parts"]
 
-[node name="Label" type="Label" parent="Parts/Brain"]
-offset_left = 3.33333
-offset_top = -63.3333
-offset_right = 59.3333
-offset_bottom = 5.66666
-theme_override_font_sizes/font_size = 50
-text = "x2"
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Brain"]
+position = Vector2(0, -209)
+texture = ExtResource("5_at8vq")
+
+[node name="Lungs" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Lungs"]
+position = Vector2(-1, -94)
+texture = ExtResource("6_s1tan")
+offset = Vector2(0.5, 0.5)
+
+[node name="Eyes" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Eyes"]
+position = Vector2(-1, -182)
+texture = ExtResource("7_t2tfn")
+offset = Vector2(0.5, 0)
+
+[node name="Tongue" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Tongue"]
+position = Vector2(-1, -157)
+texture = ExtResource("8_0qxxb")
+offset = Vector2(0.5, 0)
+
+[node name="LeftArm" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/LeftArm"]
+position = Vector2(94, -66)
+texture = ExtResource("9_8h7mj")
+offset = Vector2(0, 0.5)
+
+[node name="RightArm" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/RightArm"]
+position = Vector2(-95, -65)
+texture = ExtResource("10_psnx4")
+
+[node name="LeftLeg" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/LeftLeg"]
+position = Vector2(53, 123)
+texture = ExtResource("11_0iaya")
+offset = Vector2(0.5, 0.5)
+
+[node name="RightLeg" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/RightLeg"]
+position = Vector2(-55, 123)
+texture = ExtResource("12_k6tsx")
+offset = Vector2(0.5, 0.5)
+
+[node name="Stomach" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Stomach"]
+position = Vector2(12, -25)
+texture = ExtResource("13_ctqij")
+
+[node name="Liver" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Liver"]
+position = Vector2(-17, -37)
+texture = ExtResource("14_6apu0")
+
+[node name="LeftKidney" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/LeftKidney"]
+position = Vector2(28, -1)
+texture = ExtResource("15_oxak8")
+
+[node name="RightKidney" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/RightKidney"]
+position = Vector2(-29, -1)
+texture = ExtResource("16_e33bh")
+
+[node name="Bladder" type="Node2D" parent="Parts"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Bladder"]
+position = Vector2(-1, 32)
+texture = ExtResource("17_4e3dv")
+offset = Vector2(0.5, 0.5)

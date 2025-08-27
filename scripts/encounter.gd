@@ -67,17 +67,18 @@ func connect_part_signals(part: Area2D):
 
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
-	$"body/Parts".get_child(part.partID).modulate = Color("#ff00ff")
+	$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 
 func body_part_part_exited(part: Area2D) -> void:
-	if GameManager.body_parts.count(part.partID) == 0:
-		$"body/Parts".get_child(part.partID).modulate = Color("#404040")
-	else:
-		$"body/Parts".get_child(part.partID).modulate = Color("#ffffff")
+	update_part_count(part.partID)
+	#if GameManager.body_parts.count(part.partID) == 0:
+		#$"body/Parts".get_child(part.partID).modulate = Color("#404040")
+	#else:
+		#$"body/Parts".get_child(part.partID).modulate = Color("#ff0000")
 	if hovered_part==part:
 		hovered_part=null
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
-		$"body/Parts".get_child(part.partID).modulate = Color("#ff00ff")
+		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 
 var played_parts = []
 
@@ -117,7 +118,7 @@ func activate_part(partID: int):
 			bug.hit(-100)
 		GameManager.BODYPARTS.BRAIN:
 			bug.damage += 10
-		GameManager.BODYPARTS.LUNG:
+		GameManager.BODYPARTS.LUNGS:
 			pass
 		GameManager.BODYPARTS.EYES:
 			pass
@@ -126,7 +127,7 @@ func activate_part(partID: int):
 
 # sets the little body at the start of the encounter
 func set_body():
-	for part in GameManager.body_parts:
+	for part in range(GameManager.BODYPARTS.size()):
 		update_part_count(part)
 
 # TODO we may need to change things if we have different types of parts for the same slot, but thats for later
@@ -135,11 +136,11 @@ func set_body():
 func update_part_count(partID: int):
 	var num = GameManager.body_parts.count(partID)
 	if num > 1:
-		$"body/Parts".get_child(partID).get_child(0).text = "x" + str(num)
+		$"body/Parts".get_child(partID).get_node("Sprite2D").modulate = Color("#ff0000")
 	elif num == 1:
-		$"body/Parts".get_child(partID).get_child(0).text = ""
+		$"body/Parts".get_child(partID).get_node("Sprite2D").modulate = Color("#ff8877")
 	else:
-		$"body/Parts".get_child(partID).modulate = Color("#404040")
+		$"body/Parts".get_child(partID).get_node("Sprite2D").modulate = Color("#404040")
 
 func determine_enemy() -> PackedScene:
 	var enemy = randi_range(0, GameManager.num_enemies - 1)
