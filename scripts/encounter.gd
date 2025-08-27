@@ -7,6 +7,9 @@ func _ready():
 	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
 	create_hand()
 	set_body()
+	var player = load("res://scenes/enemy/cockroach.tscn")
+	var enemy = determine_enemy()
+	$Battlefield.place_bugs(player, enemy)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -40,7 +43,6 @@ func calc_and_move_part(i, x_position, y_position, speed):
 	var part = current_parts[i]
 	animate_part_to_position(part, new_position, speed)
 
-
 # for determining where a part in the hand should sit
 func calculate_part_position(index, x_position):
 	var part = current_parts[index]
@@ -55,16 +57,6 @@ func animate_part_to_position(part, new_position, speed):
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 	tween.tween_property(part, "position", new_position, speed)
 	await tween.finished
-
-@onready var turn: int = 1
-@onready var player_turn: bool = true
-
-func next_turn():
-	turn+=1
-	if player_turn:
-		player_turn=false
-	else:
-		player_turn=true
 
 var hovered_part: Area2D = null
 
@@ -90,6 +82,7 @@ func body_part_part_exited(part: Area2D) -> void:
 var played_parts = []
 
 func play_part(part: Area2D):
+	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
 	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
@@ -102,21 +95,18 @@ func play_part(part: Area2D):
 	update_part_count(part.partID)
 	current_parts.erase(part)
 	played_parts.append(part)
+	part.position = Vector2(-200, -200)
 	
 	update_part_positions()
-	#part.position = Vector2(960.0, 540.0)
-	#
-	#var tween2 = create_tween()
-	#tween2.tween_property(part, "modulate", Color("#ffffff"), 0.2)
-	#tween2.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
-	#await tween2.finished
 	
 	activate_part(part.partID)
+	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
 	
 func activate_part(partID: int):
 	print("activate: ", partID)
-	print(GameManager.BODYPARTS.HEART)
 	var bug
+	# TODO remove this player turn thing and replace it with something like a passed in variable given theres no turns really
+	var player_turn = true
 	if player_turn:
 		bug = $Battlefield.player_bug
 	else:
@@ -151,6 +141,11 @@ func update_part_count(partID: int):
 	else:
 		$"body/Parts".get_child(partID).modulate = Color("#404040")
 
+func determine_enemy() -> PackedScene:
+	var enemy = randi_range(0, GameManager.num_enemies - 1)
+	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemy] + ".tscn"
+	var enemy_bug = load(path)
+	return enemy_bug
 
 #health bars
 func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
@@ -161,6 +156,7 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 
 
 func _on_battlefield_reset(won: bool) -> void:
+	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
 	for part in played_parts:
 		print(part.partID)
 		if won:
@@ -168,4 +164,13 @@ func _on_battlefield_reset(won: bool) -> void:
 			update_part_count(part.partID)
 		else:
 			GameManager.lose_part(part.partID)
+		part.queue_free()
 	played_parts.clear()
+	for part in current_parts:
+		part.queue_free()
+	current_parts.clear()
+	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
+	for part in GameManager.body_parts:
+		update_part_count(part)
+	await get_tree().create_timer(2).timeout
+	create_hand()

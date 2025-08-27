@@ -8,8 +8,7 @@ func enemy_process(delta):
 
 
 func _on_direction_timer_timeout() -> void:
-	#start_movement()
-	pass
+	start_movement()
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:

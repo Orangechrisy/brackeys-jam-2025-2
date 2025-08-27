@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://1w40r4kv1mqt"]
+[gd_scene load_steps=4 format=3 uid="uid://1w40r4kv1mqt"]
 
-[ext_resource type="PackedScene" path="res://scenes/enemy/enemy.tscn" id="1_xtqu1"]
+[ext_resource type="PackedScene" uid="uid://btv5r3xujbrwm" path="res://scenes/enemy/bug.tscn" id="1_xtqu1"]
+[ext_resource type="Script" uid="uid://dg2uq7s8tc0jp" path="res://scripts/spider.gd" id="2_656li"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_656li"]
+radius = 14.0
 
 [node name="Spider" instance=ExtResource("1_xtqu1")]
+script = ExtResource("2_656li")
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(0.214353, 0.26826, 0.267616, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+position = Vector2(31, 0)
+shape = SubResource("CircleShape2D_656li")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

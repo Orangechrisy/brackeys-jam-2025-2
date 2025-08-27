@@ -1,17 +1,18 @@
 extends Node2D
 
-const COCKROACH = preload("res://scenes/enemy/cockroach.tscn")
-
 signal update_health_bar(player: bool, health: int)
 signal reset(won: bool)
 
 var player_bug
+var player_scene
 var enemy_bug
-@export var round = 0
+var enemy_scene
+@export var curr_round = 0
 @export var num_rounds = 3
-
-func _ready() -> void:
-	player_bug = COCKROACH.instantiate()
+	
+func place_bugs(player: PackedScene, enemy: PackedScene):
+	player_scene = player
+	player_bug = player.instantiate()
 	GameManager.player_bug = player_bug
 	player_bug.position = Vector2(-150.0, 0.0)
 	player_bug.modulate = Color("#00b6ff")
@@ -19,7 +20,8 @@ func _ready() -> void:
 	player_bug.connect("next_level", round_change)
 	$Bugs.add_child(player_bug)
 	
-	enemy_bug = COCKROACH.instantiate()
+	enemy_scene = enemy
+	enemy_bug = enemy.instantiate()
 	GameManager.enemy_bug = enemy_bug
 	enemy_bug.position = Vector2(150.0, 0.0)
 	enemy_bug.modulate = Color("#ea003e")
@@ -27,8 +29,8 @@ func _ready() -> void:
 	enemy_bug.connect("next_level", round_change)
 	$Bugs.add_child(enemy_bug)
 	
-	for bug in $Bugs.get_children():
-		bug.start_movement()
+	#for bug in $Bugs.get_children():
+		#bug.start_movement()
 
 func health_change(bug: CharacterBody2D, health: int):
 	if bug == player_bug:
@@ -38,14 +40,15 @@ func health_change(bug: CharacterBody2D, health: int):
 
 # if rounds left, reset, otherwise end the encounter
 func round_change(bug: CharacterBody2D):
+	# TODO if they both die at the same time this gets called twice...
 	var won = false
 	if bug == player_bug:
 		print("enemy win!")
 	else:
 		print("player win!")
 		won = true
-	round += 1
-	if round < num_rounds:
+	curr_round += 1
+	if curr_round < num_rounds:
 		print("resetting")
 		reset.emit(won) # reset the encounter scene including losing parts
 		reset_battlefield()
@@ -60,8 +63,8 @@ func reset_battlefield():
 	player_bug.queue_free()
 	enemy_bug.queue_free()
 	await get_tree().create_timer(1).timeout
-	_ready()
+	place_bugs(player_scene, enemy_scene)
 
 func _on_button_pressed() -> void:
-	$PlayerBug.start_movement()
-	$EnemyBug.start_movement()
+	player_bug.start_movement()
+	enemy_bug.start_movement()

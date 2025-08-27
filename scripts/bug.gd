@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Bug
 
 @export var ID: int
-@export var health: int = 50
+@export var health: int = 10
 @export var damage: int = 5
 @export var speed: int = 200
 var direction: Vector2 

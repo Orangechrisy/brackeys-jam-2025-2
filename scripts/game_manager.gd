@@ -17,8 +17,14 @@ enum BODYPARTS {
 	KIDNEY,
 	BLADDER
 }
+var num_bodyparts: int = BODYPARTS.size()
 
-const numbodyparts: int = BODYPARTS.BLADDER+1
+const ENEMIES = [
+	"Cockroach",
+	"Spider"
+]
+var num_enemies: int = ENEMIES.size()
+@export var bugs_fought = []
 
 
 var player_bug: CharacterBody2D
@@ -40,7 +46,7 @@ func _reset():
 	body_parts.clear()
 	for i in range(5):
 		body_parts.append(randi_range(0, 1))
-	#for i in range(numbodyparts):
+	#for i in range(num_bodyparts):
 		#body_parts.append(i)
 
 func lose_part(partID: int):

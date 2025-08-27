@@ -39,6 +39,7 @@ func buy_part(part):
 	# TODO currency???
 	GameManager.body_parts.append(part.partID)
 	part.queue_free()
+	print(GameManager.body_parts)
 
 func _on_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
