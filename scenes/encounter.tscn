@@ -90,5 +90,6 @@ position = Vector2(976, 992)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Hand"]
 sprite_frames = SubResource("SpriteFrames_2dnca")
 
+[connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
 [connection signal="update_health_bar" from="Battlefield" to="." method="_on_battlefield_update_health_bar"]

@@ -1,7 +1,7 @@
 extends Node2D
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
-
+var can_click = true
 
 func _ready():
 	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
@@ -13,7 +13,7 @@ func _ready():
 	$Battlefield.place_bugs(player, enemy)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("left_click"):
+	if can_click and Input.is_action_just_pressed("left_click"):
 		if hovered_part != null:
 			play_part(hovered_part)
 	var mouse_pos = get_global_mouse_position()
@@ -181,6 +181,7 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 
 
 func _on_battlefield_reset(won: bool) -> void:
+	can_click = true
 	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
 	for part in played_parts:
 		print(part.partID)
@@ -199,3 +200,7 @@ func _on_battlefield_reset(won: bool) -> void:
 		update_part_count(part)
 	await get_tree().create_timer(2).timeout
 	create_hand()
+
+
+func _on_battlefield_allow_clicking(allow: bool) -> void:
+	can_click = allow

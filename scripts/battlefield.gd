@@ -2,6 +2,7 @@ extends Node2D
 
 signal update_health_bar(player: bool, health: int)
 signal reset(won: bool)
+signal allow_clicking(allow: bool)
 
 var player_bug
 var player_scene
@@ -66,5 +67,7 @@ func reset_battlefield():
 	place_bugs(player_scene, enemy_scene)
 
 func _on_button_pressed() -> void:
-	player_bug.start_movement()
-	enemy_bug.start_movement()
+	if get_parent().can_click == true:
+		player_bug.start_movement()
+		enemy_bug.start_movement()
+		allow_clicking.emit(false)
