@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 		if hovered_part != null:
 			play_part(hovered_part)
 
-var current_parts = []
+
 
 func create_hand():
 	GameManager.body_parts.shuffle()
@@ -26,7 +26,7 @@ func create_hand():
 		var part = GameManager.create_part(partID)
 		#var part = BODY_PART.instantiate()
 		$"OrganHolder".add_child(part)
-		current_parts.append(part)
+		GameManager.current_parts.append(part)
 		part.position = Vector2(0, get_viewport().size.y - get_viewport().size.y / 6)
 		update_part_positions()
 
@@ -34,20 +34,20 @@ func create_hand():
 func update_part_positions():
 	var x_pos = get_viewport().size.x / 2
 	var y_pos = get_viewport().size.y - get_viewport().size.y / 6
-	for i in range(current_parts.size()):
+	for i in range(GameManager.current_parts.size()):
 		calc_and_move_part(i, x_pos, y_pos, 0.1)
 
 # calculates the new position for a part and moves it
 func calc_and_move_part(i, x_position, y_position, speed):
 	var new_position = Vector2(calculate_part_position(i, x_position), y_position)
-	var part = current_parts[i]
+	var part = GameManager.current_parts[i]
 	animate_part_to_position(part, new_position, speed)
 
 # for determining where a part in the hand should sit
 func calculate_part_position(index, x_position):
-	var part = current_parts[index]
+	var part = GameManager.current_parts[index]
 	var width = part.get_node("CollisionShape2D").get_shape().radius * 2
-	var x_offset = (current_parts.size() - 1) * width
+	var x_offset = (GameManager.current_parts.size() - 1) * width
 	var new_x_position = x_position + (index * width) - (x_offset / 2)
 	return new_x_position
 
@@ -80,10 +80,10 @@ func body_part_part_exited(part: Area2D) -> void:
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
 		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 
-var played_parts = []
+
 
 func play_part(part: Area2D):
-	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
+	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
@@ -94,14 +94,14 @@ func play_part(part: Area2D):
 	# TODO also this should just be in the lose part bit probably... but here for now since thats not set up
 	GameManager.body_parts.erase(part.partID)
 	update_part_count(part.partID)
-	current_parts.erase(part)
-	played_parts.append(part)
+	GameManager.current_parts.erase(part)
+	GameManager.played_parts.append(part)
 	part.position = Vector2(-200, -200)
 	
 	update_part_positions()
 	
 	activate_part(part.partID)
-	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
+	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	
 func activate_part(partID: int):
 	print("activate: ", partID)
@@ -115,7 +115,7 @@ func activate_part(partID: int):
 	match partID:
 		GameManager.BODYPARTS.HEART:
 			# TODO do in a more direct way probs
-			bug.hit(-100)
+			bug.health += 100
 		GameManager.BODYPARTS.BRAIN:
 			bug.damage += 10
 		GameManager.BODYPARTS.LUNGS:
@@ -157,8 +157,8 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 
 
 func _on_battlefield_reset(won: bool) -> void:
-	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
-	for part in played_parts:
+	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
+	for part in GameManager.played_parts:
 		print(part.partID)
 		if won:
 			GameManager.body_parts.append(part.partID)
@@ -166,11 +166,11 @@ func _on_battlefield_reset(won: bool) -> void:
 		else:
 			GameManager.lose_part(part.partID)
 		part.queue_free()
-	played_parts.clear()
-	for part in current_parts:
+	GameManager.played_parts.clear()
+	for part in GameManager.current_parts:
 		part.queue_free()
-	current_parts.clear()
-	print(GameManager.body_parts, ", ", current_parts, ", ", played_parts)
+	GameManager.current_parts.clear()
+	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	for part in GameManager.body_parts:
 		update_part_count(part)
 	await get_tree().create_timer(2).timeout

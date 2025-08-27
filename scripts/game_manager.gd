@@ -30,6 +30,8 @@ var num_enemies: int = ENEMIES.size()
 
 var player_bug: CharacterBody2D
 var enemy_bug: CharacterBody2D
+var current_parts = []
+var played_parts = []
 
 func _ready() -> void:
 	_reset()

@@ -48,6 +48,10 @@ func round_change(bug: CharacterBody2D):
 		print("player win!")
 		won = true
 	curr_round += 1
+	
+	# Stopping timers
+	player_bug.remove_timers()
+	
 	if curr_round < num_rounds:
 		print("resetting")
 		reset.emit(won) # reset the encounter scene including losing parts
@@ -67,4 +71,5 @@ func reset_battlefield():
 
 func _on_button_pressed() -> void:
 	player_bug.start_movement()
+	player_bug.start_timers()
 	enemy_bug.start_movement()
