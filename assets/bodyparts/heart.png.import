@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dab4llmxvmxgo"
-path="res://.godot/imported/brain.png-271941cc429380311663f60bc6c1f0b7.ctex"
+uid="uid://jc3jhakn7mi"
+path="res://.godot/imported/heart.png-0dcc5e40bd2f2a5ec9ce68003cbfa714.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/brain.png"
-dest_files=["res://.godot/imported/brain.png-271941cc429380311663f60bc6c1f0b7.ctex"]
+source_file="res://assets/bodyparts/heart.png"
+dest_files=["res://.godot/imported/heart.png-0dcc5e40bd2f2a5ec9ce68003cbfa714.ctex"]
 
 [params]
 

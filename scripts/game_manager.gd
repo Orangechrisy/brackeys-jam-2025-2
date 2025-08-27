@@ -5,7 +5,7 @@ extends Node2D
 enum BODYPARTS {
 	HEART,
 	BRAIN,
-	LUNG,
+	LUNGS,
 	EYES,
 	TONGUE,
 	LEFTARM,
@@ -14,7 +14,8 @@ enum BODYPARTS {
 	RIGHTLEG,
 	STOMACH,
 	LIVER,
-	KIDNEY,
+	LEFTKIDNEY,
+	RIGHTKIDNEY,
 	BLADDER
 }
 var num_bodyparts: int = BODYPARTS.size()
@@ -44,10 +45,10 @@ func _input(event):
 
 func _reset():
 	body_parts.clear()
-	for i in range(5):
-		body_parts.append(randi_range(0, 1))
-	#for i in range(num_bodyparts):
-		#body_parts.append(i)
+	#for i in range(5):
+		#body_parts.append(randi_range(0, 1))
+	for i in range(num_bodyparts):
+		body_parts.append(i)
 
 func lose_part(partID: int):
 	#var partID = body_parts[index]
@@ -58,7 +59,7 @@ func lose_part(partID: int):
 		BODYPARTS.BRAIN:
 			#make stupid
 			pass
-		BODYPARTS.LUNG:
+		BODYPARTS.LUNGS:
 			#timer
 			pass
 		BODYPARTS.EYES:
@@ -68,7 +69,24 @@ func lose_part(partID: int):
 			pass
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
-var partImages = ["res://assets/heart.png", "res://assets/brain.png"]
+
+# yeah im ignoring the better way to do this rn...
+var partImages = [
+	"res://assets/bodyparts/heart.png",
+	"res://assets/bodyparts/brain.png",
+	"res://assets/bodyparts/lungs.png",
+	"res://assets/bodyparts/eyes.png",
+	"res://assets/bodyparts/tongue.png",
+	"res://assets/bodyparts/left_arm.png",
+	"res://assets/bodyparts/right_arm.png",
+	"res://assets/bodyparts/left_leg.png",
+	"res://assets/bodyparts/right_leg.png",
+	"res://assets/bodyparts/stomach.png",
+	"res://assets/bodyparts/liver.png",
+	"res://assets/bodyparts/left_kidney.png",
+	"res://assets/bodyparts/right_kidney.png",
+	"res://assets/bodyparts/bladder.png",
+]
 
 func create_part(partID: int) -> Node2D:
 	var part = BODY_PART.instantiate()

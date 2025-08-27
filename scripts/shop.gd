@@ -4,16 +4,16 @@ const BODY_PART = preload("res://scenes/body_part.tscn")
 var hovered_part = null
 
 func _ready() -> void:
-	#var p1 = randi_range(0, GameManager.BODYPARTS.size())
-	#var p2 = randi_range(0, GameManager.BODYPARTS.size())
-	#var p3 = randi_range(0, GameManager.BODYPARTS.size())
-	var part1 = GameManager.create_part(randi_range(0, 1))
+	var p1 = randi_range(0, GameManager.BODYPARTS.size())
+	var p2 = randi_range(0, GameManager.BODYPARTS.size())
+	var p3 = randi_range(0, GameManager.BODYPARTS.size())
+	var part1 = GameManager.create_part(p1)
 	$"OrganHolder".add_child(part1)
 	part1.position = $Option1.position
-	var part2 = GameManager.create_part(randi_range(0, 1))
+	var part2 = GameManager.create_part(p2)
 	$"OrganHolder".add_child(part2)
 	part2.position = $Option2.position
-	var part3 = GameManager.create_part(randi_range(0, 1))
+	var part3 = GameManager.create_part(p3)
 	$"OrganHolder".add_child(part3)
 	part3.position = $Option3.position
 
