@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b0p27yf35kuge"]
 
-[ext_resource type="PackedScene" uid="uid://btv5r3xujbrwm" path="res://scenes/enemy/bug.tscn" id="1_wr8i3"]
+[ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_wr8i3"]
 [ext_resource type="Script" uid="uid://d3270a75j6igs" path="res://scripts/cockroach.gd" id="2_el1v0"]
 [ext_resource type="Texture2D" uid="uid://7rxiyy310ajm" path="res://assets/cockroach_placeholder.png" id="3_el1v0"]
 
@@ -8,6 +8,7 @@
 radius = 15.0
 
 [node name="Cockroach" instance=ExtResource("1_wr8i3")]
+z_index = 2
 script = ExtResource("2_el1v0")
 speed = 300
 

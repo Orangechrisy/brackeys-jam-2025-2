@@ -8,8 +8,10 @@ class_name Bug
 @export var speed: int = 200
 var direction: Vector2 
 
-signal lose_health(bug: CharacterBody2D, newhealth: int)
+signal change_health(bug: CharacterBody2D, newhealth: int)
 signal next_level(bug: CharacterBody2D)
+
+const STOMACH_ACID = preload("res://scenes/stomach_acid.tscn")
 
 func start_movement():
 	rotation = randf_range(0, deg_to_rad(360))
@@ -25,13 +27,13 @@ func _physics_process(delta: float) -> void:
 # define the ai of the bug by overwriting this function with movement and other things
 func enemy_process(_delta):
 	velocity = direction * speed
-	pass
 	
 func start_timers():
 	# Creates timers for given body parts
 	for part in GameManager.played_parts:
 		match part.partID:
 			GameManager.BODYPARTS.LEFTLEG:
+				speed += 50
 				# Instantiate a timer
 				print("Left leg found!")
 				var timer = Timer.new()
@@ -41,6 +43,7 @@ func start_timers():
 				timer.timeout.connect(_on_timer_leg_timeout.bind(timer))
 				timer.start()
 			GameManager.BODYPARTS.RIGHTLEG:
+				speed += 50
 				print("Right leg found!")
 				var timer = Timer.new()
 				$Timers.add_child(timer)
@@ -56,44 +59,48 @@ func start_timers():
 				timer.one_shot = true
 				timer.timeout.connect(_on_timer_stomach_timeout.bind(timer))
 				timer.start()
-	pass
+			GameManager.BODYPARTS.LIVER:
+				print("Liver found!")
+				var timer = Timer.new()
+				timer.wait_time = randi_range(1, 5)
+				timer.one_shot = true
+				timer.timeout.connect(_on_timer_liver_timeout.bind(timer))
+				timer.start()
 
 func remove_timers():
 	for timer in $Timers.get_children():
 		timer.queue_free()
-		pass
-	
-func change_health(amount: int):
-	# For damage-changing cases, mostly healing, where no reference to another bug is needed
-	health += amount
 
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
-	
-	# handling effects
-	print(GameManager.played_parts)
-	for part in GameManager.played_parts:
-		if attackingBug == GameManager.player_bug:
-			match part.partID:
-				GameManager.BODYPARTS.TONGUE:
-					# Restores a third of the damage dealt as health
-					print("Attacker has tongue!")
-					attackingBug.health += floor(attackingBug.damage / 3)
-		if attackedBug == GameManager.player_bug:
-			match part.partID:
-				GameManager.BODYPARTS.BRAIN:
-					print("Defender has brain!")
-					if randi_range(1, 2) == 2:
-						dmg = 0
-						print("Dodged!")
-						
-	
-	# Handling damage dealt
-	health -= dmg
-	print("health after hit: ", health, " ", dmg)
-	lose_health.emit(self, health)
-	#if dmg <= 0:
-		#death()
+	if attackingBug != attackedBug:
+		# TODO this should totally cause the little portrait to have an effect
+		# handling effects
+		print(GameManager.played_parts)
+		for part in GameManager.played_parts:
+			if attackingBug == GameManager.player_bug:
+				match part.partID:
+					GameManager.BODYPARTS.TONGUE:
+						# Restores a third of the damage dealt as health
+						print("Attacker has tongue!")
+						attackingBug.health += floor(attackingBug.damage / 3)
+			if attackedBug == GameManager.player_bug:
+				match part.partID:
+					GameManager.BODYPARTS.BRAIN:
+						print("Defender has brain!")
+						if randi_range(1, 2) == 2:
+							dmg = 0
+							print("Dodged!")
+							
 		
+		# Handling damage dealt
+		health -= dmg
+		print("health after hit: ", health, " ", dmg)
+		change_health.emit(self, health)
+	
+
+func _on_arm_attack_area_body_entered(body: Node2D) -> void:
+	if "health" in body:
+		body.hit(damage, self, body)
 
 # Body part timeout functions
 # In a just world this would just be stored in the body part itself but this is not a just world
@@ -101,13 +108,21 @@ func _on_timer_leg_timeout(timer: Timer):
 	print("Leg timer timeout")
 	timer.wait_time = randi_range(1, 5)
 	timer.start()
-	pass
 	
 func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")
+	var acid = STOMACH_ACID.instantiate()
+	add_child(acid)
+	acid.direction = velocity / speed
+	timer.wait_time = 0.5 #randi_range(1, 5)
+	timer.start()
+
+func _on_timer_liver_timeout(timer: Timer):
+	print("Liver timer timeout")
+	health += 2
+	change_health.emit(self, health)
 	timer.wait_time = randi_range(1, 5)
 	timer.start()
-	pass
 
 func death():
 	print(self, " died!")

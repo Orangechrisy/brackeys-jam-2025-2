@@ -13,7 +13,5 @@ func _on_direction_timer_timeout() -> void:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	if body != self:
-		if "health" in body:
-			body.hit(damage, self, body)
-			# TODO this should totally cause the little portrait to have an effect
+	if "health" in body:
+		body.hit(damage, self, body)
