@@ -9,10 +9,9 @@ radius = 15.0
 
 [node name="Cockroach" instance=ExtResource("1_wr8i3")]
 script = ExtResource("2_el1v0")
-speed = 300
+speed = 400
 
 [node name="Sprite2D" parent="." index="0"]
-modulate = Color(0.591247, 0.377639, 0.114853, 1)
 rotation = 1.5708
 texture = ExtResource("3_el1v0")
 

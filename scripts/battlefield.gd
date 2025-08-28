@@ -16,7 +16,7 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	player_bug = player.instantiate()
 	GameManager.player_bug = player_bug
 	player_bug.position = Vector2(-150.0, 0.0)
-	player_bug.modulate = Color("#00b6ff")
+	#player_bug.modulate = Color("#00b6ff")
 	player_bug.connect("lose_health", health_change)
 	player_bug.connect("next_level", round_change)
 	$Bugs.add_child(player_bug)
@@ -25,7 +25,7 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	enemy_bug = enemy.instantiate()
 	GameManager.enemy_bug = enemy_bug
 	enemy_bug.position = Vector2(150.0, 0.0)
-	enemy_bug.modulate = Color("#ea003e")
+	#enemy_bug.modulate = Color("#ea003e")
 	enemy_bug.connect("lose_health", health_change)
 	enemy_bug.connect("next_level", round_change)
 	$Bugs.add_child(enemy_bug)

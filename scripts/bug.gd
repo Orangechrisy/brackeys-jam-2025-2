@@ -20,6 +20,8 @@ func _physics_process(delta: float) -> void:
 	enemy_process(delta)
 	
 	if health <= 0:
+		$GlobalAnimationPlayer.play("death")
+		await get_tree().create_timer(0.5, false).timeout
 		death()
 
 # define the ai of the bug by overwriting this function with movement and other things
@@ -68,6 +70,13 @@ func change_health(amount: int):
 	health += amount
 
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
+	#if not invincible:
+		
+		#Taking Damage: play animation and get 0.3s of i-frames
+	invincible=true
+	$InvincibilityTimer.start()
+	if not $GlobalAnimationPlayer.animation_started:
+		$GlobalAnimationPlayer.play("damage")
 	
 	# handling effects
 	print(GameManager.played_parts)
@@ -112,3 +121,7 @@ func _on_timer_stomach_timeout(timer: Timer):
 func death():
 	print(self, " died!")
 	next_level.emit(self)
+
+var invincible: bool 
+func _on_invincibility_timer_timeout() -> void:
+	invincible = false

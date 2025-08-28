@@ -9,7 +9,8 @@ func _ready():
 	create_hand()
 	set_body()
 	var player = load("res://scenes/enemy/cockroach.tscn")
-	var enemy = determine_enemy()
+	#var enemy = determine_enemy()
+	var enemy = load("res://scenes/enemy/spider.tscn")
 	$Battlefield.place_bugs(player, enemy)
 
 func _process(_delta: float) -> void:
@@ -176,9 +177,15 @@ func determine_enemy() -> PackedScene:
 #health bars
 func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 	if player:
-		$UI/Player/HealthBar.value = health
+		var playerhealthbar_val = $UI/Player/HealthBar.value
+		if playerhealthbar_val > health:
+			$UI/Player/AnimationPlayer.play("damage")
+		playerhealthbar_val = health
 	else:
-		$UI/Enemy/HealthBar.value = health
+		var enemyhealthbar_val = $UI/Enemy/HealthBar.value
+		if enemyhealthbar_val > health:
+			$UI/Enemy/AnimationPlayer.play("damage")
+		enemyhealthbar_val = health
 
 
 func _on_battlefield_reset(won: bool) -> void:
@@ -199,7 +206,7 @@ func _on_battlefield_reset(won: bool) -> void:
 	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	for part in GameManager.body_parts:
 		update_part_count(part)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(2.0).timeout
 	create_hand()
 
 
