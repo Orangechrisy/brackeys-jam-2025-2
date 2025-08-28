@@ -4,6 +4,7 @@ const BODY_PART = preload("res://scenes/body_part.tscn")
 var can_click = true
 
 func _ready():
+	GameManager.play_audio(GameManager.battleMusic, true)
 	create_hand()
 	set_body()
 	var player = load("res://scenes/enemy/cockroach.tscn")
@@ -78,6 +79,7 @@ func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
 	$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	var nextToMouse = false
+	print("body entered, tt show")
 	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
 func body_part_part_exited(part: Area2D) -> void:
@@ -90,6 +92,7 @@ func body_part_part_exited(part: Area2D) -> void:
 		hovered_part=null
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
 		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
+	print("body exited, tt hide")
 	$Tooltip.HidePopup()
 
 
@@ -97,7 +100,8 @@ func body_part_part_exited(part: Area2D) -> void:
 func play_part(part: Area2D):
 	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	$"Hand/AnimatedSprite2D".frame = 1
-
+	$Tooltip.HidePopup()
+	print("body played, tt hide")
 	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
@@ -111,7 +115,6 @@ func play_part(part: Area2D):
 	GameManager.current_parts.erase(part)
 	GameManager.played_parts.append(part)
 	part.position = Vector2(-200, -200)
-	
 	update_part_positions()
 	
 	activate_part(part.partID)

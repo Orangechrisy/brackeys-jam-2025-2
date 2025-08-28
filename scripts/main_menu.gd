@@ -8,6 +8,7 @@ func _ready() -> void:
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("Master"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("MUSIC"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
+	GameManager.play_audio(GameManager.shopMusic, true)
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/shop.tscn")
