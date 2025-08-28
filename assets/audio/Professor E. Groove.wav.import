@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://0nyrnuk0vrr5"
+path="res://.godot/imported/Professor E. Groove.wav-13c9f96701113c50f4748ec454be2181.sample"
+
+[deps]
+
+source_file="res://assets/audio/Professor E. Groove.wav"
+dest_files=["res://.godot/imported/Professor E. Groove.wav-13c9f96701113c50f4748ec454be2181.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

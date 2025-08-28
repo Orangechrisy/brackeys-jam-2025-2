@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://wsl2rcamd0fy"]
+[gd_scene load_steps=5 format=3 uid="uid://wsl2rcamd0fy"]
 
 [ext_resource type="Script" uid="uid://btrwbc3jombcx" path="res://scripts/game_manager.gd" id="1_hwd4i"]
 [ext_resource type="PackedScene" uid="uid://bc0xjk24cdtpk" path="res://scenes/pause_menu.tscn" id="2_glms7"]
+[ext_resource type="AudioStream" uid="uid://0nyrnuk0vrr5" path="res://assets/audio/Professor E. Groove.wav" id="3_udu3i"]
+[ext_resource type="AudioStream" uid="uid://vmrvrhx6pruj" path="res://assets/audio/the cockroach has breached containment.wav" id="4_oo155"]
 
 [node name="GameManager" type="Node2D"]
 process_mode = 3
@@ -9,3 +11,11 @@ script = ExtResource("1_hwd4i")
 body_parts = [null]
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_glms7")]
+
+[node name="ShopMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_udu3i")
+bus = &"MUSIC"
+
+[node name="BattleMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_oo155")
+bus = &"MUSIC"

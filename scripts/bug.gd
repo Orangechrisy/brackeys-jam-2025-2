@@ -7,11 +7,15 @@ class_name Bug
 @export var damage: int = 5
 @export var speed: int = 200
 var direction: Vector2 
+var played_parts = GameManager.played_parts
 
 signal change_health(bug: CharacterBody2D, newhealth: int)
 signal next_level(bug: CharacterBody2D)
 
 const STOMACH_ACID = preload("res://scenes/stomach_acid.tscn")
+
+func set_as_enemy():
+	played_parts = GameManager.enemy_played_parts
 
 func start_movement():
 	rotation = randf_range(0, deg_to_rad(360))
@@ -30,8 +34,8 @@ func enemy_process(_delta):
 	
 func start_timers():
 	# Creates timers for given body parts
-	for part in GameManager.played_parts:
-		match part.partID:
+	for part in played_parts:
+		match part:
 			GameManager.BODYPARTS.LEFTLEG:
 				# Instantiate a timer
 				print("Left leg found!")
@@ -74,17 +78,17 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 	if attackingBug != attackedBug:
 		# TODO this should totally cause the little portrait to have an effect
 		# handling effects
-		print(GameManager.played_parts)
-		for part in GameManager.played_parts:
+		#print(played_parts)
+		for part in played_parts:
 			if attackingBug == GameManager.player_bug:
-				match part.partID:
+				match part:
 					GameManager.BODYPARTS.TONGUE:
 						# Restores a third of the damage dealt as health
 						print("Attacker has tongue!")
 						attackingBug.health += floor(attackingBug.damage / 3)
 						change_health.emit(attackingBug, attackingBug.health)
 			if attackedBug == GameManager.player_bug:
-				match part.partID:
+				match part:
 					GameManager.BODYPARTS.BRAIN:
 						print("Defender has brain!")
 						if randi_range(1, 2) == 2:

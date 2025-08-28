@@ -129,6 +129,7 @@ mouse_filter = 1
 sprite_frames = SubResource("SpriteFrames_2dnca")
 
 [node name="Tooltip" parent="." instance=ExtResource("7_2dnca")]
+visible = false
 z_index = 6
 offset_left = 311.0
 offset_top = 463.0
