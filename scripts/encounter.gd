@@ -137,7 +137,7 @@ func activate_part(partID: int):
 			# in bug script
 			pass
 		GameManager.BODYPARTS.LUNGS:
-			pass
+			bug.speed += 100
 		GameManager.BODYPARTS.EYES:
 			pass
 		GameManager.BODYPARTS.LEFTARM:

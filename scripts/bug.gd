@@ -20,6 +20,8 @@ func start_movement():
 
 func _physics_process(delta: float) -> void:
 	enemy_process(delta)
+	if self == GameManager.player_bug:
+		print("speed: ", speed)
 	
 	if health <= 0:
 		death()
@@ -33,7 +35,6 @@ func start_timers():
 	for part in GameManager.played_parts:
 		match part.partID:
 			GameManager.BODYPARTS.LEFTLEG:
-				speed += 50
 				# Instantiate a timer
 				print("Left leg found!")
 				var timer = Timer.new()
@@ -43,7 +44,6 @@ func start_timers():
 				timer.timeout.connect(_on_timer_leg_timeout.bind(timer))
 				timer.start()
 			GameManager.BODYPARTS.RIGHTLEG:
-				speed += 50
 				print("Right leg found!")
 				var timer = Timer.new()
 				$Timers.add_child(timer)
@@ -111,8 +111,21 @@ func _on_arm_attack_area_body_entered(body: Node2D) -> void:
 # In a just world this would just be stored in the body part itself but this is not a just world
 func _on_timer_leg_timeout(timer: Timer):
 	print("Leg timer timeout")
-	timer.wait_time = randi_range(1, 5)
+	#var timer2 = Timer.new()
+	#timer2.wait_time = 1
+	#timer2.one_shot = true
+	#timer2.timeout.connect(_on_timer2_leg2_timeout.bind(timer2))
+	#timer2.start()
+	speed += 100
+	await get_tree().create_timer(1).timeout
+	speed -= 100
+	#print("timer2 started")
+	timer.wait_time = randi_range(2, 5)
 	timer.start()
+
+#func _on_timer2_leg2_timeout(timer: Timer):
+	#print("timer2 ended")
+	#speed -= 50
 	
 func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")
