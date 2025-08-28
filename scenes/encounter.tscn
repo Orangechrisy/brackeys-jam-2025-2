@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=10 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dnf8heq3gfksq" path="res://assets/cockroach_reaction.png" id="3_kb58x"]
 [ext_resource type="Texture2D" uid="uid://c0x2cgeflwr2k" path="res://assets/hand_open.png" id="5_75kek"]
 [ext_resource type="Texture2D" uid="uid://c5cixqhk35u2i" path="res://assets/hand_closed.png" id="6_woaxd"]
+[ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="7_2dnca"]
 
 [sub_resource type="Theme" id="Theme_75kek"]
 
@@ -83,12 +84,25 @@ z_index = 4
 [node name="Battlefield" parent="." instance=ExtResource("3_ensgf")]
 position = Vector2(967, 385)
 
-[node name="Hand" type="Node2D" parent="."]
-z_index = 20
-position = Vector2(976, 992)
+[node name="Hand" type="Control" parent="."]
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_left = 976.0
+offset_top = 992.0
+offset_right = 976.0
+offset_bottom = 992.0
+mouse_filter = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Hand"]
 sprite_frames = SubResource("SpriteFrames_2dnca")
+
+[node name="Tooltip" parent="." instance=ExtResource("7_2dnca")]
+z_index = 6
+offset_left = 311.0
+offset_top = 463.0
+offset_right = 311.0
+offset_bottom = 463.0
 
 [connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]

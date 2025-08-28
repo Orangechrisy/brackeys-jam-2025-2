@@ -1,0 +1,100 @@
+{
+  "0": {
+	"NAME": "Heart",
+	"RARITY": "legendary",
+	"PATH": "heart.png",
+	"BUGDESCR": "",
+	"PLAYERDESCR": "Kills the player instantly"
+  },
+  "1": {
+	"NAME": "Brain",
+	"RARITY": "legendary",
+	"PATH": "brain.png",
+	"BUGDESCR": "Bug has a chance to dodge attacks",
+	"PLAYERDESCR": "Become Dumb: Game plays itself"
+  },
+  "2": {
+	"NAME": "Lungs",
+	"RARITY": "rare",
+	"PATH": "lungs.png",
+	"BUGDESCR": "",
+	"PLAYERDESCR": "Timer: All future rounds have to end within 30 seconds or they die"
+  },
+  "3": {
+	"NAME": "Eyes",
+	"RARITY": "rare",
+	"PATH": "eyes.png",
+	"BUGDESCR": "",
+	"PLAYERDESCR": ""
+  },
+  "4": {
+	"NAME": "Tongue",
+	"RARITY": "uncommon",
+	"PATH": "tongue.png",
+	"BUGDESCR": "Bug heals +1 health every successful attack",
+	"PLAYERDESCR": ""
+  },
+  "5": {
+	"NAME": "Left Arm",
+	"RARITY": "common",
+	"PATH": "left_arm.png",
+	"BUGDESCR": "Higher attack range?",
+	"PLAYERDESCR": ""
+  },
+  "6": {
+	"NAME": "Right Arm",
+	"RARITY": "uncommon",
+	"PATH": "right_arm.png",
+	"BUGDESCR": "Higher attack range?",
+	"PLAYERDESCR": ""
+  },
+  "7": {
+	"NAME": "Left Leg",
+	"RARITY": "common",
+	"PATH": "left_leg.png",
+	"BUGDESCR": "Bug is faster",
+	"PLAYERDESCR": ""
+  },
+  "8": {
+	"NAME": "Right Leg",
+	"RARITY": "uncommon",
+	"PATH": "right_leg.png",
+	"BUGDESCR": "Bug is faster",
+	"PLAYERDESCR": ""
+  },
+  "9": {
+	"NAME": "Stomach",
+	"RARITY": "uncommon",
+	"PATH": "stomach.png",
+	"BUGDESCR": "Bug shoots out stomach acid",
+	"PLAYERDESCR": ""
+  },
+  "10": {
+	"NAME": "Liver",
+	"RARITY": "uncommon",
+	"PATH": "liver.png",
+	"BUGDESCR": "Bug slowly regenerates health",
+	"PLAYERDESCR": ""
+  },
+  "11": {
+	"NAME": "Left Kidney",
+	"RARITY": "common",
+	"PATH": "left_kidney.png",
+	"BUGDESCR": "Bug creates a shield on the left side",
+	"PLAYERDESCR": ""
+  },
+  "12": {
+	"NAME": "Right Kidney",
+	"RARITY": "common",
+	"PATH": "right_kidney.png",
+	"BUGDESCR": "Bug creates a shield on the right side",
+	"PLAYERDESCR": ""
+  },
+  "13": {
+	"NAME": "Bladder",
+	"RARITY": "uncommon",
+	"PATH": "bladder.png",
+	"BUGDESCR": "",
+	"PLAYERDESCR": ""
+  }
+}

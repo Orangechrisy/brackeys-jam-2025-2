@@ -67,7 +67,6 @@ func change_health(amount: int):
 	# For damage-changing cases, mostly healing, where no reference to another bug is needed
 	health += amount
 
-# TODO fix hitbox and own hurtbox triggering this
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 	
 	# handling effects

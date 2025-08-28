@@ -20,6 +20,55 @@ enum BODYPARTS {
 }
 var num_bodyparts: int = BODYPARTS.size()
 
+var partName: Array = []
+var partChance: Array = []
+var partImages: Array = []
+var partTooltip : Array = []
+
+#rarities
+var common: int = 20
+var uncommon: int = 10
+var rare: int = 5
+var legendary: int = 2
+
+const ITEM_JSON_DATA = "res://data/Body_Parts.json"
+
+#IMPORTING EXCEL DATA TO JSON TO ARRAYS
+func load_json(path: String):
+	var file = FileAccess.get_file_as_string(path)
+	var json
+	if file != null:
+		json = JSON.parse_string(file)
+	else:
+		print("error importing file")
+	
+	return json
+
+func init_json_data() -> void:
+	var json = load_json(ITEM_JSON_DATA)
+	if json != null:
+		for i in range(0, json.size()):
+			parse_json(i, json[str(i)])
+	else:
+		print("error initalizing Items.json")
+
+func parse_json(ID: int, json: Dictionary):
+	partName[ID] = json["NAME"]
+	match json["RARITY"]:
+		"common":
+			partChance[ID] = common
+		"uncommon":
+			partChance[ID] = uncommon
+		"rare":
+			partChance[ID] = rare
+		"legendary":
+			partChance[ID] = legendary
+		_:
+			print("Error: Body Part "+str(ID)+" has unknown rarity.")
+	partImages[ID] += json["PATH"]
+	partTooltip[ID] = json["BUGDESCR"] +  "\n\n" + json["PLAYERDESCR"]
+
+
 const ENEMIES = [
 	"Cockroach",
 	"Spider"
@@ -35,6 +84,8 @@ var played_parts = []
 
 func _ready() -> void:
 	_reset()
+	
+	
 
 func game_over():
 	print("game over :(")
@@ -47,10 +98,23 @@ func _input(event):
 
 func _reset():
 	body_parts.clear()
+	
+	partName.resize(num_bodyparts)
+	partName.fill("null")
+	partChance.resize(num_bodyparts)
+	partChance.fill(0)
+	partImages.resize(num_bodyparts)
+	partImages.fill("res://assets/bodyparts/")
+	partTooltip.resize(num_bodyparts)
+	partTooltip.fill("null")
+	
+	
 	#for i in range(5):
 		#body_parts.append(randi_range(0, 1))
 	for i in range(num_bodyparts):
 		body_parts.append(i)
+	
+	init_json_data()
 
 func lose_part(partID: int):
 	#var partID = body_parts[index]
@@ -87,24 +151,6 @@ func lose_part(partID: int):
 			pass
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
-
-# yeah im ignoring the better way to do this rn...
-var partImages = [
-	"res://assets/bodyparts/heart.png",
-	"res://assets/bodyparts/brain.png",
-	"res://assets/bodyparts/lungs.png",
-	"res://assets/bodyparts/eyes.png",
-	"res://assets/bodyparts/tongue.png",
-	"res://assets/bodyparts/left_arm.png",
-	"res://assets/bodyparts/right_arm.png",
-	"res://assets/bodyparts/left_leg.png",
-	"res://assets/bodyparts/right_leg.png",
-	"res://assets/bodyparts/stomach.png",
-	"res://assets/bodyparts/liver.png",
-	"res://assets/bodyparts/left_kidney.png",
-	"res://assets/bodyparts/right_kidney.png",
-	"res://assets/bodyparts/bladder.png",
-]
 
 func create_part(partID: int) -> Node2D:
 	var part = BODY_PART.instantiate()

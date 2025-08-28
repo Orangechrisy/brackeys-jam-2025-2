@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var TOOLTIP = $Tooltip
 const BODY_PART = preload("res://scenes/body_part.tscn")
 var hovered_part = null
 
@@ -24,16 +25,20 @@ func connect_part_signals(part: Area2D):
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
 	part.modulate = Color("#ff00ff")
+	var nextToMouse = true
+	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
 func body_part_part_exited(part: Area2D) -> void:
 	part.modulate = Color("#ffffff")
 	if hovered_part==part:
 		hovered_part=null
+	$Tooltip.HidePopup()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		if hovered_part != null:
 			buy_part(hovered_part)
+			$Tooltip.HidePopup()
 
 func buy_part(part):
 	# TODO currency???

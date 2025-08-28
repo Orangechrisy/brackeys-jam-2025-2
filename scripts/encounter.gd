@@ -19,8 +19,6 @@ func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	# can maybe instead do this by viewport size instead of hardcoded...
 	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 900, 1080))
-	
-
 
 
 func create_hand():
@@ -73,6 +71,8 @@ func connect_part_signals(part: Area2D):
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
 	$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
+	var nextToMouse = false
+	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
 func body_part_part_exited(part: Area2D) -> void:
 	update_part_count(part.partID)
@@ -84,6 +84,7 @@ func body_part_part_exited(part: Area2D) -> void:
 		hovered_part=null
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
 		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
+	$Tooltip.HidePopup()
 
 
 
