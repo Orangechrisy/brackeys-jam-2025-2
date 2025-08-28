@@ -1,21 +1,10 @@
 extends Bug
 
-@onready var knows_enemy: bool = false
-var enemy: CharacterBody2D
-
-
 func enemy_process(delta):
-	if not knows_enemy:
-		knows_enemy=true
-		if self == GameManager.player_bug:
-			enemy = GameManager.enemy_bug
-		elif self == GameManager.enemy_bug:
-			enemy = GameManager.player_bug
-	else:
-		look_at(enemy.global_position)
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
+		look_at(velocity/speed + global_position)
 
 
 func _on_direction_timer_timeout() -> void:

@@ -6,22 +6,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
 radius = 95.5249
 
-[sub_resource type="Animation" id="Animation_7dv1t"]
-resource_name = "damage"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1), Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_glhb6"]
 length = 0.001
 tracks/0/type = "value"
@@ -47,6 +31,22 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0.4, 0.4)]
+}
+
+[sub_resource type="Animation" id="Animation_7dv1t"]
+resource_name = "damage"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1), Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tcmtr"]
@@ -104,7 +104,6 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_glhb6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_a3pup")
 
