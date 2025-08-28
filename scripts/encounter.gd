@@ -8,9 +8,11 @@ func _ready():
 	GameManager.play_audio(GameManager.battleMusic, true)
 	create_hand()
 	set_body()
+	set_enemy_body()
 	var player = load("res://scenes/enemy/cockroach.tscn")
 	var enemy = determine_enemy()
 	$Battlefield.place_bugs(player, enemy)
+	enemy_play_parts()
 	set_health_bars()
 
 func _process(_delta: float) -> void:
@@ -80,29 +82,24 @@ func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
 	$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	var nextToMouse = false
-	print("body entered, tt show")
+	#print("body entered, tt show")
 	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
 func body_part_part_exited(part: Area2D) -> void:
-	update_part_count(part.partID)
-	#if GameManager.body_parts.count(part.partID) == 0:
-		#$"body/Parts".get_child(part.partID).modulate = Color("#404040")
-	#else:
-		#$"body/Parts".get_child(part.partID).modulate = Color("#ff0000")
+	update_part_count(part.partID, true)
 	if hovered_part==part:
 		hovered_part=null
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
 		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
-	print("body exited, tt hide")
+	#print("body exited, tt hide")
 	$Tooltip.HidePopup()
 
 
 
 func play_part(part: Area2D):
-	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	$"Hand/AnimatedSprite2D".frame = 1
 	$Tooltip.HidePopup()
-	print("body played, tt hide")
+	#print("body played, tt hide")
 	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
@@ -110,24 +107,22 @@ func play_part(part: Area2D):
 	await tween.finished
 	
 	# this may need to be different if we want different types of the same part
-	# TODO also this should just be in the lose part bit probably... but here for now since thats not set up
-	GameManager.body_parts.erase(part.partID)
-	update_part_count(part.partID)
+	var partID = part.partID
+	GameManager.body_parts.erase(partID)
 	GameManager.current_parts.erase(part)
-	GameManager.played_parts.append(part)
-	part.position = Vector2(-200, -200)
+	GameManager.played_parts.append(partID)
+	update_part_count(partID, true)
+	part.queue_free()
 	update_part_positions()
 	
-	activate_part(part.partID)
-	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
+	activate_part(partID, true)
 	$"Hand/AnimatedSprite2D".frame = 0
 	
-func activate_part(partID: int):
+func activate_part(partID: int, isPlayer: bool):
 	print("activate: ", partID)
 	var bug
-	# TODO remove this player turn thing and replace it with something like a passed in variable given theres no turns really
 	var player_turn = true
-	if player_turn:
+	if isPlayer:
 		bug = $Battlefield.player_bug
 	else:
 		bug = $Battlefield.enemy_bug
@@ -146,13 +141,9 @@ func activate_part(partID: int):
 		GameManager.BODYPARTS.EYES:
 			pass
 		GameManager.BODYPARTS.LEFTARM:
-			print("playing left arm!")
-			#print(bug.get_node("LeftArm").visible)
 			bug.get_node("LeftArm").show()
 			bug.get_node("LeftArm/ArmAttackArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.RIGHTARM:
-			print("playing right arm!")
-			#print(bug.get_node("RightArm").visible)
 			bug.get_node("RightArm").show()
 			bug.get_node("RightArm/ArmAttackArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.LEFTLEG:
@@ -182,20 +173,46 @@ func activate_part(partID: int):
 
 # sets the little body at the start of the encounter
 func set_body():
-	for part in range(GameManager.BODYPARTS.size()):
-		update_part_count(part)
+	for part in range(GameManager.num_bodyparts):
+		update_part_count(part, true)
 
-# TODO we may need to change things if we have different types of parts for the same slot, but thats for later
-# TODO also dunno if label under the sprite works cause the modulate effects it too, but that should all be different anyways
+func set_enemy_body():
+	# give them some random extra parts??
+	for part in range(GameManager.num_bodyparts):
+		GameManager.enemy_body_parts.append(part)
+		update_part_count(part, false)
+
+func enemy_play_parts():
+	GameManager.enemy_body_parts.shuffle()
+	for i in range(min(5, GameManager.enemy_body_parts.size())):
+		var partID = GameManager.enemy_body_parts.pop_back()
+		GameManager.enemy_played_parts.append(partID)
+		activate_part(partID, false)
+		update_part_count(partID, false)
+	
+
+# TODO DIFFERENT COLOR FOR CURRENTLY PLAYED PARTS
 # updates the part counts on the little body
-func update_part_count(partID: int):
-	var num = GameManager.body_parts.count(partID)
-	if num > 1:
-		$"body/Parts".get_child(partID).get_node("Sprite2D").modulate = Color("#ff0000")
-	elif num == 1:
-		$"body/Parts".get_child(partID).get_node("Sprite2D").modulate = Color("#ff8877")
+func update_part_count(partID: int, isPlayer: bool):
+	var amount
+	var played_parts
+	var parts_node
+	if isPlayer:
+		amount = GameManager.body_parts.count(partID)
+		played_parts = GameManager.played_parts
+		parts_node = $body/Parts
 	else:
-		$"body/Parts".get_child(partID).get_node("Sprite2D").modulate = Color("#404040")
+		amount = GameManager.enemy_body_parts.count(partID)
+		played_parts = GameManager.enemy_played_parts
+		parts_node = $enemybody/Parts
+	if played_parts.has(partID):
+		parts_node.get_child(partID).get_node("Sprite2D").modulate = Color("#ffeb00")
+	elif amount > 1:
+		parts_node.get_child(partID).get_node("Sprite2D").modulate = Color("#ff0000")
+	elif amount == 1:
+		parts_node.get_child(partID).get_node("Sprite2D").modulate = Color("#ff8877")
+	else:
+		parts_node.get_child(partID).get_node("Sprite2D").modulate = Color("#404040")
 
 func determine_enemy() -> PackedScene:
 	var enemy = randi_range(0, GameManager.num_enemies - 1)
@@ -209,31 +226,43 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 		$UI/Player/HealthBar.value = health
 		$UI/Player/HealthBar/Label.text = str(health)
 	else:
+		$UI/Enemy/HealthBar.value = health
 		$UI/Enemy/HealthBar/Label.text = str(health)
 
 
 func _on_battlefield_reset(won: bool) -> void:
 	can_click = true
-	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
-	for part in GameManager.played_parts:
-		print(part.partID)
+	#for part in GameManager.played_parts:
+	for i in range(GameManager.played_parts.size()):
+		var part = GameManager.played_parts.pop_back()
 		if won:
-			GameManager.body_parts.append(part.partID)
-			update_part_count(part.partID)
+			GameManager.body_parts.append(part)
 		else:
-			GameManager.lose_part(part.partID)
-		part.queue_free()
-	GameManager.played_parts.clear()
+			GameManager.lose_part(part)
+		update_part_count(part, true)
 	for part in GameManager.current_parts:
 		part.queue_free()
 	GameManager.current_parts.clear()
-	print(GameManager.body_parts, ", ", GameManager.current_parts, ", ", GameManager.played_parts)
 	for part in GameManager.body_parts:
-		update_part_count(part)
+		update_part_count(part, true)
+	reset_enemy_parts(won)
 	await get_tree().create_timer(2).timeout
 	create_hand()
+	enemy_play_parts()
 	set_health_bars()
 
+func reset_enemy_parts(won: bool):
+	if won:
+		# TODO convert the parts into currency for player
+		for i in range(GameManager.enemy_played_parts.size()):
+			var part = GameManager.enemy_played_parts.pop_back()
+			update_part_count(part, false)
+	else:
+		# put the parts back into enemy's body parts pool since they didnt lose any
+		for i in range(GameManager.enemy_played_parts.size()):
+			var part = GameManager.enemy_played_parts.pop_back()
+			GameManager.enemy_body_parts.append(part)
+			update_part_count(part, false)
 
 func _on_battlefield_allow_clicking(allow: bool) -> void:
 	can_click = allow

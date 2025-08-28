@@ -38,5 +38,6 @@ scale = Vector2(3, 3)
 texture = ExtResource("3_1l46r")
 
 [node name="Tooltip" parent="." instance=ExtResource("4_032fp")]
+visible = false
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

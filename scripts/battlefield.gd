@@ -20,7 +20,6 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	player_bug.connect("change_health", health_change)
 	player_bug.connect("next_level", round_change)
 	$Bugs.add_child(player_bug)
-	print(player_bug.speed)
 	
 	enemy_scene = enemy
 	enemy_bug = enemy.instantiate()
@@ -30,7 +29,7 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	enemy_bug.connect("change_health", health_change)
 	enemy_bug.connect("next_level", round_change)
 	$Bugs.add_child(enemy_bug)
-	print(enemy_bug.speed)
+	enemy_bug.set_as_enemy()
 	
 	#for bug in $Bugs.get_children():
 		#bug.start_movement()

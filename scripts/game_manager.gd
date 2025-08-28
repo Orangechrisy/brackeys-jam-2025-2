@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var body_parts = []
+@export var enemy_body_parts = []
 
 enum BODYPARTS {
 	HEART,
@@ -81,6 +82,7 @@ var player_bug: CharacterBody2D
 var enemy_bug: CharacterBody2D
 var current_parts = []
 var played_parts = []
+var enemy_played_parts = []
 
 func _ready() -> void:
 	_reset()
@@ -175,6 +177,7 @@ func play_audio(path: String, fadeIn: bool):
 		tween.parallel()
 		tween.tween_property(audio_to_play, "volume_linear", audio_to_play.volume_linear, 3.0).from(0.0)
 		tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		await get_tree().create_timer(0.05).timeout
 		audio_to_play.play(0.0)
 	else:
 		audio_to_play.play(0.0)
