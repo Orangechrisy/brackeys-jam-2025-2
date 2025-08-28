@@ -181,6 +181,11 @@ func set_enemy_body():
 	for part in range(GameManager.num_bodyparts):
 		GameManager.enemy_body_parts.append(part)
 		update_part_count(part, false)
+	for i in range(5):
+		var partID = randi_range(0, GameManager.num_bodyparts - 1)
+		GameManager.enemy_body_parts.append(partID)
+		update_part_count(partID, false)
+		
 
 func enemy_play_parts():
 	GameManager.enemy_body_parts.shuffle()
