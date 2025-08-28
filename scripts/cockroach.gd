@@ -13,5 +13,8 @@ func _on_direction_timer_timeout() -> void:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	if "health" in body:
-		body.hit(damage, self, body)
+	print("Collision with" + str(body))
+	if body.is_in_group("hurtbox"):
+		print("Is in group!")
+		if "health" in body:
+			body.hit(damage, self, body)
