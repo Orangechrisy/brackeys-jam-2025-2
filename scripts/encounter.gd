@@ -177,7 +177,6 @@ func set_body():
 		update_part_count(part, true)
 
 func set_enemy_body():
-	# give them some random extra parts??
 	for part in range(GameManager.num_bodyparts):
 		GameManager.enemy_body_parts.append(part)
 		update_part_count(part, false)
@@ -196,7 +195,6 @@ func enemy_play_parts():
 		update_part_count(partID, false)
 	
 
-# TODO DIFFERENT COLOR FOR CURRENTLY PLAYED PARTS
 # updates the part counts on the little body
 func update_part_count(partID: int, isPlayer: bool):
 	var amount
