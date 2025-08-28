@@ -9,13 +9,7 @@ func _ready():
 	var player = load("res://scenes/enemy/cockroach.tscn")
 	var enemy = determine_enemy()
 	$Battlefield.place_bugs(player, enemy)
-	print(GameManager.player_bug.health)
-	$UI/Player/HealthBar.max_value = GameManager.player_bug.health
-	$UI/Enemy/HealthBar.max_value = GameManager.enemy_bug.health
-	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
-	$UI/Player/HealthBar/Label.text = str($UI/Player/HealthBar.value)
-	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
-	$UI/Enemy/HealthBar/Label.text = str($UI/Enemy/HealthBar.value)
+	set_health_bars()
 
 func _process(_delta: float) -> void:
 	if can_click and Input.is_action_just_pressed("left_click"):
@@ -25,6 +19,13 @@ func _process(_delta: float) -> void:
 	# can maybe instead do this by viewport size instead of hardcoded...
 	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
 
+func set_health_bars():
+	$UI/Player/HealthBar.max_value = GameManager.player_bug.health
+	$UI/Enemy/HealthBar.max_value = GameManager.enemy_bug.health
+	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
+	$UI/Player/HealthBar/Label.text = str(int($UI/Player/HealthBar.value))
+	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
+	$UI/Enemy/HealthBar/Label.text = str(int($UI/Enemy/HealthBar.value))
 
 func create_hand():
 	GameManager.body_parts.shuffle()
@@ -227,6 +228,7 @@ func _on_battlefield_reset(won: bool) -> void:
 		update_part_count(part)
 	await get_tree().create_timer(2).timeout
 	create_hand()
+	set_health_bars()
 
 
 func _on_battlefield_allow_clicking(allow: bool) -> void:

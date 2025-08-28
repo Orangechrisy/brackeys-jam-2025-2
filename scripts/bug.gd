@@ -20,8 +20,6 @@ func start_movement():
 
 func _physics_process(delta: float) -> void:
 	enemy_process(delta)
-	if self == GameManager.player_bug:
-		print("speed: ", speed)
 	
 	if health <= 0:
 		death()
