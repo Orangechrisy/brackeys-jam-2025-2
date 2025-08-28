@@ -8,6 +8,7 @@ func _ready() -> void:
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("Master"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("MUSIC"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
+	GameManager.stop_other_music(GameManager.shopMusic)
 	GameManager.play_audio(GameManager.shopMusic, true)
 
 func _on_start_pressed() -> void:

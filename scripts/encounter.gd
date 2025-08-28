@@ -4,6 +4,7 @@ const BODY_PART = preload("res://scenes/body_part.tscn")
 var can_click = true
 
 func _ready():
+	GameManager.stop_other_music(GameManager.battleMusic)
 	GameManager.play_audio(GameManager.battleMusic, true)
 	create_hand()
 	set_body()

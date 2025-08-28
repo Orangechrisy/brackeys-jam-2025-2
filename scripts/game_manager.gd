@@ -166,6 +166,23 @@ func play_audio(path: String, fadeIn: bool):
 		if $ShopMusic.playing:
 			return
 		audio_to_play = $ShopMusic
+	elif path == battleMusic:
+		if $BattleMusic.playing:
+			return
+		audio_to_play = $BattleMusic
+	if fadeIn:
+		var tween = create_tween()
+		tween.parallel()
+		tween.tween_property(audio_to_play, "volume_linear", audio_to_play.volume_linear, 3.0).from(0.0)
+		tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		audio_to_play.play(0.0)
+	else:
+		audio_to_play.play(0.0)
+
+func stop_other_music(path: String):
+	if path == shopMusic:
+		if $ShopMusic.playing:
+			return
 		if $BattleMusic.playing:
 			var tween = create_tween()
 			tween.tween_property($BattleMusic, "volume_linear", 0.0, 1.0)
@@ -175,18 +192,9 @@ func play_audio(path: String, fadeIn: bool):
 	elif path == battleMusic:
 		if $BattleMusic.playing:
 			return
-		audio_to_play = $BattleMusic
 		if $ShopMusic.playing:
 			var tween = create_tween()
 			tween.tween_property($ShopMusic, "volume_linear", 0.0, 1.0)
 			tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 			tween.tween_callback($ShopMusic.stop)
 			await tween.finished
-	if fadeIn:
-		var tween = create_tween()
-		tween.parallel()
-		tween.tween_property(audio_to_play, "volume_linear", audio_to_play.volume_linear, 3.0).from(0.0)
-		tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-		audio_to_play.play(0.0)
-	else:
-		audio_to_play.play(0.0)
