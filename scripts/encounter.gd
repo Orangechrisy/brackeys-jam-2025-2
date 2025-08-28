@@ -165,14 +165,14 @@ func activate_part(partID: int):
 			pass
 		GameManager.BODYPARTS.LEFTKIDNEY:
 			pass
-			# TODO in bug script
-			#bug.get_node("LeftKidney").show()
-			#bug.get_node("LeftKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
+			# TODO make this less janky if possible? Right now kidneys won't interact with each other
+			bug.get_node("LeftKidney").show()
+			bug.get_node("LeftKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.RIGHTKIDNEY:
 			pass
-			# TODO in bug script
-			#bug.get_node("RightKidney").show()
-			#bug.get_node("RightKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
+			# TODO make this less janky if possible? Right now kidneys won't interact with each other
+			bug.get_node("RightKidney").show()
+			bug.get_node("RightKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.BLADDER:
 			pass
 

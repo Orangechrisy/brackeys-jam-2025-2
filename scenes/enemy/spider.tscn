@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://1w40r4kv1mqt"]
 
-[ext_resource type="PackedScene" uid="uid://btv5r3xujbrwm" path="res://scenes/enemy/bug.tscn" id="1_xtqu1"]
+[ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_xtqu1"]
 [ext_resource type="Script" uid="uid://dg2uq7s8tc0jp" path="res://scripts/spider.gd" id="2_656li"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_656li"]
