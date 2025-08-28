@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://btv5r3xujbrwm"]
+[gd_scene load_steps=8 format=3 uid="uid://dm5m0f20omtaj"]
 
 [ext_resource type="Script" uid="uid://b5vidvlpr235r" path="res://scripts/bug.gd" id="1_7dv1t"]
 [ext_resource type="Texture2D" uid="uid://c1463vedwu8i" path="res://icon.svg" id="2_glhb6"]
+[ext_resource type="Texture2D" uid="uid://b30jsb4bam2di" path="res://assets/bodyparts/left_arm.png" id="3_tcmtr"]
+[ext_resource type="Texture2D" uid="uid://cjv6qu43yr8e1" path="res://assets/bodyparts/right_arm.png" id="4_srpgu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
 radius = 95.5249
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ev3hl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nw6e0"]
 
 [node name="Bug" type="CharacterBody2D"]
 script = ExtResource("1_7dv1t")
@@ -20,3 +26,40 @@ shape = SubResource("CircleShape2D_a3pup")
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="Timers" type="Node" parent="."]
+
+[node name="LeftArm" type="Marker2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftArm"]
+z_index = -1
+position = Vector2(17, -24)
+rotation = -1.91463
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_tcmtr")
+
+[node name="ArmAttackArea" type="Area2D" parent="LeftArm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArm/ArmAttackArea"]
+position = Vector2(31, -26)
+shape = SubResource("CircleShape2D_ev3hl")
+disabled = true
+
+[node name="RightArm" type="Marker2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="RightArm"]
+z_index = -1
+position = Vector2(20, 20)
+rotation = -1.46608
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_srpgu")
+
+[node name="ArmAttackArea" type="Area2D" parent="RightArm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArm/ArmAttackArea"]
+position = Vector2(33, 19)
+shape = SubResource("CircleShape2D_nw6e0")
+disabled = true
+
+[connection signal="body_entered" from="LeftArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]
+[connection signal="body_entered" from="RightArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]

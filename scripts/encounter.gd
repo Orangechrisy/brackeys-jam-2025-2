@@ -4,13 +4,18 @@ const BODY_PART = preload("res://scenes/body_part.tscn")
 var can_click = true
 
 func _ready():
-	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
-	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
 	create_hand()
 	set_body()
 	var player = load("res://scenes/enemy/cockroach.tscn")
 	var enemy = determine_enemy()
 	$Battlefield.place_bugs(player, enemy)
+	print(GameManager.player_bug.health)
+	$UI/Player/HealthBar.max_value = GameManager.player_bug.health
+	$UI/Enemy/HealthBar.max_value = GameManager.enemy_bug.health
+	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
+	$UI/Player/HealthBar/Label.text = str($UI/Player/HealthBar.value)
+	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
+	$UI/Enemy/HealthBar/Label.text = str($UI/Enemy/HealthBar.value)
 
 func _process(_delta: float) -> void:
 	if can_click and Input.is_action_just_pressed("left_click"):
@@ -18,9 +23,7 @@ func _process(_delta: float) -> void:
 			play_part(hovered_part)
 	var mouse_pos = get_global_mouse_position()
 	# can maybe instead do this by viewport size instead of hardcoded...
-	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 900, 1080))
-	
-
+	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
 
 
 func create_hand():
@@ -123,28 +126,46 @@ func activate_part(partID: int):
 	match partID:
 		GameManager.BODYPARTS.HEART:
 			# TODO do in a more direct way probs
+			$UI/Player/HealthBar.max_value += 100
 			bug.health += 100
+			$UI/Player/HealthBar.value += 100
+			$UI/Player/HealthBar/Label.text = str(bug.health)
 		GameManager.BODYPARTS.BRAIN:
-			bug.damage += 10
+			# in bug script
+			pass
 		GameManager.BODYPARTS.LUNGS:
 			pass
 		GameManager.BODYPARTS.EYES:
 			pass
 		GameManager.BODYPARTS.LEFTARM:
-			pass
+			print("playing left arm!")
+			#print(bug.get_node("LeftArm").visible)
+			bug.get_node("LeftArm").show()
+			bug.get_node("LeftArm/ArmAttackArea/CollisionShape2D").disabled = false
+			print(bug.get_node("LeftArm/Sprite2D").is_visible_in_tree())
 		GameManager.BODYPARTS.RIGHTARM:
-			pass
+			print("playing right arm!")
+			#print(bug.get_node("RightArm").visible)
+			bug.get_node("RightArm").show()
+			bug.get_node("RightArm/ArmAttackArea/CollisionShape2D").disabled = false
+			print(bug.get_node("RightArm/Sprite2D").is_visible_in_tree())
 		GameManager.BODYPARTS.LEFTLEG:
+			# in bug script
 			pass
 		GameManager.BODYPARTS.RIGHTLEG:
+			# in bug script
 			pass
 		GameManager.BODYPARTS.STOMACH:
+			# in bug script
 			pass
 		GameManager.BODYPARTS.LIVER:
+			# TODO in bug script
 			pass
 		GameManager.BODYPARTS.LEFTKIDNEY:
+			# TODO in bug script
 			pass
 		GameManager.BODYPARTS.RIGHTKIDNEY:
+			# TODO in bug script
 			pass
 		GameManager.BODYPARTS.BLADDER:
 			pass
@@ -176,8 +197,9 @@ func determine_enemy() -> PackedScene:
 func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 	if player:
 		$UI/Player/HealthBar.value = health
+		$UI/Player/HealthBar/Label.text = str(health)
 	else:
-		$UI/Enemy/HealthBar.value = health
+		$UI/Enemy/HealthBar/Label.text = str(health)
 
 
 func _on_battlefield_reset(won: bool) -> void:
