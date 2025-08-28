@@ -145,13 +145,11 @@ func activate_part(partID: int):
 			#print(bug.get_node("LeftArm").visible)
 			bug.get_node("LeftArm").show()
 			bug.get_node("LeftArm/ArmAttackArea/CollisionShape2D").disabled = false
-			print(bug.get_node("LeftArm/Sprite2D").is_visible_in_tree())
 		GameManager.BODYPARTS.RIGHTARM:
 			print("playing right arm!")
 			#print(bug.get_node("RightArm").visible)
 			bug.get_node("RightArm").show()
 			bug.get_node("RightArm/ArmAttackArea/CollisionShape2D").disabled = false
-			print(bug.get_node("RightArm/Sprite2D").is_visible_in_tree())
 		GameManager.BODYPARTS.LEFTLEG:
 			# in bug script
 			pass
@@ -165,11 +163,15 @@ func activate_part(partID: int):
 			# TODO in bug script
 			pass
 		GameManager.BODYPARTS.LEFTKIDNEY:
-			# TODO in bug script
 			pass
+			# TODO in bug script
+			#bug.get_node("LeftKidney").show()
+			#bug.get_node("LeftKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.RIGHTKIDNEY:
-			# TODO in bug script
 			pass
+			# TODO in bug script
+			#bug.get_node("RightKidney").show()
+			#bug.get_node("RightKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.BLADDER:
 			pass
 

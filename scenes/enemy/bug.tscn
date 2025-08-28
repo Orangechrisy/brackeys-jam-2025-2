@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dm5m0f20omtaj"]
+[gd_scene load_steps=10 format=3 uid="uid://dm5m0f20omtaj"]
 
 [ext_resource type="Script" uid="uid://b5vidvlpr235r" path="res://scripts/bug.gd" id="1_7dv1t"]
 [ext_resource type="Texture2D" uid="uid://c1463vedwu8i" path="res://icon.svg" id="2_glhb6"]
@@ -11,6 +11,12 @@ radius = 95.5249
 [sub_resource type="CircleShape2D" id="CircleShape2D_ev3hl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nw6e0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tcmtr"]
+radius = 19.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_srpgu"]
+radius = 19.0263
 
 [node name="Bug" type="CharacterBody2D"]
 script = ExtResource("1_7dv1t")
@@ -59,6 +65,26 @@ texture = ExtResource("4_srpgu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightArm/ArmAttackArea"]
 position = Vector2(33, 19)
 shape = SubResource("CircleShape2D_nw6e0")
+disabled = true
+
+[node name="LeftKidney" type="Marker2D" parent="."]
+visible = false
+
+[node name="KidneyDefenseArea" type="Area2D" parent="LeftKidney"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea"]
+position = Vector2(0, -27)
+shape = SubResource("CircleShape2D_tcmtr")
+disabled = true
+
+[node name="RightKidney" type="Marker2D" parent="."]
+visible = false
+
+[node name="KidneyDefenseArea" type="Area2D" parent="RightKidney"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightKidney/KidneyDefenseArea"]
+position = Vector2(0, 27)
+shape = SubResource("CircleShape2D_srpgu")
 disabled = true
 
 [connection signal="body_entered" from="LeftArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]

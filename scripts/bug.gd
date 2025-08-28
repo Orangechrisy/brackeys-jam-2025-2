@@ -72,6 +72,7 @@ func remove_timers():
 		timer.queue_free()
 
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
+	#print("hit: ", attackingBug, " | ", attackedBug)
 	if attackingBug != attackedBug:
 		# TODO this should totally cause the little portrait to have an effect
 		# handling effects
@@ -83,6 +84,7 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 						# Restores a third of the damage dealt as health
 						print("Attacker has tongue!")
 						attackingBug.health += floor(attackingBug.damage / 3)
+						change_health.emit(attackingBug, attackingBug.health)
 			if attackedBug == GameManager.player_bug:
 				match part.partID:
 					GameManager.BODYPARTS.BRAIN:
@@ -90,7 +92,10 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 						if randi_range(1, 2) == 2:
 							dmg = 0
 							print("Dodged!")
-							
+					#GameManager.BODYPARTS.LEFTKIDNEY:
+						#print("checking areas: ", $LeftKidney/KidneyDefenseArea.get_overlapping_areas())
+					#GameManager.BODYPARTS.RIGHTKIDNEY:
+						#print("checking areas: ", $RightKidney/KidneyDefenseArea.get_overlapping_areas())
 		
 		# Handling damage dealt
 		health -= dmg
