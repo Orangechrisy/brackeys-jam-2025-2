@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://xtjsrk8ye6fr"]
+
+[ext_resource type="Script" uid="uid://cjc383ms3k2uw" path="res://scripts/hp_bar.gd" id="1_e8frx"]
+
+[node name="HPBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e8frx")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 34.0
+offset_bottom = 244.0
+value = 75.0
+fill_mode = 3
+show_percentage = false

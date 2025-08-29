@@ -1,106 +1,119 @@
 {
-	"0": {
-		"NAME": "Heart",
-		"RARITY": "legendary",
-		"PATH": "heart.png",
-		"BUGDESCR": "Bonus HP?",
-		"PLAYERDESCR": "Kills the player instantly",
-		"COST": 20.0
-	},
-	"1": {
-		"NAME": "Brain",
-		"RARITY": "legendary",
-		"PATH": "brain.png",
-		"BUGDESCR": "Bug has a chance to dodge attacks",
-		"PLAYERDESCR": "Become Dumb: Game plays itself",
-		"COST": 15.0
-	},
-	"2": {
-		"NAME": "Lungs",
-		"RARITY": "rare",
-		"PATH": "lungs.png",
-		"BUGDESCR": "Bug is much faster",
-		"PLAYERDESCR": "Timer: All future rounds have to end within 30 seconds or they die",
-		"COST": 10.0
-	},
-	"3": {
-		"NAME": "Eyes",
-		"RARITY": "rare",
-		"PATH": "eyes.png",
-		"BUGDESCR": "",
-		"PLAYERDESCR": "",
-		"COST": 10.0
-	},
-	"4": {
-		"NAME": "Tongue",
-		"RARITY": "uncommon",
-		"PATH": "tongue.png",
-		"BUGDESCR": "Bug heals +1 health every successful attack",
-		"PLAYERDESCR": "",
-		"COST": 7.0
-	},
-	"5": {
-		"NAME": "Left Arm",
-		"RARITY": "common",
-		"PATH": "left_arm.png",
-		"BUGDESCR": "Bug gets another hitbox",
-		"PLAYERDESCR": "",
-		"COST": 5.0
-	},
-	"6": {
-		"NAME": "Right Arm",
-		"RARITY": "uncommon",
-		"PATH": "right_arm.png",
-		"BUGDESCR": "Bug gets another hitbox",
-		"PLAYERDESCR": "",
-		"COST": 7.0
-	},
-	"7": {
-		"NAME": "Left Leg",
-		"RARITY": "common",
-		"PATH": "left_leg.png",
-		"BUGDESCR": "Bug can dash",
-		"PLAYERDESCR": "",
-		"COST": 3.0
-	},
-	"8": {
-		"NAME": "Right Leg",
-		"RARITY": "uncommon",
-		"PATH": "right_leg.png",
-		"BUGDESCR": "Bug can dash",
-		"PLAYERDESCR": "",
-		"COST": 5.0
-	},
-	"9": {
-		"NAME": "Stomach",
-		"RARITY": "uncommon",
-		"PATH": "stomach.png",
-		"BUGDESCR": "Bug shoots out stomach acid",
-		"PLAYERDESCR": "",
-		"COST": 9.0
-	},
-	"10": {
-		"NAME": "Liver",
-		"RARITY": "uncommon",
-		"PATH": "liver.png",
-		"BUGDESCR": "Bug slowly regenerates health",
-		"PLAYERDESCR": "",
-		"COST": 7.0
-	},
-	"11": {
-		"NAME": "Left Kidney",
-		"RARITY": "common",
-		"PATH": "left_kidney.png",
-		"BUGDESCR": "Bug creates a shield on the left side",
-		"PLAYERDESCR": "",
-		"COST": 5.0
-	},
-	"12": {
-		"NAME": "Right Kidney",
-		"RARITY": "common",
-		"PATH": "right_kidney.png",
-		"BUGDESCR": "Bug creates a shield on the right side",
-		"PLAYERDESCR": "",
-		"COST": 5.0
-	}
+  "0": {
+    "NAME": "Heart",
+    "RARITY": "legendary",
+    "PATH": "heart.png",
+    "BUGDESCR": "Bug has +25 max health",
+    "PLAYERDESCR": "Kills the player instantly",
+    "COST": 20,
+    "HPLOSS": 30
+  },
+  "1": {
+    "NAME": "Brain",
+    "RARITY": "legendary",
+    "PATH": "brain.png",
+    "BUGDESCR": "Bug has a chance to dodge attacks",
+    "PLAYERDESCR": "Become Dumb: Game plays itself?",
+    "COST": 15,
+    "HPLOSS": 25
+  },
+  "2": {
+    "NAME": "Lungs",
+    "RARITY": "rare",
+    "PATH": "lungs.png",
+    "BUGDESCR": "Bug is much faster",
+    "PLAYERDESCR": "Timer: All future rounds have to end within 30 seconds or they die",
+    "COST": 10,
+    "HPLOSS": 15
+  },
+  "3": {
+    "NAME": "Eyes",
+    "RARITY": "rare",
+    "PATH": "eyes.png",
+    "BUGDESCR": "Bug's attack area increases",
+    "PLAYERDESCR": "Can't see organs",
+    "COST": 10,
+    "HPLOSS": 8
+  },
+  "4": {
+    "NAME": "Tongue",
+    "RARITY": "uncommon",
+    "PATH": "tongue.png",
+    "BUGDESCR": "Bug heals +1 health every successful attack",
+    "PLAYERDESCR": "Harder to get rare parts at the Surgeon",
+    "COST": 7,
+    "HPLOSS": 5
+  },
+  "5": {
+    "NAME": "Left Arm",
+    "RARITY": "common",
+    "PATH": "left_arm.png",
+    "BUGDESCR": "Bug gets another hitbox",
+    "PLAYERDESCR": "Smaller selection of parts to play from",
+    "COST": 5,
+    "HPLOSS": 7
+  },
+  "6": {
+    "NAME": "Right Arm",
+    "RARITY": "uncommon",
+    "PATH": "right_arm.png",
+    "BUGDESCR": "Bug gets another hitbox",
+    "PLAYERDESCR": "Smaller selection of parts to play from",
+    "COST": 7,
+    "HPLOSS": 7
+  },
+  "7": {
+    "NAME": "Left Leg",
+    "RARITY": "common",
+    "PATH": "left_leg.png",
+    "BUGDESCR": "Bug can dash",
+    "PLAYERDESCR": "Bug can't move for a couple seconds?",
+    "COST": 3,
+    "HPLOSS": 7
+  },
+  "8": {
+    "NAME": "Right Leg",
+    "RARITY": "uncommon",
+    "PATH": "right_leg.png",
+    "BUGDESCR": "Bug can dash",
+    "PLAYERDESCR": "Bug can't move for a couple seconds?",
+    "COST": 5,
+    "HPLOSS": 7
+  },
+  "9": {
+    "NAME": "Stomach",
+    "RARITY": "uncommon",
+    "PATH": "stomach.png",
+    "BUGDESCR": "Bug shoots out stomach acid",
+    "PLAYERDESCR": "bug takes more damage per hit?",
+    "COST": 9,
+    "HPLOSS": 6
+  },
+  "10": {
+    "NAME": "Liver",
+    "RARITY": "uncommon",
+    "PATH": "liver.png",
+    "BUGDESCR": "Bug slowly regenerates health",
+    "PLAYERDESCR": "player takes damage per round?",
+    "COST": 7,
+    "HPLOSS": 5
+  },
+  "11": {
+    "NAME": "Left Kidney",
+    "RARITY": "common",
+    "PATH": "left_kidney.png",
+    "BUGDESCR": "Bug creates a shield on the left side",
+    "PLAYERDESCR": "Less Blood from winning?",
+    "COST": 5,
+    "HPLOSS": 3
+  },
+  "12": {
+    "NAME": "Right Kidney",
+    "RARITY": "common",
+    "PATH": "right_kidney.png",
+    "BUGDESCR": "Bug creates a shield on the right side",
+    "PLAYERDESCR": "Less Blood from winning?",
+    "COST": 5,
+    "HPLOSS": 3
+  }
 }

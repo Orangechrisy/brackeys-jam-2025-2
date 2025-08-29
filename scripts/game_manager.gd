@@ -25,6 +25,7 @@ var partChance: Array = []
 var partImages: Array = []
 var partTooltip : Array = []
 var partCost: Array = []
+var partHPLoss: Array = []
 
 #rarities
 var common: int = 20
@@ -69,6 +70,7 @@ func parse_json(ID: int, json: Dictionary):
 	partImages[ID] += json["PATH"]
 	partTooltip[ID] = json["BUGDESCR"] +  "\n\n" + json["PLAYERDESCR"]
 	partCost[ID] = json["COST"]
+	partHPLoss[ID] = json["HPLOSS"]
 
 
 enum BUGS {
@@ -108,6 +110,8 @@ var has_lungs = true
 var no_left_leg = false
 var no_right_leg = false
 var no_eyes = false
+var player_max_health = 50
+var player_health = 50
 
 func game_over():
 	print("game over :(")
@@ -131,6 +135,8 @@ func _reset():
 	partTooltip.fill("null")
 	partCost.resize(num_bodyparts)
 	partCost.fill(0)
+	partHPLoss.resize(num_bodyparts)
+	partHPLoss.fill(0)
 	
 	for i in range(num_bodyparts):
 		body_parts.append(i)
@@ -149,6 +155,8 @@ func _reset():
 	no_left_leg = false
 	no_right_leg = false
 	no_eyes = false
+	player_max_health = 50
+	player_health = 50
 	reset_rarities()
 
 func reset_rarities():
@@ -192,6 +200,9 @@ func lose_part(partID: int):
 				less_blood -= 1
 			BODYPARTS.RIGHTKIDNEY:
 				less_blood -= 1
+	player_health = max(0, player_health - partHPLoss[partID])
+	if player_health == 0:
+		game_over()
 
 # for when you have none of the part and you buy one at the shop
 func bought_part(partID: int):
@@ -236,6 +247,12 @@ func create_part(partID: int) -> Node2D:
 		part.get_node("Censor").show()
 	part.cost = partCost[partID]
 	return part
+
+func liver_check():
+	if body_parts.count(BODYPARTS.LIVER) == 0:
+		player_health -= 1
+		if player_health <= 0:
+			game_over()
 
 var shopMusic = "ShopMusic"
 var battleMusic = "BattleMusic"

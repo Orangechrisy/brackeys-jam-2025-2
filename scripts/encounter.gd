@@ -334,6 +334,8 @@ func _on_battlefield_reset(won: bool) -> void:
 		update_part_count(part, true)
 	reset_enemy_parts(won)
 	
+	GameManager.liver_check()
+	
 	if curr_round < num_rounds:
 		await get_tree().create_timer(2.0).timeout
 		# these two temp
