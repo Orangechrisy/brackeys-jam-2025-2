@@ -180,6 +180,8 @@ func play_part(part: Area2D):
 	
 	activate_part(partID, true)
 	$"Hand/AnimatedSprite2D".frame = 0
+	if not $Battlefield/Button.visible:
+		$Battlefield/Button.show()
 	
 func activate_part(partID: int, isPlayer: bool):
 	var bug
