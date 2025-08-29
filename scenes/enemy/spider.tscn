@@ -17,8 +17,10 @@ speed = 100
 position = Vector2(9.53674e-07, -9.53674e-07)
 texture = ExtResource("3_pf1qy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+[node name="AttackArea" parent="." index="3"]
 position = Vector2(50, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
 shape = SubResource("CircleShape2D_656li")
 
 [node name="ShootTimer" type="Timer" parent="BugTimers" index="1"]

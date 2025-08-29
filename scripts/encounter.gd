@@ -200,8 +200,9 @@ func activate_part(partID: int, isPlayer: bool):
 			pass
 		GameManager.BODYPARTS.LUNGS:
 			bug.speed += 100
+			bug.default_speed += 100
 		GameManager.BODYPARTS.EYES:
-			pass
+			bug.get_node("AttackArea/CollisionShape2D").scale = Vector2(1.2, 1.2)
 		GameManager.BODYPARTS.LEFTARM:
 			bug.get_node("LeftArm").show()
 			bug.get_node("LeftArm/ArmAttackArea/CollisionShape2D").disabled = false
@@ -218,7 +219,7 @@ func activate_part(partID: int, isPlayer: bool):
 			# in bug script
 			pass
 		GameManager.BODYPARTS.LIVER:
-			# TODO in bug script
+			# in bug script
 			pass
 		GameManager.BODYPARTS.LEFTKIDNEY:
 			bug.get_node("LeftKidney").show()

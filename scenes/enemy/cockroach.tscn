@@ -20,8 +20,10 @@ autostart = true
 [node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("3_el1v0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+[node name="AttackArea" parent="." index="4"]
 position = Vector2(42, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
 shape = SubResource("CircleShape2D_el1v0")
 
 [node name="ArmAttackArea" parent="LeftArm" index="1"]

@@ -2,7 +2,6 @@ extends Bug
 
 func enemy_process(delta):
 	velocity = direction * speed
-	print("velocity: ", velocity)
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
