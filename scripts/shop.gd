@@ -11,14 +11,18 @@ func _ready() -> void:
 	var p2 = randi_range(0, GameManager.BODYPARTS.size()-1)
 	var p3 = randi_range(0, GameManager.BODYPARTS.size()-1)
 	var part1 = GameManager.create_part(p1)
-	$"OrganHolder".add_child(part1)
+	$OrganHolder.add_child(part1)
 	part1.position = $Option1.position
+	$Option1/Label.text = str(part1.cost)
 	var part2 = GameManager.create_part(p2)
-	$"OrganHolder".add_child(part2)
+	$OrganHolder.add_child(part2)
 	part2.position = $Option2.position
+	$Option2/Label.text = str(part2.cost)
 	var part3 = GameManager.create_part(p3)
-	$"OrganHolder".add_child(part3)
+	$OrganHolder.add_child(part3)
 	part3.position = $Option3.position
+	$Option3/Label.text = str(part3.cost)
+	$Blood/Label.text = str(GameManager.blood)
 
 func connect_part_signals(part: Area2D):
 	part.connect("part_entered", body_part_part_entered)
@@ -43,10 +47,15 @@ func _process(_delta: float) -> void:
 			$Tooltip.HidePopup()
 
 func buy_part(part):
-	# TODO currency???
-	GameManager.body_parts.append(part.partID)
-	part.queue_free()
-	print(GameManager.body_parts)
+	if GameManager.blood >= part.cost:
+		GameManager.blood -= part.cost
+		$Blood/Label.text = str(GameManager.blood)
+		GameManager.body_parts.append(part.partID)
+		part.queue_free()
+		print(GameManager.body_parts)
+	else:
+		# do a shake or some sound to indicate cant buy?
+		pass
 
 func _on_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/encounter.tscn")

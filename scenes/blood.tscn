@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://csbtxgx5jy0d8"]
+
+[ext_resource type="Texture2D" uid="uid://be5i7rq6ndjg0" path="res://assets/blood.png" id="1_kl077"]
+
+[node name="Blood" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kl077")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 35.0
+offset_top = -37.0
+offset_right = 75.0
+offset_bottom = 46.0
+theme_override_font_sizes/font_size = 60
+text = "0"
+vertical_alignment = 1

@@ -5,7 +5,7 @@ var speed = 10
 var damage: int = 5
 
 func _physics_process(delta: float) -> void:
-	global_position += direction * speed
+	position += direction * speed
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

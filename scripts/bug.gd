@@ -133,6 +133,7 @@ func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")
 	var acid = STOMACH_ACID.instantiate()
 	add_child(acid)
+	acid.position = global_position
 	acid.direction = velocity / speed
 	timer.wait_time = 0.5 #randi_range(1, 5)
 	timer.start()
