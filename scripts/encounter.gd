@@ -179,11 +179,10 @@ func activate_part(partID: int, isPlayer: bool):
 		bug = $Battlefield.enemy_bug
 	match partID:
 		GameManager.BODYPARTS.HEART:
-			# TODO do in a more direct way probs
-			$UI/Player/HealthBar.max_value += 100
-			bug.health += 100
-			$UI/Player/HealthBar.value += 100
-			$UI/Player/HealthBar/Label.text = str(bug.health)
+			var health = 25
+			$UI/Player/HealthBar.max_value += health
+			bug.max_health += health
+			bug.health += 25
 		GameManager.BODYPARTS.BRAIN:
 			# in bug script
 			pass
