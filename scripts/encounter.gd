@@ -182,7 +182,6 @@ func play_part(part: Area2D):
 	$"Hand/AnimatedSprite2D".frame = 0
 	
 func activate_part(partID: int, isPlayer: bool):
-	print("activate: ", partID)
 	var bug
 	#var player_turn = true
 	if isPlayer:
@@ -281,7 +280,8 @@ const BEETLEICON: Texture2D = preload("res://assets/bugs/beetleicon.png")
 
 @onready var enemyID: int = -1
 func determine_enemy() -> PackedScene:
-	enemyID = randi_range(0, GameManager.num_enemies - 1)
+	if enemyID == -1:
+		enemyID = randi_range(0, GameManager.num_enemies - 1)
 	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
 	var enemy_bug = load(path)
 	$UI/Enemy/NameLabel.text = GameManager.default_bug_names[enemyID]
