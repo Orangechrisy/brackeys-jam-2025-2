@@ -122,7 +122,7 @@ func play_part(part: Area2D):
 func activate_part(partID: int, isPlayer: bool):
 	print("activate: ", partID)
 	var bug
-	var player_turn = true
+	#var player_turn = true
 	if isPlayer:
 		bug = $Battlefield.player_bug
 	else:

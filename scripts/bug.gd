@@ -81,7 +81,7 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 		invincible=true
 		$InvincibilityTimer.start()
 		if not $GlobalAnimationPlayer.animation_started:
-		$GlobalAnimationPlayer.play("damage")
+			$GlobalAnimationPlayer.play("damage")
 		
 		#print("hit: ", attackingBug, " | ", attackedBug)
 		if attackingBug != attackedBug:

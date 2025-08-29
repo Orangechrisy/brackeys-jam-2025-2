@@ -20,7 +20,6 @@ height = 42.0
 radius = 12.0
 height = 42.0
 
-
 [sub_resource type="Animation" id="Animation_glhb6"]
 length = 0.001
 tracks/0/type = "value"
@@ -34,18 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.4, 0.4)]
 }
 
 [sub_resource type="Animation" id="Animation_7dv1t"]
@@ -70,38 +57,38 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.4, 0.4), Vector2(5, 5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5, 0.503333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-651, -1363), Vector2(-166, -397)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation")
+tracks/2/path = NodePath(".:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 6.28319]
+"values": [Vector2(1, 1), Vector2(20, 20)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tcmtr"]
@@ -110,7 +97,6 @@ _data = {
 &"damage": SubResource("Animation_7dv1t"),
 &"death": SubResource("Animation_tcmtr")
 }
-
 
 [node name="Bug" type="CharacterBody2D" groups=["hurtbox"]]
 script = ExtResource("1_7dv1t")
@@ -187,11 +173,11 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_srpgu")
 disabled = true
 
-
 [node name="GlobalAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_tcmtr")
 }
 
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="body_entered" from="LeftArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]
 [connection signal="body_entered" from="RightArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]

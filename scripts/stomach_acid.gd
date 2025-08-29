@@ -4,7 +4,7 @@ var direction: Vector2
 var speed = 10
 var damage: int = 5
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	global_position += direction * speed
 
 
