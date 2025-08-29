@@ -210,17 +210,11 @@ func activate_part(partID: int, isPlayer: bool):
 			# TODO in bug script
 			pass
 		GameManager.BODYPARTS.LEFTKIDNEY:
-			pass
-			# TODO make this less janky if possible? Right now kidneys won't interact with each other
 			bug.get_node("LeftKidney").show()
 			bug.get_node("LeftKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.RIGHTKIDNEY:
-			pass
-			# TODO make this less janky if possible? Right now kidneys won't interact with each other
 			bug.get_node("RightKidney").show()
 			bug.get_node("RightKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
-		GameManager.BODYPARTS.BLADDER:
-			pass
 
 # sets the little body at the start of the encounter
 func set_body():

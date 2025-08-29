@@ -16,8 +16,7 @@ enum BODYPARTS {
 	STOMACH,
 	LIVER,
 	LEFTKIDNEY,
-	RIGHTKIDNEY,
-	BLADDER
+	RIGHTKIDNEY
 }
 var num_bodyparts: int = BODYPARTS.size()
 
@@ -174,8 +173,6 @@ func lose_part(partID: int):
 				less_blood -= 1
 			BODYPARTS.RIGHTKIDNEY:
 				less_blood -= 1
-			BODYPARTS.BLADDER:
-				pass
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 

@@ -102,13 +102,5 @@
     "BUGDESCR": "Bug creates a shield on the right side",
     "PLAYERDESCR": "",
     "COST": 5
-  },
-  "13": {
-    "NAME": "Bladder",
-    "RARITY": "uncommon",
-    "PATH": "bladder.png",
-    "BUGDESCR": "",
-    "PLAYERDESCR": "",
-    "COST": 3
   }
 }
