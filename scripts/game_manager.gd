@@ -206,6 +206,7 @@ func lose_part(partID: int):
 
 # for when you have none of the part and you buy one at the shop
 func bought_part(partID: int):
+	GameManager.player_health += 1
 	if body_parts.count(partID) == 0:
 		match partID:
 			BODYPARTS.HEART:
