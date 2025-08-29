@@ -227,15 +227,15 @@ func determine_enemy() -> PackedScene:
 #health bars
 func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 	if player:
-		var playerhealthbar_val = $UI/Player/HealthBar.value
-		if playerhealthbar_val > health:
+		if $UI/Player/HealthBar.value > health:
 			$UI/Player/AnimationPlayer.play("damage")
-		playerhealthbar_val = health
+		$UI/Player/HealthBar.value = health
+		$UI/Player/HealthBar/Label.text = str(health)
 	else:
-		var enemyhealthbar_val = $UI/Enemy/HealthBar.value
-		if enemyhealthbar_val > health:
+		if $UI/Enemy/HealthBar.value > health:
 			$UI/Enemy/AnimationPlayer.play("damage")
-		enemyhealthbar_val = health
+		$UI/Enemy/HealthBar.value = health
+		$UI/Enemy/HealthBar/Label.text = str(health)
 
 
 func _on_battlefield_reset(won: bool) -> void:

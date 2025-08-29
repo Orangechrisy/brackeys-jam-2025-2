@@ -3,9 +3,21 @@ extends CharacterBody2D
 class_name Bug
 
 @export var ID: int
-@export var health: int = 20
+@export var health: int = 20:
+	set(value):
+		if max_health != null:
+			if value > max_health:
+				health = max_health
+			else:
+				health = value
+			change_health.emit(self, health)
+			print("health changed")
+		else:
+			health = value
 @export var damage: int = 5
 @export var speed: int = 200
+@onready var max_health = health
+ 
 var direction: Vector2 
 var played_parts = GameManager.played_parts
 
@@ -95,7 +107,6 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 							# Restores a third of the damage dealt as health
 							print("Attacker has tongue!")
 							attackingBug.health += floor(attackingBug.damage / 3)
-							change_health.emit(attackingBug, attackingBug.health)
 				if attackedBug == GameManager.player_bug:
 					match part:
 						GameManager.BODYPARTS.BRAIN:
@@ -111,12 +122,12 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 		# Handling damage dealt
 		health -= dmg
 		print("health after hit: ", health, " ", dmg)
-		change_health.emit(self, health)
 	
 
 func _on_arm_attack_area_body_entered(body: Node2D) -> void:
-	if "health" in body:
-		body.hit(damage, self, body)
+	if body != self:
+		if "health" in body:
+			body.hit(damage, self, body)
 
 # Body part timeout functions
 # In a just world this would just be stored in the body part itself but this is not a just world
@@ -149,7 +160,6 @@ func _on_timer_stomach_timeout(timer: Timer):
 func _on_timer_liver_timeout(timer: Timer):
 	print("Liver timer timeout")
 	health += 2
-	change_health.emit(self, health)
 	timer.wait_time = randi_range(1, 5)
 	timer.start()
 

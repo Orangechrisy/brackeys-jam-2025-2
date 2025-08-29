@@ -38,6 +38,7 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 		#bug.start_movement()
 
 func health_change(bug: CharacterBody2D, health: int):
+	print("updating health")
 	if bug == player_bug:
 		update_health_bar.emit(true, health)
 	else:
