@@ -9,8 +9,8 @@ func _ready():
 	create_hand()
 	set_body()
 	var player = load("res://scenes/enemy/cockroach.tscn")
-	#var enemy = determine_enemy()
-	var enemy = load("res://scenes/enemy/spider.tscn")
+	var enemy = determine_enemy()
+	#var enemy = load("res://scenes/enemy/spider.tscn")
 	$Battlefield.place_bugs(player, enemy)
 
 func _process(_delta: float) -> void:

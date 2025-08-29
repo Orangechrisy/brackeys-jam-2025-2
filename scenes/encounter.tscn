@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=14 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
@@ -9,6 +9,46 @@
 [ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="7_2dnca"]
 
 [sub_resource type="Theme" id="Theme_75kek"]
+
+[sub_resource type="Animation" id="Animation_2dnca"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reaction:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1), Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3l52i"]
+_data = {
+&"damage": SubResource("Animation_2dnca")
+}
+
+[sub_resource type="Animation" id="Animation_3l52i"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reaction:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1), Color(0.933326, 4.81308e-06, 9.62615e-07, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0kgoe"]
+_data = {
+&"damage": SubResource("Animation_3l52i")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2dnca"]
 animations = [{
@@ -60,6 +100,11 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_3l52i")
+}
+
 [node name="Enemy" type="Node2D" parent="UI"]
 
 [node name="Reaction" type="Sprite2D" parent="UI/Enemy"]
@@ -81,7 +126,6 @@ offset_left = 1552.0
 offset_top = 399.0
 offset_right = 1929.0
 offset_bottom = 426.0
-
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
@@ -101,6 +145,11 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Enemy"]
+libraries = {
+&"": SubResource("AnimationLibrary_0kgoe")
+}
 
 [node name="body" parent="." instance=ExtResource("1_lp88p")]
 position = Vector2(156, 848)
