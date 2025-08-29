@@ -1,5 +1,7 @@
 extends Node2D
 
+var fullscreen: bool = false
+
 func _ready() -> void:
 	#$CenterContainer/MenuButtons/start.grab_focus()
 	# useful for controller support, can do on the other button bits too for when going to each menu/back to main
@@ -8,6 +10,10 @@ func _ready() -> void:
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("Master"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("MUSIC"))
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		fullscreen = true
+	else:
+		fullscreen = false
 	GameManager.stop_other_music(GameManager.shopMusic)
 	GameManager.play_audio(GameManager.shopMusic, true)
 
@@ -35,11 +41,14 @@ func _on_back_pressed() -> void:
 	$CenterContainer/CreditsMenu.visible = false
 
 
-func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+func _on_fullscreen_pressed() -> void:
+	if not fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		fullscreen = true
 	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		fullscreen = false
+	$CenterContainer/SettingsMenu/fullscreen.release_focus()
 
 
 func _on_mainvolume_value_changed(value: float) -> void:

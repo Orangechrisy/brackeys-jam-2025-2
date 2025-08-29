@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://vnmrxbjra12c"]
+[gd_scene load_steps=3 format=3 uid="uid://vnmrxbjra12c"]
 
 [ext_resource type="Script" uid="uid://cbwuoo0qfocs4" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="2_ekxnf"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_l6cm7")
@@ -25,21 +26,25 @@ theme_override_constants/separation = 16
 
 [node name="start" type="Button" parent="CenterContainer/MenuButtons"]
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 75
 text = "START"
 
 [node name="settings" type="Button" parent="CenterContainer/MenuButtons"]
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 75
 text = "SETTINGS"
 
 [node name="credits" type="Button" parent="CenterContainer/MenuButtons"]
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 75
 text = "CREDITS"
 
 [node name="quit" type="Button" parent="CenterContainer/MenuButtons"]
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 75
 text = "QUIT"
 
@@ -48,8 +53,9 @@ visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="fullscreen" type="CheckBox" parent="CenterContainer/SettingsMenu"]
+[node name="fullscreen" type="Button" parent="CenterContainer/SettingsMenu"]
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 75
 text = "Fullscreen"
 expand_icon = true
@@ -57,6 +63,7 @@ expand_icon = true
 [node name="mainvolume" type="HSlider" parent="CenterContainer/SettingsMenu"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 max_value = 1.0
 step = 0.001
 
@@ -73,6 +80,7 @@ horizontal_alignment = 1
 [node name="musicvolume" type="HSlider" parent="CenterContainer/SettingsMenu"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 max_value = 1.0
 step = 0.001
 
@@ -89,6 +97,7 @@ horizontal_alignment = 1
 [node name="sfxvolume" type="HSlider" parent="CenterContainer/SettingsMenu"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 max_value = 1.0
 step = 0.001
 
@@ -104,6 +113,7 @@ horizontal_alignment = 1
 
 [node name="back" type="Button" parent="CenterContainer/SettingsMenu"]
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 75
 text = "BACK"
 
@@ -122,6 +132,7 @@ horizontal_alignment = 1
 
 [node name="back" type="Button" parent="CenterContainer/CreditsMenu"]
 layout_mode = 2
+theme = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 75
 text = "BACK"
 
@@ -129,7 +140,7 @@ text = "BACK"
 [connection signal="pressed" from="CenterContainer/MenuButtons/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="CenterContainer/MenuButtons/credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="CenterContainer/MenuButtons/quit" to="." method="_on_quit_pressed"]
-[connection signal="toggled" from="CenterContainer/SettingsMenu/fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="CenterContainer/SettingsMenu/fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="value_changed" from="CenterContainer/SettingsMenu/mainvolume" to="." method="_on_mainvolume_value_changed"]
 [connection signal="value_changed" from="CenterContainer/SettingsMenu/musicvolume" to="." method="_on_musicvolume_value_changed"]
 [connection signal="value_changed" from="CenterContainer/SettingsMenu/sfxvolume" to="." method="_on_sfxvolume_value_changed"]

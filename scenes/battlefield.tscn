@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxho170gbbxx1"]
+[gd_scene load_steps=5 format=3 uid="uid://bxho170gbbxx1"]
 
 [ext_resource type="Script" uid="uid://ca0qjmx55oaai" path="res://scripts/battlefield.gd" id="1_j68fe"]
 [ext_resource type="Texture2D" uid="uid://baf2itf7ghc8g" path="res://assets/Battlefield.png" id="2_21s54"]
+[ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="3_j68fe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixbtv"]
 size = Vector2(20, 229)
@@ -66,6 +67,7 @@ offset_left = -453.0
 offset_top = -236.0
 offset_right = -334.0
 offset_bottom = -159.0
+theme = ExtResource("3_j68fe")
 theme_override_font_sizes/font_size = 50
 text = "fight"
 

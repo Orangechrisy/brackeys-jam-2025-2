@@ -24,8 +24,5 @@ autostart = true
 position = Vector2(33, -3)
 shape = SubResource("CircleShape2D_el1v0")
 
-[node name="RightArm" parent="." index="6"]
-visible = false
-
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

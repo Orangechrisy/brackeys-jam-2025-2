@@ -180,8 +180,6 @@ func play_audio(path: String, fadeIn: bool):
 			return
 		audio_to_play = $BattleMusic
 	if fadeIn:
-		print($ShopMusic.volume_linear)
-		print($BattleMusic.volume_linear)
 		var tween = create_tween()
 		tween.parallel()
 		tween.tween_property(audio_to_play, "volume_linear", audio_to_play.volume_linear, 3.0).from(0.0)

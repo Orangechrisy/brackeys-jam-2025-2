@@ -1,4 +1,6 @@
-extends Node2D
+extends Control
+
+var fullscreen: bool = false
 
 func _notification(what: int) -> void:
 	match what:
@@ -6,6 +8,10 @@ func _notification(what: int) -> void:
 			hide()
 		Node.NOTIFICATION_UNPAUSED:
 			show()
+			if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+				fullscreen = true
+			else:
+				fullscreen = false
 
 func _on_resume_pressed() -> void:
 	get_tree().paused = !get_tree().paused
@@ -22,11 +28,15 @@ func _on_settings_pressed() -> void:
 	$CenterContainer/SettingsMenu.visible = true
 
 
-func _on_fullscreen_toggled(toggled_on: bool) -> void:
-	if toggled_on:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+func _on_fullscreen_pressed() -> void:
+	if not fullscreen:
+		print("setting fullscreen")
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		fullscreen = true
 	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		fullscreen = false
+	$CenterContainer/SettingsMenu/fullscreen.release_focus()
 
 
 func _on_mainvolume_value_changed(value: float) -> void:
