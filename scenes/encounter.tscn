@@ -224,6 +224,32 @@ theme_override_font_sizes/font_size = 100
 text = "The Reward?"
 vertical_alignment = 1
 
+[node name="EndingReward" type="Node2D" parent="."]
+visible = false
+z_index = 2048
+
+[node name="Background" type="Sprite2D" parent="EndingReward"]
+texture = ExtResource("9_nw3qf")
+centered = false
+
+[node name="Reward" type="Sprite2D" parent="EndingReward"]
+position = Vector2(960, 540)
+texture = ExtResource("10_mw7nh")
+
+[node name="Label" type="Label" parent="EndingReward"]
+offset_top = 105.0
+offset_right = 1917.0
+offset_bottom = 942.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "You Won A Wet $5 Bill! 
+
+
+
+
+And A Little Extra"
+horizontal_alignment = 1
+
 [connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
 [connection signal="update_health_bar" from="Battlefield" to="." method="_on_battlefield_update_health_bar"]

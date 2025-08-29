@@ -8,8 +8,6 @@ var player_bug
 var player_scene
 var enemy_bug
 var enemy_scene
-@export var curr_round = 0
-@export var num_rounds = 3
 var round_ended = false
 	
 func place_bugs(player: PackedScene, enemy: PackedScene):
@@ -26,6 +24,7 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	enemy_bug = enemy.instantiate()
 	GameManager.enemy_bug = enemy_bug
 	enemy_bug.position = Vector2(150.0, 0.0)
+	enemy_bug.rotation = deg_to_rad(180)
 	#enemy_bug.modulate = Color("#ea003e")
 	enemy_bug.connect("change_health", health_change)
 
@@ -54,29 +53,12 @@ func round_change(bug: CharacterBody2D):
 		else:
 			print("player win!")
 			won = true
-		curr_round += 1
 		
-		# Stopping timers
 		player_bug.remove_timers()
-		
-		if curr_round < num_rounds:
-			print("resetting")
-			reset.emit(won) # reset the encounter scene including losing parts
-			reset_battlefield()
-		else:
-			print("fight finished")
-			player_bug.queue_free()
-			enemy_bug.queue_free()
-			reset.emit(won)
-			GameManager.enemy_body_parts.clear()
-			GameManager.enemy_played_parts.clear()
-			get_tree().change_scene_to_file("res://scenes/shop.tscn")
-
-func reset_battlefield():
-	player_bug.queue_free()
-	enemy_bug.queue_free()
-	await get_tree().create_timer(1).timeout
-	place_bugs(player_scene, enemy_scene)
+		player_bug.queue_free()
+		enemy_bug.queue_free()
+		await get_tree().create_timer(1).timeout
+		reset.emit(won)
 
 func _on_button_pressed() -> void:
 	if get_parent().can_click == true:

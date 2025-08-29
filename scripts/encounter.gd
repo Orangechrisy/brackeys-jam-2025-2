@@ -2,6 +2,7 @@ extends Node2D
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 var can_click = true
+var wins = 0
 
 func _ready():
 	GameManager.stop_other_music(GameManager.battleMusic)
@@ -43,13 +44,25 @@ var reward_images = [
 ]
 
 func start_of_battle():
-	var rng = randi_range(0, rewards.size() - 1)
-	reward = rng
+	$StartingReward.show()
+	reward = randi_range(0, rewards.size() - 1)
 	await get_tree().create_timer(2.0).timeout
-	$StartingReward/LabelReward.text = "The Reward? " + rewards[rng]
-	$StartingReward/Reward.texture = load(reward_images[rng])
+	$StartingReward/LabelReward.text = "The Reward? " + rewards[reward]
+	$StartingReward/Reward.texture = load(reward_images[reward])
 	await get_tree().create_timer(2.0).timeout
 	$StartingReward.hide()
+
+func end_of_battle():
+	$EndingReward.show()
+	$StartingReward/Reward.texture = load(reward_images[reward])
+	if wins == 3:
+		$EndingReward/Label.text = "You Won " + rewards[reward] + "\n\n\n\n\nAnd A Little Extra"
+		GameManager.blood += 1
+	elif wins == 2:
+		$EndingReward/Label.text = "You Won " + rewards[reward]
+	else:
+		$EndingReward/Label.text = "You Didn't Win " + rewards[reward]
+	await get_tree().create_timer(2.0).timeout
 
 func set_health_bars():
 	$UI/Player/HealthBar.max_value = GameManager.player_bug.health
@@ -266,7 +279,13 @@ func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 		$UI/Enemy/HealthBar/Label.text = str(health)
 
 
+@export var curr_round = 0
+@export var num_rounds = 3
+
 func _on_battlefield_reset(won: bool) -> void:
+	curr_round += 1
+	if won:
+		wins += 1
 	can_click = true
 	#for part in GameManager.played_parts:
 	for i in range(GameManager.played_parts.size()):
@@ -282,10 +301,21 @@ func _on_battlefield_reset(won: bool) -> void:
 	for part in GameManager.body_parts:
 		update_part_count(part, true)
 	reset_enemy_parts(won)
-	await get_tree().create_timer(2.0).timeout
-	create_hand()
-	enemy_play_parts()
-	set_health_bars()
+	
+	if curr_round < num_rounds:
+		await get_tree().create_timer(2.0).timeout
+		# these two temp
+		var player = load("res://scenes/enemy/cockroach.tscn")
+		var enemy = determine_enemy()
+		$Battlefield.place_bugs(player, enemy)
+		create_hand()
+		enemy_play_parts()
+		set_health_bars()
+	else:
+		GameManager.enemy_body_parts.clear()
+		GameManager.enemy_played_parts.clear()
+		await end_of_battle()
+		get_tree().change_scene_to_file("res://scenes/shop.tscn")
 
 func reset_enemy_parts(won: bool):
 	if won:
