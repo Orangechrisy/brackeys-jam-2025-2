@@ -11,6 +11,7 @@ func _ready():
 	set_enemy_body()
 	var player = load("res://scenes/enemy/cockroach.tscn")
 	var enemy = determine_enemy()
+	#var enemy = load("res://scenes/enemy/spider.tscn")
 	$Battlefield.place_bugs(player, enemy)
 	enemy_play_parts()
 	set_health_bars()
@@ -226,11 +227,15 @@ func determine_enemy() -> PackedScene:
 #health bars
 func _on_battlefield_update_health_bar(player: bool, health: int) -> void:
 	if player:
-		$UI/Player/HealthBar.value = health
-		$UI/Player/HealthBar/Label.text = str(health)
+		var playerhealthbar_val = $UI/Player/HealthBar.value
+		if playerhealthbar_val > health:
+			$UI/Player/AnimationPlayer.play("damage")
+		playerhealthbar_val = health
 	else:
-		$UI/Enemy/HealthBar.value = health
-		$UI/Enemy/HealthBar/Label.text = str(health)
+		var enemyhealthbar_val = $UI/Enemy/HealthBar.value
+		if enemyhealthbar_val > health:
+			$UI/Enemy/AnimationPlayer.play("damage")
+		enemyhealthbar_val = health
 
 
 func _on_battlefield_reset(won: bool) -> void:
@@ -249,7 +254,7 @@ func _on_battlefield_reset(won: bool) -> void:
 	for part in GameManager.body_parts:
 		update_part_count(part, true)
 	reset_enemy_parts(won)
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(2.0).timeout
 	create_hand()
 	enemy_play_parts()
 	set_health_bars()

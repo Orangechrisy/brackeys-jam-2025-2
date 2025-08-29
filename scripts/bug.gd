@@ -26,6 +26,8 @@ func _physics_process(delta: float) -> void:
 	enemy_process(delta)
 	
 	if health <= 0:
+		$GlobalAnimationPlayer.play("death")
+		await get_tree().create_timer(0.5, false).timeout
 		death()
 
 # define the ai of the bug by overwriting this function with movement and other things
@@ -74,30 +76,37 @@ func remove_timers():
 		timer.queue_free()
 
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
-	#print("hit: ", attackingBug, " | ", attackedBug)
-	if attackingBug != attackedBug:
-		# TODO this should totally cause the little portrait to have an effect
-		# handling effects
-		#print(played_parts)
-		for part in played_parts:
-			if attackingBug == GameManager.player_bug:
-				match part:
-					GameManager.BODYPARTS.TONGUE:
-						# Restores a third of the damage dealt as health
-						print("Attacker has tongue!")
-						attackingBug.health += floor(attackingBug.damage / 3)
-						change_health.emit(attackingBug, attackingBug.health)
-			if attackedBug == GameManager.player_bug:
-				match part:
-					GameManager.BODYPARTS.BRAIN:
-						print("Defender has brain!")
-						if randi_range(1, 2) == 2:
-							dmg = 0
-							print("Dodged!")
-					#GameManager.BODYPARTS.LEFTKIDNEY:
-						#print("checking areas: ", $LeftKidney/KidneyDefenseArea.get_overlapping_areas())
-					#GameManager.BODYPARTS.RIGHTKIDNEY:
-						#print("checking areas: ", $RightKidney/KidneyDefenseArea.get_overlapping_areas())
+	if not invincible:
+		#Taking Damage: play animation and get 0.3s of i-frames
+		invincible=true
+		$InvincibilityTimer.start()
+		if not $GlobalAnimationPlayer.animation_started:
+		$GlobalAnimationPlayer.play("damage")
+		
+		#print("hit: ", attackingBug, " | ", attackedBug)
+		if attackingBug != attackedBug:
+			# TODO this should totally cause the little portrait to have an effect
+			# handling effects
+			#print(played_parts)
+			for part in played_parts:
+				if attackingBug == GameManager.player_bug:
+					match part:
+						GameManager.BODYPARTS.TONGUE:
+							# Restores a third of the damage dealt as health
+							print("Attacker has tongue!")
+							attackingBug.health += floor(attackingBug.damage / 3)
+							change_health.emit(attackingBug, attackingBug.health)
+				if attackedBug == GameManager.player_bug:
+					match part:
+						GameManager.BODYPARTS.BRAIN:
+							print("Defender has brain!")
+							if randi_range(1, 2) == 2:
+								dmg = 0
+								print("Dodged!")
+						#GameManager.BODYPARTS.LEFTKIDNEY:
+							#print("checking areas: ", $LeftKidney/KidneyDefenseArea.get_overlapping_areas())
+						#GameManager.BODYPARTS.RIGHTKIDNEY:
+							#print("checking areas: ", $RightKidney/KidneyDefenseArea.get_overlapping_areas())
 		
 		# Handling damage dealt
 		health -= dmg
@@ -147,3 +156,7 @@ func _on_timer_liver_timeout(timer: Timer):
 func death():
 	print(self, " died!")
 	next_level.emit(self)
+
+var invincible: bool 
+func _on_invincibility_timer_timeout() -> void:
+	invincible = false
