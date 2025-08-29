@@ -9,7 +9,7 @@ class_name Bug
 			if value > max_health:
 				health = max_health
 			else:
-				health = value
+				health = max(0, value)
 			change_health.emit(self, health)
 		else:
 			health = value

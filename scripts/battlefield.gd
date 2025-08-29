@@ -52,6 +52,7 @@ func create_area(area_scene: PackedScene, pos):
 # if rounds left, reset, otherwise end the encounter
 func round_change(bug: CharacterBody2D):
 	if not round_ended:
+		$"../Lungs/LungsTimer".stop()
 		round_ended = true
 		var won = false
 		if bug == player_bug:
@@ -72,3 +73,6 @@ func _on_button_pressed() -> void:
 		player_bug.start_timers()
 		enemy_bug.start_movement()
 		allow_clicking.emit(false)
+		if not GameManager.has_lungs:
+			$"../Lungs/LungsTimer".start()
+	$Button.release_focus()

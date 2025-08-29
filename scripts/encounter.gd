@@ -3,6 +3,7 @@ extends Node2D
 const BODY_PART = preload("res://scenes/body_part.tscn")
 var can_click = true
 var wins = 0
+var lungs_timer_ended = false
 
 func _ready():
 	GameManager.stop_other_music(GameManager.battleMusic)
@@ -26,6 +27,14 @@ func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	# can maybe instead do this by viewport size instead of hardcoded...
 	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
+	if not GameManager.has_lungs:
+		$Lungs.show()
+		if $Lungs/LungsTimer.is_stopped() and not lungs_timer_ended:
+			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.wait_time
+		else:
+			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.time_left
+	else:
+		$Lungs.hide()
 
 var reward: int
 var rewards = [
@@ -74,7 +83,7 @@ func set_health_bars():
 
 func create_hand():
 	GameManager.body_parts.shuffle()
-	for i in range(min(5, GameManager.body_parts.size())):
+	for i in range(min(GameManager.hand_size, GameManager.body_parts.size())):
 		var partID = GameManager.body_parts[i]
 		# TODO determine which image to show based on partID instead of just default heart 
 		var part = GameManager.create_part(partID)
@@ -286,7 +295,6 @@ func _on_battlefield_reset(won: bool) -> void:
 	curr_round += 1
 	if won:
 		wins += 1
-	can_click = true
 	#for part in GameManager.played_parts:
 	for i in range(GameManager.played_parts.size()):
 		var part = GameManager.played_parts.pop_back()
@@ -316,16 +324,17 @@ func _on_battlefield_reset(won: bool) -> void:
 		GameManager.enemy_played_parts.clear()
 		await end_of_battle()
 		get_tree().change_scene_to_file("res://scenes/shop.tscn")
+	can_click = true
 
 func reset_enemy_parts(won: bool):
 	if won:
-		# TODO convert the parts into currency for player
+		var blood_gain = 0
 		for i in range(GameManager.enemy_played_parts.size()):
 			var part = GameManager.enemy_played_parts.pop_back()
 			update_part_count(part, false)
-			GameManager.blood += 1
-			$Blood/Label.text = str(GameManager.blood)
-			
+			blood_gain += 1
+		GameManager.blood += max(0, blood_gain - GameManager.less_blood)
+		$Blood/Label.text = str(GameManager.blood)
 	else:
 		# put the parts back into enemy's body parts pool since they didnt lose any
 		for i in range(GameManager.enemy_played_parts.size()):
@@ -335,3 +344,7 @@ func reset_enemy_parts(won: bool):
 
 func _on_battlefield_allow_clicking(allow: bool) -> void:
 	can_click = allow
+
+
+func _on_lungs_timer_timeout() -> void:
+	GameManager.game_over()

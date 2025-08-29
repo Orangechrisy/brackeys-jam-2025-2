@@ -193,6 +193,7 @@ offset_right = 311.0
 offset_bottom = 463.0
 
 [node name="StartingReward" type="Node2D" parent="."]
+visible = false
 z_index = 2048
 
 [node name="Background" type="Sprite2D" parent="StartingReward"]
@@ -250,6 +251,22 @@ text = "You Won A Wet $5 Bill!
 And A Little Extra"
 horizontal_alignment = 1
 
+[node name="Lungs" type="Node2D" parent="."]
+visible = false
+
+[node name="LungsTimer" type="Timer" parent="Lungs"]
+wait_time = 30.0
+one_shot = true
+
+[node name="Label" type="Label" parent="Lungs"]
+offset_left = 514.0
+offset_top = 36.0
+offset_right = 633.0
+offset_bottom = 119.0
+theme_override_font_sizes/font_size = 60
+text = "30.0"
+
 [connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
 [connection signal="update_health_bar" from="Battlefield" to="." method="_on_battlefield_update_health_bar"]
+[connection signal="timeout" from="Lungs/LungsTimer" to="." method="_on_lungs_timer_timeout"]

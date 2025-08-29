@@ -51,6 +51,7 @@ func buy_part(part):
 		GameManager.blood -= part.cost
 		$Blood/Label.text = str(GameManager.blood)
 		GameManager.body_parts.append(part.partID)
+		# TODO IF HAD 0 AND NOW HAVE 1, REMOVE DEBUFF
 		part.queue_free()
 		print(GameManager.body_parts)
 	else:

@@ -86,6 +86,9 @@ var current_parts = []
 var played_parts = []
 var enemy_played_parts = []
 var blood = 0
+var hand_size = 5
+var less_blood = 0
+var has_lungs = true
 
 func _ready() -> void:
 	_reset()
@@ -94,7 +97,6 @@ func _ready() -> void:
 
 func game_over():
 	print("game over :(")
-	pass
 
 func _input(event):
 	if event.is_action_pressed("escape"):
@@ -124,38 +126,38 @@ func _reset():
 	init_json_data()
 
 func lose_part(partID: int):
-	#var partID = body_parts[index]
-	#body_parts.remove_at(index)
-	match partID:
-		BODYPARTS.HEART:
-			game_over()
-		BODYPARTS.BRAIN:
-			#make stupid
-			pass
-		BODYPARTS.LUNGS:
-			#timer
-			pass
-		BODYPARTS.EYES:
-			#obsucre vision
-			pass
-		BODYPARTS.LEFTARM:
-			pass
-		BODYPARTS.RIGHTARM:
-			pass
-		BODYPARTS.LEFTLEG:
-			pass
-		BODYPARTS.RIGHTLEG:
-			pass
-		BODYPARTS.STOMACH:
-			pass
-		BODYPARTS.LIVER:
-			pass
-		BODYPARTS.LEFTKIDNEY:
-			pass
-		BODYPARTS.RIGHTKIDNEY:
-			pass
-		BODYPARTS.BLADDER:
-			pass
+	# to account for playing two of the same part (and ensuring theres no more of the part left)
+	if played_parts.count(partID) == 0 and body_parts.count(partID) != 0:
+		match partID:
+			BODYPARTS.HEART:
+				game_over()
+			BODYPARTS.BRAIN:
+				#make stupid
+				pass
+			BODYPARTS.LUNGS:
+				has_lungs = false
+			BODYPARTS.EYES:
+				#obsucre vision
+				pass
+			BODYPARTS.LEFTARM:
+				hand_size -= 1
+			BODYPARTS.RIGHTARM:
+				hand_size -= 1
+				# TODO ghost hand
+			BODYPARTS.LEFTLEG:
+				pass
+			BODYPARTS.RIGHTLEG:
+				pass
+			BODYPARTS.STOMACH:
+				pass
+			BODYPARTS.LIVER:
+				pass
+			BODYPARTS.LEFTKIDNEY:
+				less_blood -= 1
+			BODYPARTS.RIGHTKIDNEY:
+				less_blood -= 1
+			BODYPARTS.BLADDER:
+				pass
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 
