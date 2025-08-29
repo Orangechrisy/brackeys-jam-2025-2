@@ -2,20 +2,42 @@
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_xtqu1"]
 [ext_resource type="Script" uid="uid://dg2uq7s8tc0jp" path="res://scripts/spider.gd" id="2_656li"]
-[ext_resource type="Texture2D" uid="uid://bm0ti6duy126r" path="res://assets/spider.png" id="3_pf1qy"]
+[ext_resource type="Texture2D" uid="uid://ba8d2f2m40pp1" path="res://assets/bugs/spider.png" id="3_pf1qy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_656li"]
-radius = 14.0
+radius = 32.0624
 
 [node name="Spider" instance=ExtResource("1_xtqu1")]
 script = ExtResource("2_656li")
+health = 15
+damage = 3
+speed = 100
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(9.53674e-07, -9.53674e-07)
 texture = ExtResource("3_pf1qy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
-position = Vector2(31, 0)
+position = Vector2(50, -3)
 shape = SubResource("CircleShape2D_656li")
 
+[node name="ShootTimer" type="Timer" parent="BugTimers" index="1"]
+wait_time = 3.0
+autostart = true
+
+[node name="MeleeTimer" type="Timer" parent="BugTimers" index="3"]
+wait_time = 1.5
+one_shot = true
+
+[node name="LeftArm" parent="." index="5"]
+position = Vector2(22, 1)
+
+[node name="RightArm" parent="." index="6"]
+position = Vector2(22, -6)
+
+[node name="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea" index="0"]
+position = Vector2(0.35768, -7.33138)
+
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="BugTimers/ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="BugTimers/MeleeTimer" to="." method="_on_melee_timer_timeout"]

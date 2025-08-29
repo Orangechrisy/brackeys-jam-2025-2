@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_wr8i3"]
 [ext_resource type="Script" uid="uid://d3270a75j6igs" path="res://scripts/cockroach.gd" id="2_el1v0"]
-[ext_resource type="Texture2D" uid="uid://7rxiyy310ajm" path="res://assets/cockroach_placeholder.png" id="3_el1v0"]
+[ext_resource type="Texture2D" uid="uid://7rxiyy310ajm" path="res://assets/bugs/cockroach_placeholder.png" id="3_el1v0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_el1v0"]
 radius = 15.0
@@ -10,7 +10,8 @@ radius = 15.0
 [node name="Cockroach" instance=ExtResource("1_wr8i3")]
 z_index = 2
 script = ExtResource("2_el1v0")
-speed = 300
+health = 25
+speed = 400
 
 [node name="Sprite2D" parent="." index="0"]
 rotation = 1.5708
@@ -23,6 +24,12 @@ autostart = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
 position = Vector2(33, -3)
 shape = SubResource("CircleShape2D_el1v0")
+
+[node name="ArmAttackArea" parent="LeftArm" index="1"]
+position = Vector2(29, -28)
+
+[node name="CollisionShape2D" parent="LeftArm/ArmAttackArea" index="0"]
+position = Vector2(0, 0)
 
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
