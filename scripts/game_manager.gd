@@ -77,8 +77,6 @@ const ENEMIES = [
 	"Spider"
 ]
 var num_enemies: int = ENEMIES.size()
-@export var bugs_fought = []
-
 
 var player_bug: CharacterBody2D
 var enemy_bug: CharacterBody2D
@@ -90,11 +88,6 @@ var hand_size = 5
 var less_blood = 0
 var has_lungs = true
 
-func _ready() -> void:
-	_reset()
-	
-	
-
 func game_over():
 	print("game over :(")
 
@@ -105,6 +98,7 @@ func _input(event):
 
 func _reset():
 	body_parts.clear()
+	enemy_body_parts.clear()
 	
 	partName.resize(num_bodyparts)
 	partName.fill("null")
@@ -117,14 +111,29 @@ func _reset():
 	partCost.resize(num_bodyparts)
 	partCost.fill(0)
 	
-	
-	#for i in range(5):
-		#body_parts.append(randi_range(0, 1))
 	for i in range(num_bodyparts):
 		body_parts.append(i)
 	
 	init_json_data()
+	
+	player_bug = null
+	enemy_bug = null
+	current_parts.clear()
+	played_parts.clear()
+	enemy_played_parts.clear()
+	blood = 0
+	hand_size = 5
+	less_blood = 0
+	has_lungs = true
+	reset_rarities()
 
+func reset_rarities():
+	common = 20
+	uncommon = 10
+	rare = 5
+	legendary = 2
+
+# TODO REMOVE DEBUFFS WHEN BUYING PARTS TO GO BACK ABOVE 0
 func lose_part(partID: int):
 	# to account for playing two of the same part (and ensuring theres no more of the part left)
 	if played_parts.count(partID) == 0 and body_parts.count(partID) != 0:
@@ -139,6 +148,11 @@ func lose_part(partID: int):
 			BODYPARTS.EYES:
 				#obsucre vision
 				pass
+			BODYPARTS.TONGUE:
+				common = 30
+				uncommon = 15
+				rare = 4
+				legendary = 2
 			BODYPARTS.LEFTARM:
 				hand_size -= 1
 			BODYPARTS.RIGHTARM:

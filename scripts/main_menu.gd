@@ -18,6 +18,7 @@ func _ready() -> void:
 	GameManager.play_audio(GameManager.shopMusic, true)
 
 func _on_start_pressed() -> void:
+	GameManager._reset()
 	get_tree().change_scene_to_file("res://scenes/shop.tscn")
 
 
