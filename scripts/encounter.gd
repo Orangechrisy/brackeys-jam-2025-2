@@ -279,12 +279,13 @@ const SPIDERICON: Texture2D = preload("res://assets/bugs/spidericon.png")
 const WASPICON: Texture2D = preload("res://assets/bugs/waspicon.png")
 const BEETLEICON: Texture2D = preload("res://assets/bugs/beetleicon.png")
 
+@onready var enemyID: int = -1
 func determine_enemy() -> PackedScene:
-	var enemy = randi_range(0, GameManager.num_enemies - 1)
-	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemy] + ".tscn"
+	enemyID = randi_range(0, GameManager.num_enemies - 1)
+	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
 	var enemy_bug = load(path)
-	$UI/Enemy/NameLabel.text = GameManager.default_bug_names[enemy]
-	match enemy:
+	$UI/Enemy/NameLabel.text = GameManager.default_bug_names[enemyID]
+	match enemyID:
 		GameManager.BUGS.COCKROACH:
 			$UI/Enemy/IconBG/Icon.texture = COCKROACHICON
 		GameManager.BUGS.SPIDER:
@@ -335,7 +336,12 @@ func _on_battlefield_reset(won: bool) -> void:
 		await get_tree().create_timer(2.0).timeout
 		# these two temp
 		var player = load("res://scenes/enemy/cockroach.tscn")
-		var enemy = determine_enemy()
+		var enemy
+		if enemyID == -1:
+			enemy = determine_enemy()
+		else:
+			var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
+			enemy = load(path)
 		$Battlefield.place_bugs(player, enemy)
 		create_hand()
 		enemy_play_parts()

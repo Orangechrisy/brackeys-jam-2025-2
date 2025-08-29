@@ -13,7 +13,7 @@ health = 15
 damage = 3
 speed = 100
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(9.53674e-07, -9.53674e-07)
 texture = ExtResource("3_pf1qy")
 
@@ -29,10 +29,10 @@ autostart = true
 wait_time = 1.5
 one_shot = true
 
-[node name="LeftArm" parent="." index="5"]
+[node name="LeftArm" parent="." index="6"]
 position = Vector2(22, 1)
 
-[node name="RightArm" parent="." index="6"]
+[node name="RightArm" parent="." index="7"]
 position = Vector2(22, -6)
 
 [node name="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea" index="0"]

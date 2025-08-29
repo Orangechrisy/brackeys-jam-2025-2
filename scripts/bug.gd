@@ -19,6 +19,8 @@ class_name Bug
 @onready var default_speed: int = speed
 @onready var max_health = health
  
+@onready var battlefield = get_parent().get_parent()
+
 var direction: Vector2 
 var played_parts = GameManager.played_parts
 var can_move = true
@@ -47,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(0.5, false).timeout
 		death()
 	
-	if can_move:
+	if can_move and (not spidersnared):
 		enemy_process(delta)
 
 # define the ai of the bug by overwriting this function with movement and other things
@@ -118,6 +120,7 @@ func remove_timers():
 	for timer in $BodyPartTimers.get_children():
 		timer.queue_free()
 
+
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 	if not invincible:
 		#Taking Damage: play animation and get 0.3s of i-frames
@@ -168,13 +171,14 @@ func _on_timer_leg_timeout(timer: Timer):
 	timer.wait_time = randi_range(2, 5)
 	timer.start()
 
-func _on_timer_leg_lost_timeout(timer: Timer):
+func _on_timer_leg_lost_timeout(_timer: Timer):
 	print("Leg lost timer timeout")
 	can_move = true
 	
 func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")
 	var acid = STOMACH_ACID.instantiate()
+	acid.origin_bug = self
 	add_child(acid)
 	acid.global_position = global_position
 	acid.direction = Vector2(1,0)

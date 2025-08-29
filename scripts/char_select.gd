@@ -85,6 +85,7 @@ func _on_start_button_pressed() -> void:
 #ANIMATIONS
 func _on_cockroach_button_mouse_entered() -> void:
 	$Control/CockroachButton/AnimationPlayer.play("hovered")
+	play_mouse_over_sound()
 	show_bug_icon(GameManager.BUGS.COCKROACH)
 
 func _on_cockroach_button_mouse_exited() -> void:
@@ -94,6 +95,7 @@ func _on_cockroach_button_mouse_exited() -> void:
 
 func _on_spider_button_mouse_entered() -> void:
 	$Control/SpiderButton/AnimationPlayer.play("hover")
+	play_mouse_over_sound()
 	show_bug_icon(GameManager.BUGS.SPIDER)
 
 func _on_spider_button_mouse_exited() -> void:
@@ -103,6 +105,7 @@ func _on_spider_button_mouse_exited() -> void:
 
 func _on_wasp_button_mouse_entered() -> void:
 	$Control/WaspButton/AnimationPlayer.play("hover")
+	play_mouse_over_sound()
 	show_bug_icon(GameManager.BUGS.WASP)
 
 func _on_wasp_button_mouse_exited() -> void:
@@ -112,6 +115,7 @@ func _on_wasp_button_mouse_exited() -> void:
 
 func _on_beetle_button_mouse_entered() -> void:
 	$Control/BeetleButton/AnimationPlayer.play("hover")
+	play_mouse_over_sound()
 	show_bug_icon(GameManager.BUGS.BEETLE)
 
 func _on_beetle_button_mouse_exited() -> void:
@@ -122,3 +126,11 @@ func _on_beetle_button_mouse_exited() -> void:
 #BUG NAME CHANGING
 func _on_bug_name_input_text_changed(new_text: String) -> void:
 	bug_name = new_text
+
+#AUDIO
+func play_mouse_over_sound():
+	$MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
+	$MouseOverSound.play()
+
+func _on_start_button_mouse_entered() -> void:
+	play_mouse_over_sound()

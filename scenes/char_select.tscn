@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dx8ppinnq61ma"]
+[gd_scene load_steps=22 format=3 uid="uid://dx8ppinnq61ma"]
 
 [ext_resource type="Script" uid="uid://58hmccvtfua6" path="res://scripts/char_select.gd" id="1_a2t0j"]
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="1_qjq5y"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="6_5kqyn"]
 [ext_resource type="Texture2D" uid="uid://d2t0tuapfisbb" path="res://assets/bugs/portrait_bg2.png" id="7_dgebt"]
 [ext_resource type="Texture2D" uid="uid://bk6vqwqwnpade" path="res://assets/bugs/cockroachicon.png" id="8_dgebt"]
+[ext_resource type="AudioStream" uid="uid://65j4g5g4ork8" path="res://assets/audio/select.wav" id="9_5kqyn"]
 
 [sub_resource type="Animation" id="Animation_0k605"]
 length = 0.001
@@ -308,6 +309,11 @@ texture = ExtResource("7_dgebt")
 position = Vector2(125, 2.33345)
 texture = ExtResource("8_dgebt")
 
+[node name="MouseOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_5kqyn")
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="Control/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="mouse_entered" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_exited"]

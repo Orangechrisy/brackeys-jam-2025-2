@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=20 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
 [ext_resource type="Texture2D" uid="uid://bd7uvv5xcax03" path="res://assets/bugs/portrait_bg1.png" id="2_nw3qf"]
+[ext_resource type="Texture2D" uid="uid://d26gwy6gdiuni" path="res://assets/concrete.png" id="2_se0eo"]
 [ext_resource type="PackedScene" uid="uid://bxho170gbbxx1" path="res://scenes/battlefield.tscn" id="3_ensgf"]
 [ext_resource type="Texture2D" uid="uid://bk6vqwqwnpade" path="res://assets/bugs/cockroachicon.png" id="3_mw7nh"]
 [ext_resource type="Texture2D" uid="uid://d2t0tuapfisbb" path="res://assets/bugs/portrait_bg2.png" id="4_ip0ee"]
@@ -47,6 +48,11 @@ animations = [{
 
 [node name="encounter" type="Node2D"]
 script = ExtResource("1_kb58x")
+
+[node name="Concrete" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(955, 478)
+texture = ExtResource("2_se0eo")
 
 [node name="UI" type="Node2D" parent="."]
 
@@ -154,7 +160,7 @@ position = Vector2(1750, 845)
 z_index = 4
 
 [node name="Battlefield" parent="." instance=ExtResource("3_ensgf")]
-position = Vector2(949, 427)
+position = Vector2(970, 424)
 
 [node name="Blood" parent="." instance=ExtResource("5_3l52i")]
 position = Vector2(59, 533)
