@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnf8heq3gfksq"
-path="res://.godot/imported/cockroach_reaction.png-47a5900f01f5e3c458f606464714894f.ctex"
+uid="uid://7rxiyy310ajm"
+path="res://.godot/imported/cockroach.png-e70510979d5fc5d1cf75a5146d8303d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bugs/cockroach_reaction.png"
-dest_files=["res://.godot/imported/cockroach_reaction.png-47a5900f01f5e3c458f606464714894f.ctex"]
+source_file="res://assets/bugs/cockroach.png"
+dest_files=["res://.godot/imported/cockroach.png-e70510979d5fc5d1cf75a5146d8303d8.ctex"]
 
 [params]
 

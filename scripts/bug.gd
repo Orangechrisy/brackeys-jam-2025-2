@@ -32,12 +32,14 @@ func set_as_enemy():
 	played_parts = GameManager.enemy_played_parts
 
 func start_movement():
+	speed=default_speed
 	rotation = randf_range(0, deg_to_rad(360))
 	direction = Vector2(1,0).rotated(rotation)
 	velocity = direction*speed
 
 func _ready() -> void:
-	$IdleAnim.play("idle")
+	speed=0
+	#$IdleAnim.play("idle")
 
 func _physics_process(delta: float) -> void:
 	if health <= 0:

@@ -129,7 +129,7 @@ _data = {
 script = ExtResource("1_7dv1t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.40744
+rotation = 1.5708
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_glhb6")
 

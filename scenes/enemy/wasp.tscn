@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo3ja1cj1kcuk"]
+
+[ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_8u2kk"]
+[ext_resource type="Texture2D" uid="uid://dmv4gxls0h0pq" path="res://assets/bugs/wasp.png" id="2_t855c"]
+
+[node name="Wasp" instance=ExtResource("1_8u2kk")]
+
+[node name="Sprite2D" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource("2_t855c")
