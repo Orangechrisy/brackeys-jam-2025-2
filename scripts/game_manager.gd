@@ -87,6 +87,8 @@ var blood = 0
 var hand_size = 5
 var less_blood = 0
 var has_lungs = true
+var no_left_leg = false
+var no_right_leg = false
 
 func game_over():
 	print("game over :(")
@@ -125,6 +127,8 @@ func _reset():
 	hand_size = 5
 	less_blood = 0
 	has_lungs = true
+	no_left_leg = false
+	no_right_leg = false
 	reset_rarities()
 
 func reset_rarities():
@@ -159,9 +163,9 @@ func lose_part(partID: int):
 				hand_size -= 1
 				# TODO ghost hand
 			BODYPARTS.LEFTLEG:
-				pass
+				no_left_leg = true
 			BODYPARTS.RIGHTLEG:
-				pass
+				no_right_leg = true
 			BODYPARTS.STOMACH:
 				pass
 			BODYPARTS.LIVER:

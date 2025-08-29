@@ -21,6 +21,7 @@ class_name Bug
  
 var direction: Vector2 
 var played_parts = GameManager.played_parts
+var can_move = false
 
 signal change_health(bug: CharacterBody2D, newhealth: int)
 signal next_level(bug: CharacterBody2D)
@@ -39,18 +40,18 @@ func _ready() -> void:
 	$IdleAnim.play("idle")
 
 func _physics_process(delta: float) -> void:
-	if not spidersnared:
-		enemy_process(delta)
-	
 	if health <= 0:
 		$GlobalAnimationPlayer.play("death")
 		await get_tree().create_timer(0.5, false).timeout
 		death()
+	
+	if can_move:
+		enemy_process(delta)
 
 # define the ai of the bug by overwriting this function with movement and other things
 func enemy_process(_delta):
 	velocity = direction * speed
-	
+
 func start_timers():
 	# Creates timers for given body parts
 	for part in played_parts:
@@ -83,10 +84,34 @@ func start_timers():
 			GameManager.BODYPARTS.LIVER:
 				print("Liver found!")
 				var timer = Timer.new()
+				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
 				timer.one_shot = true
 				timer.timeout.connect(_on_timer_liver_timeout.bind(timer))
 				timer.start()
+	can_move = false
+	var timer = Timer.new()
+	$BodyPartTimers.add_child(timer)
+	timer.wait_time = 1
+	timer.one_shot = true
+	timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
+	timer.start()
+	print("start leg lost timer")
+	#if self == GameManager.player_bug:
+		#if GameManager.no_left_leg and GameManager.no_right_leg:
+			#can_move = false
+			#var timer = Timer.new()
+			#timer.wait_time = randi_range(6, 12)
+			#timer.one_shot = true
+			#timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
+			#timer.start()
+		#elif GameManager.no_left_leg or GameManager.no_right_leg:
+			#can_move = false
+			#var timer = Timer.new()
+			#timer.wait_time = randi_range(3, 6)
+			#timer.one_shot = true
+			#timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
+			#timer.start()
 	
 	start_bug_timers()
 
@@ -105,9 +130,7 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 		if not $GlobalAnimationPlayer.animation_started:
 			$GlobalAnimationPlayer.play("damage")
 		
-		#print("hit: ", attackingBug, " | ", attackedBug)
 		if attackingBug != attackedBug:
-			# TODO this should totally cause the little portrait to have an effect
 			# handling effects
 			#print(played_parts)
 			for part in played_parts:
@@ -143,21 +166,15 @@ func _on_arm_attack_area_body_entered(body: Node2D) -> void:
 # In a just world this would just be stored in the body part itself but this is not a just world
 func _on_timer_leg_timeout(timer: Timer):
 	print("Leg timer timeout")
-	#var timer2 = Timer.new()
-	#timer2.wait_time = 1
-	#timer2.one_shot = true
-	#timer2.timeout.connect(_on_timer2_leg2_timeout.bind(timer2))
-	#timer2.start()
 	speed += 100
 	await get_tree().create_timer(1).timeout
 	speed -= 100
-	#print("timer2 started")
 	timer.wait_time = randi_range(2, 5)
 	timer.start()
 
-#func _on_timer2_leg2_timeout(timer: Timer):
-	#print("timer2 ended")
-	#speed -= 50
+func _on_timer_leg_lost_timeout(timer: Timer):
+	print("Leg lost timer timeout")
+	can_move = true
 	
 func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")
