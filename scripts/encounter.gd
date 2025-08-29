@@ -15,6 +15,7 @@ func _ready():
 	$Battlefield.place_bugs(player, enemy)
 	enemy_play_parts()
 	set_health_bars()
+	$Blood/Label.text = str(GameManager.blood)
 
 func _process(_delta: float) -> void:
 	if can_click and Input.is_action_just_pressed("left_click"):
@@ -41,7 +42,7 @@ func create_hand():
 		#var part = BODY_PART.instantiate()
 		$"OrganHolder".add_child(part)
 		GameManager.current_parts.append(part)
-		part.position = Vector2(0, get_viewport().size.y - get_viewport().size.y / 6)
+		part.position = $body.position
 		update_part_positions()
 
 # updates the parts so they are in the right positions in the "hand"
@@ -98,6 +99,7 @@ func body_part_part_exited(part: Area2D) -> void:
 
 
 func play_part(part: Area2D):
+	part.get_node("CollisionShape2D").disabled = true
 	$"Hand/AnimatedSprite2D".frame = 1
 	$Tooltip.HidePopup()
 	#print("body played, tt hide")
@@ -265,6 +267,9 @@ func reset_enemy_parts(won: bool):
 		for i in range(GameManager.enemy_played_parts.size()):
 			var part = GameManager.enemy_played_parts.pop_back()
 			update_part_count(part, false)
+			GameManager.blood += 1
+			$Blood/Label.text = str(GameManager.blood)
+			
 	else:
 		# put the parts back into enemy's body parts pool since they didnt lose any
 		for i in range(GameManager.enemy_played_parts.size()):

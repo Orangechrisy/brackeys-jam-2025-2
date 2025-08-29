@@ -1,100 +1,114 @@
 {
   "0": {
-	"NAME": "Heart",
-	"RARITY": "legendary",
-	"PATH": "heart.png",
-	"BUGDESCR": "",
-	"PLAYERDESCR": "Kills the player instantly"
+    "NAME": "Heart",
+    "RARITY": "legendary",
+    "PATH": "heart.png",
+    "BUGDESCR": "Bonus HP?",
+    "PLAYERDESCR": "Kills the player instantly",
+    "COST": 20
   },
   "1": {
-	"NAME": "Brain",
-	"RARITY": "legendary",
-	"PATH": "brain.png",
-	"BUGDESCR": "Bug has a chance to dodge attacks",
-	"PLAYERDESCR": "Become Dumb: Game plays itself"
+    "NAME": "Brain",
+    "RARITY": "legendary",
+    "PATH": "brain.png",
+    "BUGDESCR": "Bug has a chance to dodge attacks",
+    "PLAYERDESCR": "Become Dumb: Game plays itself",
+    "COST": 15
   },
   "2": {
-	"NAME": "Lungs",
-	"RARITY": "rare",
-	"PATH": "lungs.png",
-	"BUGDESCR": "",
-	"PLAYERDESCR": "Timer: All future rounds have to end within 30 seconds or they die"
+    "NAME": "Lungs",
+    "RARITY": "rare",
+    "PATH": "lungs.png",
+    "BUGDESCR": "Bug is much faster",
+    "PLAYERDESCR": "Timer: All future rounds have to end within 30 seconds or they die",
+    "COST": 10
   },
   "3": {
-	"NAME": "Eyes",
-	"RARITY": "rare",
-	"PATH": "eyes.png",
-	"BUGDESCR": "",
-	"PLAYERDESCR": ""
+    "NAME": "Eyes",
+    "RARITY": "rare",
+    "PATH": "eyes.png",
+    "BUGDESCR": "",
+    "PLAYERDESCR": "",
+    "COST": 10
   },
   "4": {
-	"NAME": "Tongue",
-	"RARITY": "uncommon",
-	"PATH": "tongue.png",
-	"BUGDESCR": "Bug heals +1 health every successful attack",
-	"PLAYERDESCR": ""
+    "NAME": "Tongue",
+    "RARITY": "uncommon",
+    "PATH": "tongue.png",
+    "BUGDESCR": "Bug heals +1 health every successful attack",
+    "PLAYERDESCR": "",
+    "COST": 7
   },
   "5": {
-	"NAME": "Left Arm",
-	"RARITY": "common",
-	"PATH": "left_arm.png",
-	"BUGDESCR": "Higher attack range?",
-	"PLAYERDESCR": ""
+    "NAME": "Left Arm",
+    "RARITY": "common",
+    "PATH": "left_arm.png",
+    "BUGDESCR": "Bug gets another hitbox",
+    "PLAYERDESCR": "",
+    "COST": 5
   },
   "6": {
-	"NAME": "Right Arm",
-	"RARITY": "uncommon",
-	"PATH": "right_arm.png",
-	"BUGDESCR": "Higher attack range?",
-	"PLAYERDESCR": ""
+    "NAME": "Right Arm",
+    "RARITY": "uncommon",
+    "PATH": "right_arm.png",
+    "BUGDESCR": "Bug gets another hitbox",
+    "PLAYERDESCR": "",
+    "COST": 7
   },
   "7": {
-	"NAME": "Left Leg",
-	"RARITY": "common",
-	"PATH": "left_leg.png",
-	"BUGDESCR": "Bug is faster",
-	"PLAYERDESCR": ""
+    "NAME": "Left Leg",
+    "RARITY": "common",
+    "PATH": "left_leg.png",
+    "BUGDESCR": "Bug can dash",
+    "PLAYERDESCR": "",
+    "COST": 3
   },
   "8": {
-	"NAME": "Right Leg",
-	"RARITY": "uncommon",
-	"PATH": "right_leg.png",
-	"BUGDESCR": "Bug is faster",
-	"PLAYERDESCR": ""
+    "NAME": "Right Leg",
+    "RARITY": "uncommon",
+    "PATH": "right_leg.png",
+    "BUGDESCR": "Bug can dash",
+    "PLAYERDESCR": "",
+    "COST": 5
   },
   "9": {
-	"NAME": "Stomach",
-	"RARITY": "uncommon",
-	"PATH": "stomach.png",
-	"BUGDESCR": "Bug shoots out stomach acid",
-	"PLAYERDESCR": ""
+    "NAME": "Stomach",
+    "RARITY": "uncommon",
+    "PATH": "stomach.png",
+    "BUGDESCR": "Bug shoots out stomach acid",
+    "PLAYERDESCR": "",
+    "COST": 9
   },
   "10": {
-	"NAME": "Liver",
-	"RARITY": "uncommon",
-	"PATH": "liver.png",
-	"BUGDESCR": "Bug slowly regenerates health",
-	"PLAYERDESCR": ""
+    "NAME": "Liver",
+    "RARITY": "uncommon",
+    "PATH": "liver.png",
+    "BUGDESCR": "Bug slowly regenerates health",
+    "PLAYERDESCR": "",
+    "COST": 7
   },
   "11": {
-	"NAME": "Left Kidney",
-	"RARITY": "common",
-	"PATH": "left_kidney.png",
-	"BUGDESCR": "Bug creates a shield on the left side",
-	"PLAYERDESCR": ""
+    "NAME": "Left Kidney",
+    "RARITY": "common",
+    "PATH": "left_kidney.png",
+    "BUGDESCR": "Bug creates a shield on the left side",
+    "PLAYERDESCR": "",
+    "COST": 5
   },
   "12": {
-	"NAME": "Right Kidney",
-	"RARITY": "common",
-	"PATH": "right_kidney.png",
-	"BUGDESCR": "Bug creates a shield on the right side",
-	"PLAYERDESCR": ""
+    "NAME": "Right Kidney",
+    "RARITY": "common",
+    "PATH": "right_kidney.png",
+    "BUGDESCR": "Bug creates a shield on the right side",
+    "PLAYERDESCR": "",
+    "COST": 5
   },
   "13": {
-	"NAME": "Bladder",
-	"RARITY": "uncommon",
-	"PATH": "bladder.png",
-	"BUGDESCR": "",
-	"PLAYERDESCR": ""
+    "NAME": "Bladder",
+    "RARITY": "uncommon",
+    "PATH": "bladder.png",
+    "BUGDESCR": "",
+    "PLAYERDESCR": "",
+    "COST": 3
   }
 }

@@ -25,6 +25,7 @@ var partName: Array = []
 var partChance: Array = []
 var partImages: Array = []
 var partTooltip : Array = []
+var partCost: Array = []
 
 #rarities
 var common: int = 20
@@ -68,6 +69,7 @@ func parse_json(ID: int, json: Dictionary):
 			print("Error: Body Part "+str(ID)+" has unknown rarity.")
 	partImages[ID] += json["PATH"]
 	partTooltip[ID] = json["BUGDESCR"] +  "\n\n" + json["PLAYERDESCR"]
+	partCost[ID] = json["COST"]
 
 
 const ENEMIES = [
@@ -83,6 +85,7 @@ var enemy_bug: CharacterBody2D
 var current_parts = []
 var played_parts = []
 var enemy_played_parts = []
+var blood = 0
 
 func _ready() -> void:
 	_reset()
@@ -109,6 +112,8 @@ func _reset():
 	partImages.fill("res://assets/bodyparts/")
 	partTooltip.resize(num_bodyparts)
 	partTooltip.fill("null")
+	partCost.resize(num_bodyparts)
+	partCost.fill(0)
 	
 	
 	#for i in range(5):
@@ -158,6 +163,7 @@ func create_part(partID: int) -> Node2D:
 	var part = BODY_PART.instantiate()
 	part.partID = partID
 	part.get_node("Sprite2D").texture = load(partImages[partID])
+	part.cost = partCost[partID]
 	return part
 
 var shopMusic = "ShopMusic"
@@ -166,6 +172,7 @@ func play_audio(path: String, fadeIn: bool):
 	var audio_to_play
 	if path == shopMusic:
 		if $ShopMusic.playing:
+			print("already playing")
 			return
 		audio_to_play = $ShopMusic
 	elif path == battleMusic:
@@ -173,6 +180,8 @@ func play_audio(path: String, fadeIn: bool):
 			return
 		audio_to_play = $BattleMusic
 	if fadeIn:
+		print($ShopMusic.volume_linear)
+		print($BattleMusic.volume_linear)
 		var tween = create_tween()
 		tween.parallel()
 		tween.tween_property(audio_to_play, "volume_linear", audio_to_play.volume_linear, 3.0).from(0.0)
@@ -180,6 +189,7 @@ func play_audio(path: String, fadeIn: bool):
 		await get_tree().create_timer(0.05).timeout
 		audio_to_play.play(0.0)
 	else:
+		print("just playing")
 		audio_to_play.play(0.0)
 
 func stop_other_music(path: String):
@@ -190,8 +200,10 @@ func stop_other_music(path: String):
 			var tween = create_tween()
 			tween.tween_property($BattleMusic, "volume_linear", 0.0, 1.0)
 			tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-			tween.tween_callback($BattleMusic.stop)
+			#tween.tween_callback($BattleMusic.stop)
 			await tween.finished
+			$BattleMusic.stop()
+			$BattleMusic.volume_linear = 1.0
 	elif path == battleMusic:
 		if $BattleMusic.playing:
 			return
@@ -199,5 +211,7 @@ func stop_other_music(path: String):
 			var tween = create_tween()
 			tween.tween_property($ShopMusic, "volume_linear", 0.0, 1.0)
 			tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-			tween.tween_callback($ShopMusic.stop)
+			#tween.tween_callback($ShopMusic.stop)
 			await tween.finished
+			$ShopMusic.stop()
+			$ShopMusic.volume_linear = 1.0

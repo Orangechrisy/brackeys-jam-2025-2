@@ -4,6 +4,7 @@ func enemy_process(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
+		velocity = velocity.rotated(deg_to_rad(randf_range(-10.0, 10.0)))
 		look_at(velocity/speed + global_position)
 
 
