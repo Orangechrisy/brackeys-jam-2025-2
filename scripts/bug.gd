@@ -120,6 +120,7 @@ func remove_timers():
 	for timer in $BodyPartTimers.get_children():
 		timer.queue_free()
 
+const DODGED = preload("res://scenes/dodged.tscn")
 
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 	if not invincible:
@@ -145,6 +146,7 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 							print("Defender has brain!")
 							if randi_range(1, 2) == 2:
 								dmg = 0
+								battlefield.create_area(DODGED, global_position)
 								print("Dodged!")
 						#GameManager.BODYPARTS.LEFTKIDNEY:
 							#print("checking areas: ", $LeftKidney/KidneyDefenseArea.get_overlapping_areas())
