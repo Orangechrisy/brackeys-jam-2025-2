@@ -136,7 +136,6 @@ func reset_rarities():
 	rare = 5
 	legendary = 2
 
-# TODO REMOVE DEBUFFS WHEN BUYING PARTS TO GO BACK ABOVE 0
 func lose_part(partID: int):
 	# to account for playing two of the same part (and ensuring theres no more of the part left)
 	if played_parts.count(partID) == 0 and body_parts.count(partID) != 0:
@@ -173,6 +172,40 @@ func lose_part(partID: int):
 				less_blood -= 1
 			BODYPARTS.RIGHTKIDNEY:
 				less_blood -= 1
+
+# for when you have none of the part and you buy one
+func bought_part(partID: int):
+	if body_parts.count(partID) == 0:
+		match partID:
+			BODYPARTS.HEART:
+				pass
+			BODYPARTS.BRAIN:
+				# reverse make stupid
+				pass
+			BODYPARTS.LUNGS:
+				has_lungs = true
+			BODYPARTS.EYES:
+				# reverse obsucre vision
+				pass
+			BODYPARTS.TONGUE:
+				reset_rarities()
+			BODYPARTS.LEFTARM:
+				hand_size += 1
+			BODYPARTS.RIGHTARM:
+				hand_size += 1
+				# TODO reverse ghost hand
+			BODYPARTS.LEFTLEG:
+				no_left_leg = false
+			BODYPARTS.RIGHTLEG:
+				no_right_leg = false
+			BODYPARTS.STOMACH:
+				pass
+			BODYPARTS.LIVER:
+				pass
+			BODYPARTS.LEFTKIDNEY:
+				less_blood += 1
+			BODYPARTS.RIGHTKIDNEY:
+				less_blood += 1
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 
