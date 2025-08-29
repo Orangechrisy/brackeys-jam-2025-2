@@ -10,16 +10,19 @@ func _ready() -> void:
 
 var popup_active: bool = false
 func _physics_process(_delta: float) -> void:
-	if on_mouse:
-		if popup_active:
-			var mouse_pos = Vector2(get_global_mouse_position().x+40.0,get_global_mouse_position().y+40.0)
-			if mouse_pos.x > 1350.0:
-				mouse_pos.x -= 380.0
-			#var mouse_pos = Vector2(500.0, 500.0)
-			$PanelContainer.global_position = mouse_pos
+	if GameManager.no_eyes:
+		hide()
 	else:
-		show()
-		$PanelContainer.global_position = Vector2(310.0,460.0)
+		if on_mouse:
+			if popup_active:
+				var mouse_pos = Vector2(get_global_mouse_position().x+40.0,get_global_mouse_position().y+40.0)
+				if mouse_pos.x > 1350.0:
+					mouse_pos.x -= 380.0
+				#var mouse_pos = Vector2(500.0, 500.0)
+				$PanelContainer.global_position = mouse_pos
+		else:
+			show()
+			$PanelContainer.global_position = Vector2(310.0,460.0)
 
 func InfoPopup(itemID: int, nextToMouse: bool):
 	

@@ -107,6 +107,7 @@ var less_blood = 0
 var has_lungs = true
 var no_left_leg = false
 var no_right_leg = false
+var no_eyes = false
 
 func game_over():
 	print("game over :(")
@@ -147,6 +148,7 @@ func _reset():
 	has_lungs = true
 	no_left_leg = false
 	no_right_leg = false
+	no_eyes = false
 	reset_rarities()
 
 func reset_rarities():
@@ -167,8 +169,7 @@ func lose_part(partID: int):
 			BODYPARTS.LUNGS:
 				has_lungs = false
 			BODYPARTS.EYES:
-				#obsucre vision
-				pass
+				no_eyes = true
 			BODYPARTS.TONGUE:
 				common = 30
 				uncommon = 15
@@ -192,7 +193,7 @@ func lose_part(partID: int):
 			BODYPARTS.RIGHTKIDNEY:
 				less_blood -= 1
 
-# for when you have none of the part and you buy one
+# for when you have none of the part and you buy one at the shop
 func bought_part(partID: int):
 	if body_parts.count(partID) == 0:
 		match partID:
@@ -204,8 +205,7 @@ func bought_part(partID: int):
 			BODYPARTS.LUNGS:
 				has_lungs = true
 			BODYPARTS.EYES:
-				# reverse obsucre vision
-				pass
+				no_eyes = false
 			BODYPARTS.TONGUE:
 				reset_rarities()
 			BODYPARTS.LEFTARM:
@@ -232,6 +232,8 @@ func create_part(partID: int) -> Node2D:
 	var part = BODY_PART.instantiate()
 	part.partID = partID
 	part.get_node("Sprite2D").texture = load(partImages[partID])
+	if no_eyes:
+		part.get_node("Censor").show()
 	part.cost = partCost[partID]
 	return part
 
@@ -241,7 +243,6 @@ func play_audio(path: String, fadeIn: bool):
 	var audio_to_play
 	if path == shopMusic:
 		if $ShopMusic.playing:
-			print("already playing")
 			return
 		audio_to_play = $ShopMusic
 	elif path == battleMusic:
@@ -256,7 +257,6 @@ func play_audio(path: String, fadeIn: bool):
 		await get_tree().create_timer(0.05).timeout
 		audio_to_play.play(0.0)
 	else:
-		print("just playing")
 		audio_to_play.play(0.0)
 
 func stop_other_music(path: String):

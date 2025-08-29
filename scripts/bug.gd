@@ -23,7 +23,6 @@ class_name Bug
 
 var direction: Vector2 
 var played_parts = GameManager.played_parts
-var can_move = true
 
 signal change_health(bug: CharacterBody2D, newhealth: int)
 signal next_level(bug: CharacterBody2D)
@@ -49,7 +48,8 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(0.5, false).timeout
 		death()
 	
-	if can_move and (not spidersnared):
+
+	if not spidersnared:
 		enemy_process(delta)
 
 # define the ai of the bug by overwriting this function with movement and other things
@@ -95,7 +95,7 @@ func start_timers():
 				timer.start()
 	if self == GameManager.player_bug:
 		if GameManager.no_left_leg and GameManager.no_right_leg:
-			can_move = false
+			speed = 0
 			var timer = Timer.new()
 			$BodyPartTimers.add_child(timer)
 			timer.wait_time = randi_range(6, 12)
@@ -103,10 +103,11 @@ func start_timers():
 			timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
 			timer.start()
 		elif GameManager.no_left_leg or GameManager.no_right_leg:
-			can_move = false
+			print("no leg?")
+			speed = 0
 			var timer = Timer.new()
 			$BodyPartTimers.add_child(timer)
-			timer.wait_time = randi_range(3, 6)
+			timer.wait_time = randi_range(1, 1)
 			timer.one_shot = true
 			timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
 			timer.start()
@@ -173,7 +174,7 @@ func _on_timer_leg_timeout(timer: Timer):
 
 func _on_timer_leg_lost_timeout(_timer: Timer):
 	print("Leg lost timer timeout")
-	can_move = true
+	speed = default_speed
 	
 func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dsvf6lqslsu2t"]
+[gd_scene load_steps=17 format=3 uid="uid://dsvf6lqslsu2t"]
 
 [ext_resource type="Texture2D" uid="uid://bgrdr5iiyvh1t" path="res://assets/body.png" id="1_jmcoc"]
 [ext_resource type="Script" uid="uid://pbk08wawiydj" path="res://scripts/body.gd" id="1_veluv"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://exfrxix7wf66" path="res://assets/bodypart_places/liver.png" id="14_6apu0"]
 [ext_resource type="Texture2D" uid="uid://d1hrl6nmgvkw2" path="res://assets/bodypart_places/left_kidney.png" id="15_oxak8"]
 [ext_resource type="Texture2D" uid="uid://cpfgu3dfnyd5t" path="res://assets/bodypart_places/right_kidney.png" id="16_e33bh"]
-[ext_resource type="Texture2D" uid="uid://j4jed1p0q8h4" path="res://assets/bodypart_places/bladder.png" id="17_4e3dv"]
 
 [node name="body" type="Node2D"]
 script = ExtResource("1_veluv")
@@ -111,10 +110,3 @@ texture = ExtResource("15_oxak8")
 [node name="Sprite2D" type="Sprite2D" parent="Parts/RightKidney"]
 position = Vector2(-29, -1)
 texture = ExtResource("16_e33bh")
-
-[node name="Bladder" type="Node2D" parent="Parts"]
-
-[node name="Sprite2D" type="Sprite2D" parent="Parts/Bladder"]
-position = Vector2(-1, 32)
-texture = ExtResource("17_4e3dv")
-offset = Vector2(0.5, 0.5)

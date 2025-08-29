@@ -86,8 +86,8 @@ func end_of_battle():
 	await get_tree().create_timer(2.0).timeout
 
 func set_health_bars():
-	$UI/Player/HealthBar.max_value = GameManager.player_bug.health
-	$UI/Enemy/HealthBar.max_value = GameManager.enemy_bug.health
+	$UI/Player/HealthBar.max_value = GameManager.player_bug.max_health
+	$UI/Enemy/HealthBar.max_value = GameManager.enemy_bug.max_health
 	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
 	$UI/Player/HealthBar/Label.text = str(int($UI/Player/HealthBar.value))
 	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
@@ -142,9 +142,9 @@ func connect_part_signals(part: Area2D):
 
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
-	$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
+	if not GameManager.no_eyes:
+		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	var nextToMouse = false
-	#print("body entered, tt show")
 	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
 func body_part_part_exited(part: Area2D) -> void:
@@ -152,8 +152,8 @@ func body_part_part_exited(part: Area2D) -> void:
 	if hovered_part==part:
 		hovered_part=null
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
-		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
-	#print("body exited, tt hide")
+		if not GameManager.no_eyes:
+			$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	$Tooltip.HidePopup()
 
 
@@ -191,11 +191,10 @@ func activate_part(partID: int, isPlayer: bool):
 		bug = $Battlefield.enemy_bug
 	match partID:
 		GameManager.BODYPARTS.HEART:
-			# TODO do in a more direct way probs
-			$UI/Player/HealthBar.max_value += 100
-			bug.health += 100
-			$UI/Player/HealthBar.value += 100
-			$UI/Player/HealthBar/Label.text = str(bug.health)
+			var health = 25
+			$UI/Player/HealthBar.max_value += health
+			bug.max_health += health
+			bug.health += 25
 		GameManager.BODYPARTS.BRAIN:
 			# in bug script
 			pass

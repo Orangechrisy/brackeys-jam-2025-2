@@ -32,8 +32,6 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	enemy_bug.set_as_enemy()
 	
 	round_ended = false
-	#for bug in $Bugs.get_children():
-		#bug.start_movement()
 
 func health_change(bug: CharacterBody2D, health: int):
 	if bug == player_bug:
