@@ -74,8 +74,8 @@ func end_of_battle():
 	await get_tree().create_timer(2.0).timeout
 
 func set_health_bars():
-	$UI/Player/HealthBar.max_value = GameManager.player_bug.health
-	$UI/Enemy/HealthBar.max_value = GameManager.enemy_bug.health
+	$UI/Player/HealthBar.max_value = GameManager.player_bug.max_health
+	$UI/Enemy/HealthBar.max_value = GameManager.enemy_bug.max_health
 	$UI/Player/HealthBar.value = $UI/Player/HealthBar.max_value
 	$UI/Player/HealthBar/Label.text = str(int($UI/Player/HealthBar.value))
 	$UI/Enemy/HealthBar.value = $UI/Enemy/HealthBar.max_value
