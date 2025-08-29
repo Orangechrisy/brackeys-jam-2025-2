@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j4jed1p0q8h4"
-path="res://.godot/imported/bladder.png-122094ec97bf57d54bf5c28da8d8ec36.ctex"
+uid="uid://taihjnyipnv3"
+path="res://.godot/imported/bug_shadow.png-efbd7d04b227de84cb83059db09948c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bodypart_places/bladder.png"
-dest_files=["res://.godot/imported/bladder.png-122094ec97bf57d54bf5c28da8d8ec36.ctex"]
+source_file="res://assets/bug_shadow.png"
+dest_files=["res://.godot/imported/bug_shadow.png-efbd7d04b227de84cb83059db09948c2.ctex"]
 
 [params]
 

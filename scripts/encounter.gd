@@ -130,9 +130,9 @@ func connect_part_signals(part: Area2D):
 
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
-	$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
+	if not GameManager.no_eyes:
+		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	var nextToMouse = false
-	#print("body entered, tt show")
 	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
 func body_part_part_exited(part: Area2D) -> void:
@@ -140,8 +140,8 @@ func body_part_part_exited(part: Area2D) -> void:
 	if hovered_part==part:
 		hovered_part=null
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
-		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
-	#print("body exited, tt hide")
+		if not GameManager.no_eyes:
+			$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	$Tooltip.HidePopup()
 
 

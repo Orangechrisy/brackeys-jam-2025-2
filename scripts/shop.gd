@@ -3,6 +3,7 @@ extends Node2D
 @onready var TOOLTIP = $Tooltip
 const BODY_PART = preload("res://scenes/body_part.tscn")
 var hovered_part = null
+var shop_parts = []
 
 func _ready() -> void:
 	GameManager.stop_other_music(GameManager.shopMusic)
@@ -13,6 +14,7 @@ func _ready() -> void:
 		$OrganHolder.add_child(part)
 		part.position = get_node("Option" + str(i+1)).position
 		get_node("Option" + str(i+1) + "/Label").text = str(part.cost)
+		shop_parts.append(part)
 	$Blood/Label.text = str(GameManager.blood)
 
 func pick_part() -> int:
@@ -57,11 +59,14 @@ func buy_part(part):
 		$Blood/Label.text = str(GameManager.blood)
 		GameManager.bought_part(part.partID)
 		GameManager.body_parts.append(part.partID)
+		if part.partID == GameManager.BODYPARTS.EYES and GameManager.no_eyes == false:
+			for otherParts in shop_parts:
+				otherParts.get_node("Censor").hide()
+		shop_parts.erase(part)
 		part.queue_free()
-		print(GameManager.body_parts)
 	else:
 		# do a shake or some sound to indicate cant buy?
-		pass
+		print("cant buy")
 
 func _on_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
