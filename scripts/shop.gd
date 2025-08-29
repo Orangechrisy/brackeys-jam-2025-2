@@ -7,22 +7,27 @@ var hovered_part = null
 func _ready() -> void:
 	GameManager.stop_other_music(GameManager.shopMusic)
 	GameManager.play_audio(GameManager.shopMusic, false)
-	var p1 = randi_range(0, GameManager.BODYPARTS.size()-1)
-	var p2 = randi_range(0, GameManager.BODYPARTS.size()-1)
-	var p3 = randi_range(0, GameManager.BODYPARTS.size()-1)
-	var part1 = GameManager.create_part(p1)
-	$OrganHolder.add_child(part1)
-	part1.position = $Option1.position
-	$Option1/Label.text = str(part1.cost)
-	var part2 = GameManager.create_part(p2)
-	$OrganHolder.add_child(part2)
-	part2.position = $Option2.position
-	$Option2/Label.text = str(part2.cost)
-	var part3 = GameManager.create_part(p3)
-	$OrganHolder.add_child(part3)
-	part3.position = $Option3.position
-	$Option3/Label.text = str(part3.cost)
+	for i in range(3):
+		var partID = pick_part()
+		var part = GameManager.create_part(partID)
+		$OrganHolder.add_child(part)
+		part.position = get_node("Option" + str(i+1)).position
+		get_node("Option" + str(i+1) + "/Label").text = str(part.cost)
 	$Blood/Label.text = str(GameManager.blood)
+
+func pick_part() -> int:
+	var totalChance = 0
+	var selectedPartID
+	for i in range(GameManager.num_bodyparts):
+		totalChance += GameManager.partChance[i]
+	var randchance: int = randi_range(1, totalChance) 
+	totalChance = 0
+	for i in range(GameManager.num_bodyparts):
+		totalChance += GameManager.partChance[i]
+		if randchance <= totalChance:
+			selectedPartID = i
+			break
+	return selectedPartID
 
 func connect_part_signals(part: Area2D):
 	part.connect("part_entered", body_part_part_entered)
