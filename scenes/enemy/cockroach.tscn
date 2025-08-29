@@ -28,8 +28,5 @@ shape = SubResource("CircleShape2D_el1v0")
 [node name="ArmAttackArea" parent="LeftArm" index="1"]
 position = Vector2(29, -28)
 
-[node name="CollisionShape2D" parent="LeftArm/ArmAttackArea" index="0"]
-position = Vector2(0, 0)
-
 [connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

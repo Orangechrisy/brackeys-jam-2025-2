@@ -99,6 +99,9 @@ _data = {
 &"death": SubResource("Animation_tcmtr")
 }
 
+[sub_resource type="Animation" id="Animation_ev3hl"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_srpgu"]
 resource_name = "idle"
 length = 0.4
@@ -115,9 +118,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [1.39626, 1.74533]
 }
-
-[sub_resource type="Animation" id="Animation_ev3hl"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nw6e0"]
 _data = {
