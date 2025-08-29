@@ -12,11 +12,13 @@ anchors_preset = 0
 script = ExtResource("1_n87rw")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.105882, 0, 0, 0.25098)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
 offset_top = 270.0
 offset_right = 1920.0
 offset_bottom = 810.0

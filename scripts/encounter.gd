@@ -5,7 +5,8 @@ var can_click = true
 
 func _ready():
 	GameManager.stop_other_music(GameManager.battleMusic)
-	GameManager.play_audio(GameManager.battleMusic, true)
+	GameManager.play_audio(GameManager.battleMusic, false)
+	await start_of_battle()
 	create_hand()
 	set_body()
 	set_enemy_body()
@@ -24,6 +25,31 @@ func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	# can maybe instead do this by viewport size instead of hardcoded...
 	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
+
+var reward: int
+var rewards = [
+	"A Wet $5 Bill!",
+	"A Partially Eaten Biscuit!",
+	"A Shiny Bottle Cap!",
+	"Half A Pack Of Gum!",
+	"A Paperclip!"
+]
+var reward_images = [
+	"res://assets/reward_bill.png",
+	"res://assets/reward_bill.png",
+	"res://assets/reward_bill.png",
+	"res://assets/reward_bill.png",
+	"res://assets/reward_bill.png"
+]
+
+func start_of_battle():
+	var rng = randi_range(0, rewards.size() - 1)
+	reward = rng
+	await get_tree().create_timer(2.0).timeout
+	$StartingReward/LabelReward.text = "The Reward? " + rewards[rng]
+	$StartingReward/Reward.texture = load(reward_images[rng])
+	await get_tree().create_timer(2.0).timeout
+	$StartingReward.hide()
 
 func set_health_bars():
 	$UI/Player/HealthBar.max_value = GameManager.player_bug.health

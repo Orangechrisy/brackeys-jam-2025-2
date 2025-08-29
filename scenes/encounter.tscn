@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=17 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://c0x2cgeflwr2k" path="res://assets/hand_open.png" id="5_75kek"]
 [ext_resource type="Texture2D" uid="uid://c5cixqhk35u2i" path="res://assets/hand_closed.png" id="6_woaxd"]
 [ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="7_2dnca"]
+[ext_resource type="Texture2D" uid="uid://bycvo8s5a5x75" path="res://assets/start_of_battle.png" id="9_nw3qf"]
+[ext_resource type="Texture2D" uid="uid://mxsa58q0xw7u" path="res://assets/reward_bill.png" id="10_mw7nh"]
 
 [sub_resource type="Theme" id="Theme_75kek"]
 
@@ -189,6 +191,38 @@ offset_left = 311.0
 offset_top = 463.0
 offset_right = 311.0
 offset_bottom = 463.0
+
+[node name="StartingReward" type="Node2D" parent="."]
+z_index = 2048
+
+[node name="Background" type="Sprite2D" parent="StartingReward"]
+texture = ExtResource("9_nw3qf")
+centered = false
+
+[node name="Reward" type="Sprite2D" parent="StartingReward"]
+position = Vector2(960, 540)
+texture = ExtResource("10_mw7nh")
+
+[node name="Label" type="Label" parent="StartingReward"]
+offset_left = 444.0
+offset_top = 79.0
+offset_right = 1827.0
+offset_bottom = 216.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "A Bug Battle Is Commencing!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelReward" type="Label" parent="StartingReward"]
+offset_left = 135.0
+offset_top = 769.0
+offset_right = 1377.0
+offset_bottom = 906.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "The Reward?"
+vertical_alignment = 1
 
 [connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]

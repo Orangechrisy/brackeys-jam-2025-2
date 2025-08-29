@@ -6,7 +6,7 @@ var hovered_part = null
 
 func _ready() -> void:
 	GameManager.stop_other_music(GameManager.shopMusic)
-	GameManager.play_audio(GameManager.shopMusic, true)
+	GameManager.play_audio(GameManager.shopMusic, false)
 	var p1 = randi_range(0, GameManager.BODYPARTS.size()-1)
 	var p2 = randi_range(0, GameManager.BODYPARTS.size()-1)
 	var p3 = randi_range(0, GameManager.BODYPARTS.size()-1)
