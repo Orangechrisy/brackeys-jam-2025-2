@@ -28,7 +28,6 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	enemy_bug.position = Vector2(150.0, 0.0)
 	#enemy_bug.modulate = Color("#ea003e")
 	enemy_bug.connect("change_health", health_change)
-
 	enemy_bug.connect("next_level", round_change)
 	$Bugs.add_child(enemy_bug)
 	enemy_bug.set_as_enemy()
@@ -38,14 +37,12 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 		#bug.start_movement()
 
 func health_change(bug: CharacterBody2D, health: int):
-	print("updating health")
 	if bug == player_bug:
 		update_health_bar.emit(true, health)
 	else:
 		update_health_bar.emit(false, health)
 
 func create_area(area_scene: PackedScene, pos):
-	print(pos)
 	var area = area_scene.instantiate() as Area2D
 	area.global_position = pos
 	get_parent().call_deferred("add_child", area)

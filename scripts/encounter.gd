@@ -9,9 +9,21 @@ func _ready():
 	create_hand()
 	set_body()
 	set_enemy_body()
-	var player = load("res://scenes/enemy/cockroach.tscn")
-	#var enemy = determine_enemy()
-	var enemy = load("res://scenes/enemy/spider.tscn")
+	var path = "res://scenes/enemy/" + GameManager.ENEMIES[GameManager.player_bugID] + ".tscn"
+	var player = load(path)
+	$UI/Player/NameLabel.text = GameManager.player_bug_name
+	match GameManager.player_bugID:
+		GameManager.BUGS.COCKROACH:
+			$UI/Player/IconBG/Icon.texture = COCKROACHICON
+		GameManager.BUGS.SPIDER:
+			$UI/Player/IconBG/Icon.texture = SPIDERICON
+		GameManager.BUGS.WASP:
+			$UI/Player/IconBG/Icon.texture = WASPICON
+		GameManager.BUGS.BEETLE:
+			$UI/Player/IconBG/Icon.texture = BEETLEICON
+	
+	var enemy = determine_enemy()
+	#var enemy = load("res://scenes/enemy/spider.tscn")
 	$Battlefield.place_bugs(player, enemy)
 	enemy_play_parts()
 	set_health_bars()
@@ -220,10 +232,25 @@ func update_part_count(partID: int, isPlayer: bool):
 	else:
 		parts_node.get_child(partID).get_node("Sprite2D").modulate = Color("#404040")
 
+const COCKROACHICON: Texture2D = preload("res://assets/bugs/cockroachicon.png")
+const SPIDERICON: Texture2D = preload("res://assets/bugs/spidericon.png")
+const WASPICON: Texture2D = preload("res://assets/bugs/waspicon.png")
+const BEETLEICON: Texture2D = preload("res://assets/bugs/beetleicon.png")
+
 func determine_enemy() -> PackedScene:
 	var enemy = randi_range(0, GameManager.num_enemies - 1)
 	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemy] + ".tscn"
 	var enemy_bug = load(path)
+	$UI/Enemy/NameLabel.text = GameManager.default_bug_names[enemy]
+	match enemy:
+		GameManager.BUGS.COCKROACH:
+			$UI/Enemy/IconBG/Icon.texture = COCKROACHICON
+		GameManager.BUGS.SPIDER:
+			$UI/Enemy/IconBG/Icon.texture = SPIDERICON
+		GameManager.BUGS.WASP:
+			$UI/Enemy/IconBG/Icon.texture = WASPICON
+		GameManager.BUGS.BEETLE:
+			$UI/Enemy/IconBG/Icon.texture = BEETLEICON
 	return enemy_bug
 
 #health bars

@@ -72,14 +72,31 @@ func parse_json(ID: int, json: Dictionary):
 	partCost[ID] = json["COST"]
 
 
+enum BUGS {
+	COCKROACH,
+	SPIDER,
+	WASP,
+	BEETLE
+}
+
 const ENEMIES = [
 	"Cockroach",
-	"Spider"
+	"Spider",
+	"Wasp",
+	"Beetle"
 ]
 var num_enemies: int = ENEMIES.size()
 @export var bugs_fought = []
 
+var default_bug_names = [
+	"John D. Cockroach", 
+	"Man-Spider",
+	"White Anglo-Saxon Parasite",
+	"Paul McMandible"
+]
 
+var player_bugID: int = 0
+var player_bug_name: String = "John D. Cockroach"
 var player_bug: CharacterBody2D
 var enemy_bug: CharacterBody2D
 var current_parts = []

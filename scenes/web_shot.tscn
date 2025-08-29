@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://brpuy8ypqxg0h"]
 
 [ext_resource type="PackedScene" uid="uid://bxranudn301ox" path="res://scenes/projectile.tscn" id="1_crbfv"]
-[ext_resource type="Script" uid="uid://bd4mgfatpa82p" path="res://scenes/web_shot.gd" id="2_dytd2"]
+[ext_resource type="Script" uid="uid://bd4mgfatpa82p" path="res://scripts/web_shot.gd" id="2_dytd2"]
 [ext_resource type="Texture2D" uid="uid://cnb3de08srriw" path="res://assets/abilities/webproj.png" id="2_l3ryi"]
 
 [node name="Web Shot" instance=ExtResource("1_crbfv")]

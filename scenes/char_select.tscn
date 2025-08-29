@@ -1,0 +1,324 @@
+[gd_scene load_steps=21 format=3 uid="uid://dx8ppinnq61ma"]
+
+[ext_resource type="Script" uid="uid://58hmccvtfua6" path="res://scripts/char_select.gd" id="1_a2t0j"]
+[ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="1_qjq5y"]
+[ext_resource type="Texture2D" uid="uid://7rxiyy310ajm" path="res://assets/bugs/cockroach.png" id="2_11wwc"]
+[ext_resource type="Texture2D" uid="uid://ba8d2f2m40pp1" path="res://assets/bugs/spider.png" id="4_lcdbo"]
+[ext_resource type="Texture2D" uid="uid://dmv4gxls0h0pq" path="res://assets/bugs/wasp.png" id="5_dgebt"]
+[ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="6_5kqyn"]
+[ext_resource type="Texture2D" uid="uid://d2t0tuapfisbb" path="res://assets/bugs/portrait_bg2.png" id="7_dgebt"]
+[ext_resource type="Texture2D" uid="uid://bk6vqwqwnpade" path="res://assets/bugs/cockroachicon.png" id="8_dgebt"]
+
+[sub_resource type="Animation" id="Animation_0k605"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_gx4en"]
+resource_name = "hovered"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.39626, 1.74533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nxft4"]
+_data = {
+&"RESET": SubResource("Animation_0k605"),
+&"hovered": SubResource("Animation_gx4en")
+}
+
+[sub_resource type="Animation" id="Animation_a2t0j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_bjbmf"]
+resource_name = "hover"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.39626, 1.74533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jy37n"]
+_data = {
+&"RESET": SubResource("Animation_a2t0j"),
+&"hover": SubResource("Animation_bjbmf")
+}
+
+[sub_resource type="Animation" id="Animation_lcdbo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_snw3k"]
+resource_name = "hover"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.39626, 1.74533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lrw"]
+_data = {
+&"RESET": SubResource("Animation_lcdbo"),
+&"hover": SubResource("Animation_snw3k")
+}
+
+[sub_resource type="Animation" id="Animation_dgebt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_kk48m"]
+resource_name = "hover"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.39626, 1.74533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_df63y"]
+_data = {
+&"RESET": SubResource("Animation_dgebt"),
+&"hover": SubResource("Animation_kk48m")
+}
+
+[node name="CharSelect" type="Node2D"]
+script = ExtResource("1_a2t0j")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qjq5y")
+
+[node name="StartButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1122.0
+offset_top = 251.0
+offset_right = 1453.0
+offset_bottom = 395.0
+theme_override_font_sizes/font_size = 80
+toggle_mode = true
+text = "START"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 253.0
+offset_right = 1495.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 100
+text = "COCKROACH"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 51.0
+offset_right = 877.0
+offset_bottom = 464.0
+theme_override_font_sizes/font_size = 150
+text = "CHOOSE YOUR BUG"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CockroachButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 771.0
+offset_right = 482.0
+offset_bottom = 995.0
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/CockroachButton"]
+position = Vector2(137, 118)
+rotation = 1.5708
+texture = ExtResource("2_11wwc")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/CockroachButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_nxft4")
+}
+
+[node name="SpiderButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 771.0
+offset_right = 882.0
+offset_bottom = 995.0
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/SpiderButton"]
+position = Vector2(135, 116)
+rotation = 1.5708
+texture = ExtResource("4_lcdbo")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/SpiderButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_jy37n")
+}
+
+[node name="WaspButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1001.0
+offset_top = 771.0
+offset_right = 1282.0
+offset_bottom = 995.0
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/WaspButton"]
+position = Vector2(126, 114)
+rotation = 1.5708
+texture = ExtResource("5_dgebt")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/WaspButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_a5lrw")
+}
+
+[node name="BeetleButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1401.0
+offset_top = 771.0
+offset_right = 1682.0
+offset_bottom = 995.0
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/BeetleButton"]
+position = Vector2(126, 118)
+rotation = 1.5708
+texture = ExtResource("6_5kqyn")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/BeetleButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_df63y")
+}
+
+[node name="BugName" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1160.0
+offset_top = 481.0
+offset_right = 1881.0
+offset_bottom = 662.0
+theme_override_font_sizes/font_size = 70
+text = "Bug Name:"
+horizontal_alignment = 2
+
+[node name="BugNameInput" type="LineEdit" parent="Control"]
+layout_mode = 0
+offset_left = 614.0
+offset_top = 585.0
+offset_right = 1900.0
+offset_bottom = 705.0
+theme_override_font_sizes/font_size = 70
+placeholder_text = "John D. Cockroach"
+alignment = 2
+
+[node name="IconBG" type="Sprite2D" parent="."]
+position = Vector2(1537, 383)
+scale = Vector2(3, 3)
+texture = ExtResource("7_dgebt")
+
+[node name="Icon" type="Sprite2D" parent="IconBG"]
+position = Vector2(125, 2.33345)
+texture = ExtResource("8_dgebt")
+
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_exited"]
+[connection signal="pressed" from="Control/CockroachButton" to="." method="_on_cockroach_button_pressed"]
+[connection signal="mouse_entered" from="Control/SpiderButton" to="." method="_on_spider_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/SpiderButton" to="." method="_on_spider_button_mouse_exited"]
+[connection signal="pressed" from="Control/SpiderButton" to="." method="_on_spider_button_pressed"]
+[connection signal="mouse_entered" from="Control/WaspButton" to="." method="_on_wasp_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/WaspButton" to="." method="_on_wasp_button_mouse_exited"]
+[connection signal="pressed" from="Control/WaspButton" to="." method="_on_wasp_button_pressed"]
+[connection signal="mouse_entered" from="Control/BeetleButton" to="." method="_on_beetle_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/BeetleButton" to="." method="_on_beetle_button_mouse_exited"]
+[connection signal="pressed" from="Control/BeetleButton" to="." method="_on_beetle_button_pressed"]
+[connection signal="text_changed" from="Control/BugNameInput" to="." method="_on_bug_name_input_text_changed"]
