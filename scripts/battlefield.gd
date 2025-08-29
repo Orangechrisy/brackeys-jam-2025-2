@@ -44,6 +44,12 @@ func health_change(bug: CharacterBody2D, health: int):
 	else:
 		update_health_bar.emit(false, health)
 
+func create_area(area_scene: PackedScene, pos):
+	print(pos)
+	var area = area_scene.instantiate() as Area2D
+	area.global_position = pos
+	get_parent().call_deferred("add_child", area)
+
 # if rounds left, reset, otherwise end the encounter
 func round_change(bug: CharacterBody2D):
 	if not round_ended:

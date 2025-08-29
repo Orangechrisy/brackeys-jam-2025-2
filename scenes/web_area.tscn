@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cewkepm0ne5i4"]
+
+[ext_resource type="Script" uid="uid://7ojvpv56gej4" path="res://scenes/web_area.gd" id="1_4jjag"]
+[ext_resource type="Texture2D" uid="uid://cpwj0hiywpjtn" path="res://assets/webarea.png" id="1_fwpbi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4jjag"]
+radius = 34.0147
+
+[node name="WebArea" type="Area2D"]
+script = ExtResource("1_4jjag")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fwpbi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4jjag")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

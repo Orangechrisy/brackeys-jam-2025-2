@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dm5m0f20omtaj"]
+[gd_scene load_steps=17 format=3 uid="uid://dm5m0f20omtaj"]
 
 [ext_resource type="Script" uid="uid://b5vidvlpr235r" path="res://scripts/bug.gd" id="1_7dv1t"]
 [ext_resource type="Texture2D" uid="uid://c1463vedwu8i" path="res://icon.svg" id="2_glhb6"]
@@ -9,7 +9,7 @@
 radius = 95.5249
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ev3hl"]
-radius = 7.0
+radius = 9.05539
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nw6e0"]
 
@@ -99,10 +99,37 @@ _data = {
 &"death": SubResource("Animation_tcmtr")
 }
 
+[sub_resource type="Animation" id="Animation_srpgu"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.39626, 1.74533]
+}
+
+[sub_resource type="Animation" id="Animation_ev3hl"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nw6e0"]
+_data = {
+&"RESET": SubResource("Animation_ev3hl"),
+&"idle": SubResource("Animation_srpgu")
+}
+
 [node name="Bug" type="CharacterBody2D" groups=["hurtbox"]]
 script = ExtResource("1_7dv1t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.40744
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_glhb6")
 
@@ -112,11 +139,16 @@ shape = SubResource("CircleShape2D_a3pup")
 
 [node name="AttackArea" type="Area2D" parent="."]
 
-[node name="InvincibilityTimer" type="Timer" parent="."]
+[node name="BugTimers" type="Node2D" parent="."]
+
+[node name="InvincibilityTimer" type="Timer" parent="BugTimers"]
 wait_time = 0.3
 one_shot = true
 
-[node name="Timers" type="Node2D" parent="."]
+[node name="SnaredTimer" type="Timer" parent="BugTimers"]
+one_shot = true
+
+[node name="BodyPartTimers" type="Node2D" parent="."]
 
 [node name="LeftArm" type="Marker2D" parent="."]
 visible = false
@@ -129,11 +161,12 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_tcmtr")
 
 [node name="ArmAttackArea" type="Area2D" parent="LeftArm"]
+position = Vector2(27.5199, -28.2073)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArm/ArmAttackArea"]
-position = Vector2(28, -25)
 shape = SubResource("CircleShape2D_ev3hl")
 disabled = true
+metadata/_edit_lock_ = true
 
 [node name="RightArm" type="Marker2D" parent="."]
 visible = false
@@ -146,19 +179,21 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_srpgu")
 
 [node name="ArmAttackArea" type="Area2D" parent="RightArm"]
+position = Vector2(33.2479, 21.554)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightArm/ArmAttackArea"]
-position = Vector2(33, 19)
 shape = SubResource("CircleShape2D_nw6e0")
 disabled = true
+metadata/_edit_lock_ = true
 
 [node name="LeftKidney" type="Marker2D" parent="."]
 visible = false
 
 [node name="KidneyDefenseArea" type="CharacterBody2D" parent="LeftKidney"]
+position = Vector2(0.64232, -36.6686)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea"]
-position = Vector2(0, -51)
+position = Vector2(-0.404377, -8.05211)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tcmtr")
 disabled = true
@@ -167,18 +202,25 @@ disabled = true
 visible = false
 
 [node name="KidneyDefenseArea" type="CharacterBody2D" parent="RightKidney"]
+position = Vector2(0, 51)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightKidney/KidneyDefenseArea"]
-position = Vector2(0, 51)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_srpgu")
 disabled = true
+metadata/_edit_lock_ = true
 
 [node name="GlobalAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_tcmtr")
 }
 
-[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[node name="IdleAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nw6e0")
+}
+
+[connection signal="timeout" from="BugTimers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="BugTimers/SnaredTimer" to="." method="_on_snared_timer_timeout"]
 [connection signal="body_entered" from="LeftArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]
 [connection signal="body_entered" from="RightArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]

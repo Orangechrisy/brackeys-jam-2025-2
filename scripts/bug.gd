@@ -11,11 +11,12 @@ class_name Bug
 			else:
 				health = value
 			change_health.emit(self, health)
-			print("health changed")
 		else:
 			health = value
 @export var damage: int = 5
 @export var speed: int = 200
+
+@onready var default_speed: int = speed
 @onready var max_health = health
  
 var direction: Vector2 
@@ -34,8 +35,12 @@ func start_movement():
 	direction = Vector2(1,0).rotated(rotation)
 	velocity = direction*speed
 
+func _ready() -> void:
+	$IdleAnim.play("idle")
+
 func _physics_process(delta: float) -> void:
-	enemy_process(delta)
+	if not spidersnared:
+		enemy_process(delta)
 	
 	if health <= 0:
 		$GlobalAnimationPlayer.play("death")
@@ -54,7 +59,7 @@ func start_timers():
 				# Instantiate a timer
 				print("Left leg found!")
 				var timer = Timer.new()
-				$Timers.add_child(timer)
+				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
 				timer.one_shot = true
 				timer.timeout.connect(_on_timer_leg_timeout.bind(timer))
@@ -62,7 +67,7 @@ func start_timers():
 			GameManager.BODYPARTS.RIGHTLEG:
 				print("Right leg found!")
 				var timer = Timer.new()
-				$Timers.add_child(timer)
+				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
 				timer.one_shot = true
 				timer.timeout.connect(_on_timer_leg_timeout.bind(timer))
@@ -70,7 +75,7 @@ func start_timers():
 			GameManager.BODYPARTS.STOMACH:
 				print("Stomach found!")
 				var timer = Timer.new()
-				$Timers.add_child(timer)
+				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
 				timer.one_shot = true
 				timer.timeout.connect(_on_timer_stomach_timeout.bind(timer))
@@ -82,16 +87,21 @@ func start_timers():
 				timer.one_shot = true
 				timer.timeout.connect(_on_timer_liver_timeout.bind(timer))
 				timer.start()
+	
+	start_bug_timers()
+
+func start_bug_timers():
+	pass
 
 func remove_timers():
-	for timer in $Timers.get_children():
+	for timer in $BodyPartTimers.get_children():
 		timer.queue_free()
 
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 	if not invincible:
 		#Taking Damage: play animation and get 0.3s of i-frames
 		invincible=true
-		$InvincibilityTimer.start()
+		$BugTimers/InvincibilityTimer.start()
 		if not $GlobalAnimationPlayer.animation_started:
 			$GlobalAnimationPlayer.play("damage")
 		
@@ -153,8 +163,8 @@ func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")
 	var acid = STOMACH_ACID.instantiate()
 	add_child(acid)
-	acid.position = global_position
-	acid.direction = velocity / speed
+	acid.global_position = global_position
+	acid.direction = Vector2(1,0)
 	timer.wait_time = 0.5 #randi_range(1, 5)
 	timer.start()
 
@@ -171,3 +181,21 @@ func death():
 var invincible: bool 
 func _on_invincibility_timer_timeout() -> void:
 	invincible = false
+
+#SPIDER:
+var spidersnared: bool = false:
+	set(value):
+		if value == true:
+			print("snared")
+			speed=0
+			$BugTimers/SnaredTimer.start()
+			if GameManager.enemy_bug == self:
+				GameManager.player_bug.web_area_active = true 
+			elif GameManager.player_bug == self:
+				GameManager.enemy_bug.web_area_active = true 
+		spidersnared = value
+
+
+func _on_snared_timer_timeout() -> void:
+	speed=default_speed
+	spidersnared=false
