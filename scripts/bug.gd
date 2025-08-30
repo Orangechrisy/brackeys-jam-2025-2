@@ -23,6 +23,7 @@ class_name Bug
 
 var direction: Vector2 
 var played_parts = GameManager.played_parts
+var enemy_played_parts = GameManager.enemy_played_parts
 
 signal change_health(bug: CharacterBody2D, newhealth: int)
 signal next_level(bug: CharacterBody2D)
@@ -31,6 +32,7 @@ const STOMACH_ACID = preload("res://scenes/stomach_acid.tscn")
 
 func set_as_enemy():
 	played_parts = GameManager.enemy_played_parts
+	enemy_played_parts = GameManager.played_parts
 
 func start_movement():
 	speed=default_speed
@@ -123,40 +125,42 @@ func remove_timers():
 
 const DODGED = preload("res://scenes/dodged.tscn")
 
+# this bug got attacked
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 	if not invincible:
-		#Taking Damage: play animation and get 0.3s of i-frames
-		invincible=true
-		$BugTimers/InvincibilityTimer.start()
-		if not $GlobalAnimationPlayer.animation_started:
-			$GlobalAnimationPlayer.play("damage")
-		
+		# make sure different bodies
 		if attackingBug != attackedBug:
-			# handling effects
-			#print(played_parts)
+			# player bug attacked and doesnt have a stomach
+			if attackedBug == GameManager.player_bug:
+				if GameManager.no_stomach:
+					dmg += 1
+					
+			# attacked bug has a brain
 			for part in played_parts:
-				if attackingBug == GameManager.player_bug:
-					match part:
-						GameManager.BODYPARTS.TONGUE:
-							# Restores a third of the damage dealt as health
-							print("Attacker has tongue!")
-							attackingBug.health += floor(attackingBug.damage / 3)
-				if attackedBug == GameManager.player_bug:
-					match part:
-						GameManager.BODYPARTS.BRAIN:
-							print("Defender has brain!")
-							if randi_range(1, 2) == 2:
-								dmg = 0
-								battlefield.create_area(DODGED, global_position)
-								print("Dodged!")
-						#GameManager.BODYPARTS.LEFTKIDNEY:
-							#print("checking areas: ", $LeftKidney/KidneyDefenseArea.get_overlapping_areas())
-						#GameManager.BODYPARTS.RIGHTKIDNEY:
-							#print("checking areas: ", $RightKidney/KidneyDefenseArea.get_overlapping_areas())
-		
-		# Handling damage dealt
-		health -= dmg
-		print("health after hit: ", health, " ", dmg)
+				if part == GameManager.BODYPARTS.BRAIN:
+					print("Defender has brain!")
+					if randi_range(1, 2) == 2:
+						dmg = 0
+						battlefield.create_area(DODGED, global_position)
+						print("Dodged!")
+						
+			# attacking bug has a tongue
+			if dmg > 0:
+				for part in enemy_played_parts:
+					if part == GameManager.BODYPARTS.TONGUE:
+						# Restores a third of the damage dealt as health
+						print("Attacker has tongue!")
+						attackingBug.health += floor(attackingBug.damage / 3)
+			
+			# Handling damage dealt
+			health -= dmg
+			print("health after hit: ", health, " ", dmg)
+			if dmg > 0:
+				#Taking Damage: play animation and get 0.3s of i-frames
+				invincible=true
+				$BugTimers/InvincibilityTimer.start()
+				if not $GlobalAnimationPlayer.animation_started:
+					$GlobalAnimationPlayer.play("damage")
 	
 
 func _on_arm_attack_area_body_entered(body: Node2D) -> void:

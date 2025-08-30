@@ -106,12 +106,14 @@ var enemy_played_parts = []
 var blood = 0
 var hand_size = 5
 var less_blood = 0
-var has_lungs = true
+var no_lungs = false
 var no_left_leg = false
 var no_right_leg = false
 var no_eyes = false
 var player_max_health = 50
 var player_health = 50
+var no_liver = false
+var no_stomach = false
 
 func game_over():
 	print("game over :(")
@@ -151,12 +153,14 @@ func _reset():
 	blood = 0
 	hand_size = 5
 	less_blood = 0
-	has_lungs = true
+	no_lungs = false
 	no_left_leg = false
 	no_right_leg = false
 	no_eyes = false
 	player_max_health = 50
 	player_health = 50
+	no_liver = false
+	no_stomach = false
 	reset_rarities()
 
 func reset_rarities():
@@ -175,7 +179,7 @@ func lose_part(partID: int):
 				#make stupid
 				pass
 			BODYPARTS.LUNGS:
-				has_lungs = false
+				no_lungs = true
 			BODYPARTS.EYES:
 				no_eyes = true
 			BODYPARTS.TONGUE:
@@ -193,9 +197,9 @@ func lose_part(partID: int):
 			BODYPARTS.RIGHTLEG:
 				no_right_leg = true
 			BODYPARTS.STOMACH:
-				pass
+				no_stomach = true
 			BODYPARTS.LIVER:
-				pass
+				no_liver = true
 			BODYPARTS.LEFTKIDNEY:
 				less_blood -= 1
 			BODYPARTS.RIGHTKIDNEY:
@@ -215,7 +219,7 @@ func bought_part(partID: int):
 				# reverse make stupid
 				pass
 			BODYPARTS.LUNGS:
-				has_lungs = true
+				no_lungs = false
 			BODYPARTS.EYES:
 				no_eyes = false
 			BODYPARTS.TONGUE:
@@ -230,9 +234,9 @@ func bought_part(partID: int):
 			BODYPARTS.RIGHTLEG:
 				no_right_leg = false
 			BODYPARTS.STOMACH:
-				pass
+				no_stomach = false
 			BODYPARTS.LIVER:
-				pass
+				no_liver = false
 			BODYPARTS.LEFTKIDNEY:
 				less_blood += 1
 			BODYPARTS.RIGHTKIDNEY:
@@ -250,7 +254,7 @@ func create_part(partID: int) -> Node2D:
 	return part
 
 func liver_check():
-	if body_parts.count(BODYPARTS.LIVER) == 0:
+	if no_liver:
 		player_health -= 1
 		if player_health <= 0:
 			game_over()

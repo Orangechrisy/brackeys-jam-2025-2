@@ -39,7 +39,7 @@ func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	# can maybe instead do this by viewport size instead of hardcoded...
 	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
-	if not GameManager.has_lungs:
+	if GameManager.no_lungs:
 		$Lungs.show()
 		if $Lungs/LungsTimer.is_stopped() and not lungs_timer_ended:
 			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.wait_time
