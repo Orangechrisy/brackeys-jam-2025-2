@@ -37,6 +37,8 @@ func _process(_delta: float) -> void:
 			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.time_left
 	else:
 		$Lungs.hide()
+	if hovered_part == null:
+		$Tooltip.hide()
 
 var reward: int
 var rewards = [
