@@ -49,11 +49,11 @@ var rewards = [
 	"A Paperclip!"
 ]
 var reward_images = [
-	"res://assets/reward_bill.png",
-	"res://assets/reward_bill.png",
-	"res://assets/reward_bill.png",
-	"res://assets/reward_bill.png",
-	"res://assets/reward_bill.png"
+	"res://assets/rewards/reward_bill.png",
+	"res://assets/rewards/reward_biscuit.png",
+	"res://assets/rewards/reward_bottlecap.png",
+	"res://assets/rewards/reward_gum.png",
+	"res://assets/rewards/reward_paperclip.png"
 ]
 
 func start_of_battle():
@@ -62,6 +62,7 @@ func start_of_battle():
 	await get_tree().create_timer(2.0).timeout
 	$StartingReward/LabelReward.text = "The Reward? " + rewards[reward]
 	$StartingReward/Reward.texture = load(reward_images[reward])
+	$StartingReward/Reward.show()
 	await get_tree().create_timer(2.0).timeout
 	$StartingReward.hide()
 

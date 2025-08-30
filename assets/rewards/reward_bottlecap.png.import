@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mxsa58q0xw7u"
-path="res://.godot/imported/reward_bill.png-982d2d37041bdcc90fc3a4762fe5a1e5.ctex"
+uid="uid://bcu12aguotixb"
+path="res://.godot/imported/reward_bottlecap.png-75201e8fa4938ed589df3fa6ef204d77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/reward_bill.png"
-dest_files=["res://.godot/imported/reward_bill.png-982d2d37041bdcc90fc3a4762fe5a1e5.ctex"]
+source_file="res://assets/rewards/reward_bottlecap.png"
+dest_files=["res://.godot/imported/reward_bottlecap.png-75201e8fa4938ed589df3fa6ef204d77.ctex"]
 
 [params]
 
