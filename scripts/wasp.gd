@@ -11,7 +11,7 @@ func enemy_process(delta):
 			enemy = GameManager.player_bug
 		elif self == GameManager.player_bug:
 			enemy = GameManager.enemy_bug
-	elif melee_range:
+	elif melee_range and (not spidersnared):
 		scale = Vector2(-1.0,-1.0)
 		look_at(enemy.global_position)
 		

@@ -16,7 +16,7 @@ speed = 400
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_el1v0")
 
-[node name="AttackArea" parent="." index="4"]
+[node name="AttackArea" parent="." index="3"]
 position = Vector2(42, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
