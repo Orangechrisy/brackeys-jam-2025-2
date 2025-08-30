@@ -58,12 +58,17 @@ var reward_images = [
 
 func start_of_battle():
 	$StartingReward.show()
+	$StartingReward/Drumroll.play()
 	reward = randi_range(0, rewards.size() - 1)
 	await get_tree().create_timer(2.0).timeout
-	$StartingReward/LabelReward.text = "The Reward? " + rewards[reward]
+	$StartingReward/LabelReward.text = rewards[reward]
+	$StartingReward/LabelReward.show()
+	$StartingReward/Rays.show()
 	$StartingReward/Reward.texture = load(reward_images[reward])
 	$StartingReward/Reward.show()
-	await get_tree().create_timer(2.0).timeout
+	$StartingReward/Label2.show()
+	$StartingReward/Label3.show()
+	await get_tree().create_timer(4.0).timeout
 	$StartingReward.hide()
 
 func end_of_battle():
