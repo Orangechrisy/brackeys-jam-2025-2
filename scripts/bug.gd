@@ -23,6 +23,7 @@ class_name Bug
 
 var direction: Vector2 
 var played_parts = GameManager.played_parts
+@onready var can_move: bool = false
 
 signal change_health(bug: CharacterBody2D, newhealth: int)
 signal next_level(bug: CharacterBody2D)
@@ -33,14 +34,15 @@ func set_as_enemy():
 	played_parts = GameManager.enemy_played_parts
 
 func start_movement():
-	speed=default_speed
+	#speed=default_speed
+	can_move=true
 	rotation = randf_range(0, deg_to_rad(360))
 	direction = Vector2(1,0).rotated(rotation)
 	velocity = direction*speed
 
 func _ready() -> void:
-	speed=0
-	#$IdleAnim.play("idle")
+	#speed=0
+	$IdleAnim.play("idle")
 
 func _physics_process(delta: float) -> void:
 	if health <= 0:
@@ -182,9 +184,9 @@ func _on_timer_stomach_timeout(timer: Timer):
 	print("Stomach timer timeout")
 	var acid = STOMACH_ACID.instantiate()
 	acid.origin_bug = self
-	add_child(acid)
+	get_parent().add_child(acid)
 	acid.global_position = global_position
-	acid.direction = Vector2(1,0)
+	acid.direction = (to_global(Vector2.RIGHT)-global_position).normalized()
 	timer.wait_time = 0.5 #randi_range(1, 5)
 	timer.start()
 

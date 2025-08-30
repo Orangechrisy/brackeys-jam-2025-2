@@ -24,6 +24,7 @@ func enemy_process(delta):
 		if collision_info:
 			velocity = velocity.bounce(collision_info.get_normal())
 			velocity = velocity.rotated(deg_to_rad(randf_range(-10.0, 10.0)))
+			direction = velocity/speed
 	elif not tween_started:
 		tween_started=true
 		invincible=true
@@ -47,8 +48,6 @@ func enemy_process(delta):
 		web_area_active=false
 		tween_started=false
 
-#I DONT KNOW WHY THIS DOESNT WORK 😢😢😢😢😢😢😢
-#JUST MAKING IT AUTOSTART FOR NOW YES I KNOW THE SPIDER CAN ATTACK EARLY
 func start_bug_timers():
 	$BugTimers/ShootTimer.start()
 
