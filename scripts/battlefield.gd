@@ -29,6 +29,7 @@ func place_bugs(player: PackedScene, enemy: PackedScene):
 	enemy_scene = enemy
 	enemy_bug = enemy.instantiate()
 	GameManager.enemy_bug = enemy_bug
+	enemy_bug.health += (GameManager.match_num * 2) - 2
 	enemy_bug.position = Vector2(150.0, 0.0)
 	enemy_bug.rotation = deg_to_rad(180)
 	#enemy_bug.modulate = Color("#ea003e")

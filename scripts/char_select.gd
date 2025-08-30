@@ -44,7 +44,7 @@ func _on_cockroach_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/CockroachButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.COCKROACH]
+	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.COCKROACH][0]
 	selected_bug=GameManager.BUGS.COCKROACH
 	_on_cockroach_button_mouse_entered()
 
@@ -52,7 +52,7 @@ func _on_spider_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/SpiderButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.SPIDER]
+	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.SPIDER][0]
 	selected_bug=GameManager.BUGS.SPIDER
 	_on_spider_button_mouse_entered()
 
@@ -60,7 +60,7 @@ func _on_wasp_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/WaspButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.WASP]
+	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.WASP][0]
 	selected_bug=GameManager.BUGS.WASP
 	_on_wasp_button_mouse_entered()
 
@@ -68,7 +68,7 @@ func _on_beetle_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/BeetleButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.BEETLE]
+	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.BEETLE][0]
 	selected_bug=GameManager.BUGS.BEETLE
 	_on_beetle_button_mouse_entered()
 
@@ -78,7 +78,7 @@ func _on_start_button_pressed() -> void:
 	if bug_name != "":
 		GameManager.player_bug_name = bug_name
 	else:
-		GameManager.player_bug_name = GameManager.default_bug_names[selected_bug]
+		GameManager.player_bug_name = GameManager.default_bug_names[selected_bug][0]
 	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
 
 

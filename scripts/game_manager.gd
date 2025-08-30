@@ -116,8 +116,10 @@ var no_liver = false
 var no_stomach = false
 var upper_boundary: Vector2
 var lower_boundary: Vector2
+var match_num = 1
 
 func game_over():
+	match_num = 1
 	print("game over :(")
 
 func _input(event):

@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="3_j68fe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixbtv"]
-size = Vector2(20, 441.583)
+size = Vector2(28.6119, 441.583)
 
 [node name="Battlefield" type="Node2D"]
 z_index = -6
@@ -20,54 +20,54 @@ scale = Vector2(1.5, 1.5)
 [node name="Area2D" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D"]
-position = Vector2(-173.333, -125.333)
+position = Vector2(-171.333, -125.333)
 rotation = 0.523598
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Area2D8" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D8"]
-position = Vector2(154.667, 174.667)
+position = Vector2(160.667, 176.667)
 rotation = 0.523598
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Area2D2" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D2"]
-position = Vector2(178, 30.6667)
+position = Vector2(179.333, 30.6667)
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Area2D7" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D7"]
-position = Vector2(-193.333, 23.3333)
+position = Vector2(-194.667, 23.3333)
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Area2D3" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D3"]
-position = Vector2(4, -151.333)
+position = Vector2(4, -152.667)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Area2D4" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D4"]
-position = Vector2(2.66667, 210.667)
+position = Vector2(2.66667, 212)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Area2D5" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D5"]
-position = Vector2(-164.667, 188.667)
+position = Vector2(-168, 190.667)
 rotation = -0.523599
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Area2D6" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D6"]
-position = Vector2(129.333, -168.667)
+position = Vector2(130, -170)
 rotation = -0.523599
 shape = SubResource("RectangleShape2D_ixbtv")
 
