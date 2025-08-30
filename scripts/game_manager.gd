@@ -114,6 +114,8 @@ var player_max_health = 50
 var player_health = 50
 var no_liver = false
 var no_stomach = false
+var no_right_arm = false
+var no_left_arm = false
 var upper_boundary: Vector2
 var lower_boundary: Vector2
 var match_num = 1
@@ -165,6 +167,8 @@ func _reset():
 	player_health = 50
 	no_liver = false
 	no_stomach = false
+	no_right_arm = false
+	no_left_arm = false
 	reset_rarities()
 
 func reset_rarities():
@@ -192,10 +196,11 @@ func lose_part(partID: int):
 				rare = 4
 				legendary = 2
 			BODYPARTS.LEFTARM:
+				no_left_arm = true
 				hand_size -= 1
 			BODYPARTS.RIGHTARM:
+				no_right_arm = true
 				hand_size -= 1
-				# TODO ghost hand
 			BODYPARTS.LEFTLEG:
 				no_left_leg = true
 			BODYPARTS.RIGHTLEG:
@@ -229,10 +234,11 @@ func bought_part(partID: int):
 			BODYPARTS.TONGUE:
 				reset_rarities()
 			BODYPARTS.LEFTARM:
+				no_left_arm = false
 				hand_size += 1
 			BODYPARTS.RIGHTARM:
+				no_right_arm = false
 				hand_size += 1
-				# TODO reverse ghost hand
 			BODYPARTS.LEFTLEG:
 				no_left_leg = false
 			BODYPARTS.RIGHTLEG:

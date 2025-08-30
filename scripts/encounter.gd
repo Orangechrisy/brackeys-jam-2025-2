@@ -13,6 +13,7 @@ func _ready():
 	set_body()
 	set_enemy_body()
 	
+	check_hand_sprite()
 	
 	var enemy = determine_enemy()
 	var player = determine_player()
@@ -157,7 +158,14 @@ func body_part_part_exited(part: Area2D) -> void:
 			$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	$Tooltip.HidePopup()
 
-
+func check_hand_sprite():
+	if GameManager.no_right_arm:
+		if GameManager.no_left_arm:
+			$Hand/AnimatedSprite2D.animation = &"ghost"
+		else:
+			$Hand/AnimatedSprite2D.animation = &"left"
+	else:
+		$Hand/AnimatedSprite2D.animation = &"default"
 
 func play_part(part: Area2D):
 	part.get_node("CollisionShape2D").disabled = true
@@ -355,6 +363,7 @@ func _on_battlefield_reset(won: bool) -> void:
 	reset_enemy_parts(won)
 	
 	GameManager.liver_check()
+	check_hand_sprite()
 	
 	if curr_round < num_rounds:
 		await get_tree().create_timer(2.0).timeout
