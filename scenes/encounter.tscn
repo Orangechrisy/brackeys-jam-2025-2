@@ -8,14 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://bk6vqwqwnpade" path="res://assets/bugs/cockroachicon.png" id="3_mw7nh"]
 [ext_resource type="Texture2D" uid="uid://d2t0tuapfisbb" path="res://assets/bugs/portrait_bg2.png" id="4_ip0ee"]
 [ext_resource type="PackedScene" uid="uid://csbtxgx5jy0d8" path="res://scenes/blood.tscn" id="5_3l52i"]
+[ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="5_8lsj0"]
 [ext_resource type="Texture2D" uid="uid://c0x2cgeflwr2k" path="res://assets/hand_open.png" id="5_75kek"]
 [ext_resource type="Texture2D" uid="uid://c5cixqhk35u2i" path="res://assets/hand_closed.png" id="6_woaxd"]
 [ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="7_2dnca"]
 [ext_resource type="Texture2D" uid="uid://bycvo8s5a5x75" path="res://assets/start_of_battle.png" id="9_nw3qf"]
 [ext_resource type="Texture2D" uid="uid://mxsa58q0xw7u" path="res://assets/reward_bill.png" id="10_mw7nh"]
 [ext_resource type="PackedScene" uid="uid://xtjsrk8ye6fr" path="res://scenes/hp_bar.tscn" id="14_034qn"]
-
-[sub_resource type="Theme" id="Theme_75kek"]
 
 [sub_resource type="Animation" id="Animation_2dnca"]
 resource_name = "damage"
@@ -72,7 +71,7 @@ texture = ExtResource("3_mw7nh")
 offset_top = 423.0
 offset_right = 412.0
 offset_bottom = 465.0
-theme = SubResource("Theme_75kek")
+theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 30
 text = "John D. Cockroach"
 horizontal_alignment = 1
@@ -88,6 +87,7 @@ show_percentage = false
 layout_mode = 0
 offset_right = 376.0
 offset_bottom = 28.0
+theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 20
 text = "100"
 horizontal_alignment = 1
@@ -115,7 +115,7 @@ offset_left = 1518.0
 offset_top = 447.0
 offset_right = 1924.0
 offset_bottom = 489.0
-theme = SubResource("Theme_75kek")
+theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 30
 text = "John D. Cockroach"
 horizontal_alignment = 1
@@ -140,6 +140,7 @@ offset_left = -5.0
 offset_top = 4.0
 offset_right = 371.0
 offset_bottom = 27.0
+theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 20
 text = "100"
 horizontal_alignment = 1

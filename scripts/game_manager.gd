@@ -90,10 +90,10 @@ var num_enemies: int = ENEMIES.size()
 @export var bugs_fought = []
 
 var default_bug_names = [
-	"John D. Cockroach", 
-	"Man-Spider",
-	"White Anglo-Saxon Parasite",
-	"Paul McMandible"
+	["John D. Cockroach"], 
+	["Man-Spider"],
+	["White Anglo-Saxon Parasite"],
+	["Paul McMandible"]
 ]
 
 var player_bugID: int = 0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbx7eyc7lgxem"]
+[gd_scene load_steps=4 format=3 uid="uid://bbx7eyc7lgxem"]
 
 [ext_resource type="Script" uid="uid://05p1thmor0dh" path="res://scripts/tooltip.gd" id="1_7dicn"]
+[ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="1_75wrl"]
 
 [sub_resource type="Theme" id="Theme_75wrl"]
 
@@ -8,6 +9,7 @@
 z_index = 3
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_75wrl")
 script = ExtResource("1_7dicn")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
