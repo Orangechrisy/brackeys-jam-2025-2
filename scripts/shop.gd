@@ -66,6 +66,12 @@ func buy_part(part):
 		part.queue_free()
 	else:
 		# do a shake or some sound to indicate cant buy?
+		var x = part.position.x
+		
+		var tween = create_tween()
+		tween.tween_property(part, "position:x", x - 15, .05)
+		tween.tween_property(part, "position:x", x + 15, .05)
+		tween.tween_property(part, "position:x", x, .05)
 		print("cant buy")
 
 func _on_button_pressed() -> void:

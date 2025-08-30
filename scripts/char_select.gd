@@ -78,7 +78,8 @@ func _on_start_button_pressed() -> void:
 	if bug_name != "":
 		GameManager.player_bug_name = bug_name
 	else:
-		GameManager.player_bug_name = GameManager.default_bug_names[selected_bug][0]
+		var bug_names = GameManager.default_bug_names[selected_bug]
+		GameManager.player_bug_name = bug_names[randi_range(0, bug_names.size() - 1)]
 	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
 
 
