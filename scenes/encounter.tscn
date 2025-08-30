@@ -275,6 +275,7 @@ text = "So cool!"
 
 [node name="Drumroll" type="AudioStreamPlayer2D" parent="StartingReward"]
 stream = ExtResource("17_2kmb0")
+bus = &"SFX"
 
 [node name="EndingReward" type="Node2D" parent="."]
 visible = false
