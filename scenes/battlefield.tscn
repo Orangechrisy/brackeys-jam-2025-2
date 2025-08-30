@@ -74,11 +74,10 @@ shape = SubResource("RectangleShape2D_ixbtv")
 [node name="Bugs" type="Node2D" parent="."]
 
 [node name="Button" type="Button" parent="."]
-visible = false
-offset_left = -453.0
-offset_top = -236.0
-offset_right = -334.0
-offset_bottom = -159.0
+offset_left = -455.0
+offset_top = -389.0
+offset_right = -316.0
+offset_bottom = -292.0
 theme = ExtResource("3_j68fe")
 theme_override_font_sizes/font_size = 50
 text = "fight"
