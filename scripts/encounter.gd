@@ -29,7 +29,8 @@ func _process(_delta: float) -> void:
 			play_part(hovered_part)
 	var mouse_pos = get_global_mouse_position()
 	# can maybe instead do this by viewport size instead of hardcoded...
-	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
+	if not brain_move_tween:
+		$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
 	if GameManager.no_lungs:
 		$Lungs.show()
 		if $Lungs/LungsTimer.is_stopped() and not lungs_timer_ended:
@@ -100,7 +101,7 @@ func create_hand():
 	for i in range(min(GameManager.hand_size, GameManager.body_parts.size())):
 		var partID = GameManager.body_parts[i]
 		# TODO determine which image to show based on partID instead of just default heart 
-		var part = GameManager.create_part(partID)
+		var part = GameManager.create_part(partID, false)
 		#var part = BODY_PART.instantiate()
 		$"OrganHolder".add_child(part)
 		GameManager.current_parts.append(part)
@@ -144,8 +145,7 @@ func connect_part_signals(part: Area2D):
 
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
-	if not GameManager.no_eyes:
-		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
+	$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	var nextToMouse = false
 	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
@@ -154,8 +154,7 @@ func body_part_part_exited(part: Area2D) -> void:
 	if hovered_part==part:
 		hovered_part=null
 	elif hovered_part and hovered_part.partID == part.partID: # to fix weird issue of entering triggering first on part with same ID
-		if not GameManager.no_eyes:
-			$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
+		$"body/Parts".get_child(part.partID).get_node("Sprite2D").modulate = Color("#b00000")
 	$Tooltip.HidePopup()
 
 func check_hand_sprite():
@@ -167,29 +166,49 @@ func check_hand_sprite():
 	else:
 		$Hand/AnimatedSprite2D.animation = &"default"
 
+var playing_part: bool = false
+var brain_move_tween = false
+
 func play_part(part: Area2D):
-	part.get_node("CollisionShape2D").disabled = true
-	$"Hand/AnimatedSprite2D".frame = 1
-	$Tooltip.HidePopup()
-	# fades the part away
-	var tween = create_tween()
-	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
-	await tween.finished
-	
-	# this may need to be different if we want different types of the same part
-	var partID = part.partID
-	GameManager.body_parts.erase(partID)
-	GameManager.current_parts.erase(part)
-	GameManager.played_parts.append(partID)
-	update_part_count(partID, true)
-	part.queue_free()
-	update_part_positions()
-	
-	activate_part(partID, true)
-	$"Hand/AnimatedSprite2D".frame = 0
-	if not $Battlefield/Button.visible:
-		$Battlefield/Button.show()
+	if not playing_part:
+		playing_part = true
+		
+		# no brain so play a random part
+		if GameManager.no_brain:
+			var rng = randi_range(0, GameManager.current_parts.size() - 1)
+			if part != GameManager.current_parts[rng]:
+				part = GameManager.current_parts[rng]
+				get_viewport().warp_mouse(part.global_position)
+				var handtween = create_tween()
+				handtween.tween_property($Hand, "position", part.global_position, 0.3)
+				brain_move_tween = true
+				await handtween.finished
+				brain_move_tween = false
+		
+		# grab animation
+		$"Hand/AnimatedSprite2D".frame = 1
+		$Tooltip.HidePopup()
+		
+		# fades the part away
+		var tween = create_tween()
+		tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)
+		tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+		await tween.finished
+		
+		# this may need to be different if we want different types of the same part
+		var partID = part.partID
+		GameManager.body_parts.erase(partID)
+		GameManager.current_parts.erase(part)
+		GameManager.played_parts.append(partID)
+		update_part_count(partID, true)
+		part.queue_free()
+		update_part_positions()
+		
+		activate_part(partID, true)
+		$"Hand/AnimatedSprite2D".frame = 0
+		if not $Battlefield/Button.visible:
+			$Battlefield/Button.show()
+		playing_part = false
 	
 func activate_part(partID: int, isPlayer: bool):
 	var bug
@@ -314,7 +333,10 @@ func determine_enemy() -> PackedScene:
 	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
 	var enemy_bug = load(path)
 	var enemy_names = GameManager.default_bug_names[enemyID]
-	$UI/Enemy/NameLabel.text = enemy_names[randi_range(0, enemy_names.size() - 1)]
+	var rng = randi_range(0, enemy_names.size() - 1)
+	while GameManager.player_bug_name == enemy_names[rng]:
+		rng = randi_range(0, enemy_names.size() - 1)
+	$UI/Enemy/NameLabel.text = enemy_names[rng]
 	match enemyID:
 		GameManager.BUGS.COCKROACH:
 			$UI/Enemy/IconBG/Icon.texture = COCKROACHICON

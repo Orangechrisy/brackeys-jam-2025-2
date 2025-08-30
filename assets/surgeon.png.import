@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6i4yvdijufoe"
-path="res://.godot/imported/surgeon shop.png-510548aaae63a56a0bebc21b47b2a024.ctex"
+uid="uid://djj5nvlbvjslu"
+path="res://.godot/imported/surgeon.png-a94dddf3893db6865f670560d2810eac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/surgeon shop.png"
-dest_files=["res://.godot/imported/surgeon shop.png-510548aaae63a56a0bebc21b47b2a024.ctex"]
+source_file="res://assets/surgeon.png"
+dest_files=["res://.godot/imported/surgeon.png-a94dddf3893db6865f670560d2810eac.ctex"]
 
 [params]
 

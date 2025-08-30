@@ -44,7 +44,8 @@ func _on_cockroach_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/CockroachButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.COCKROACH][0]
+	var bug_names = GameManager.default_bug_names[GameManager.BUGS.COCKROACH]
+	$Control/BugNameInput.placeholder_text = bug_names[randi_range(0, bug_names.size() - 1)]
 	selected_bug=GameManager.BUGS.COCKROACH
 	_on_cockroach_button_mouse_entered()
 
@@ -52,7 +53,8 @@ func _on_spider_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/SpiderButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.SPIDER][0]
+	var bug_names = GameManager.default_bug_names[GameManager.BUGS.SPIDER]
+	$Control/BugNameInput.placeholder_text = bug_names[randi_range(0, bug_names.size() - 1)]
 	selected_bug=GameManager.BUGS.SPIDER
 	_on_spider_button_mouse_entered()
 
@@ -60,7 +62,8 @@ func _on_wasp_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/WaspButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.WASP][0]
+	var bug_names = GameManager.default_bug_names[GameManager.BUGS.WASP]
+	$Control/BugNameInput.placeholder_text = bug_names[randi_range(0, bug_names.size() - 1)]
 	selected_bug=GameManager.BUGS.WASP
 	_on_wasp_button_mouse_entered()
 
@@ -68,7 +71,8 @@ func _on_beetle_button_pressed() -> void:
 	toggle_all_off()
 	await get_tree().physics_frame
 	$Control/BeetleButton.button_pressed = true
-	$Control/BugNameInput.placeholder_text = GameManager.default_bug_names[GameManager.BUGS.BEETLE][0]
+	var bug_names = GameManager.default_bug_names[GameManager.BUGS.BEETLE]
+	$Control/BugNameInput.placeholder_text = bug_names[randi_range(0, bug_names.size() - 1)]
 	selected_bug=GameManager.BUGS.BEETLE
 	_on_beetle_button_mouse_entered()
 

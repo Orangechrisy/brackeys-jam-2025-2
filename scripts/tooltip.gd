@@ -10,7 +10,7 @@ func _ready() -> void:
 
 var popup_active: bool = false
 func _physics_process(_delta: float) -> void:
-	if GameManager.no_eyes:
+	if GameManager.no_eyes and get_tree().current_scene.name == "shop":
 		hide()
 	else:
 		if on_mouse:

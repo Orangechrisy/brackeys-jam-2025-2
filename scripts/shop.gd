@@ -10,7 +10,7 @@ func _ready() -> void:
 	GameManager.play_audio(GameManager.shopMusic, false)
 	for i in range(3):
 		var partID = pick_part()
-		var part = GameManager.create_part(partID)
+		var part = GameManager.create_part(partID, true)
 		$OrganHolder.add_child(part)
 		part.position = get_node("Option" + str(i+1)).position
 		get_node("Option" + str(i+1) + "/Label").text = str(part.cost)
@@ -37,7 +37,7 @@ func connect_part_signals(part: Area2D):
 
 func body_part_part_entered(part: Area2D) -> void:
 	hovered_part=part
-	part.modulate = Color("#ff00ff")
+	part.modulate = Color("#ffb8bc")
 	var nextToMouse = true
 	$Tooltip.InfoPopup(part.partID, nextToMouse)
 
@@ -54,6 +54,13 @@ func _process(_delta: float) -> void:
 			$Tooltip.HidePopup()
 
 func buy_part(part):
+	# no brain so play a random part
+	if GameManager.no_brain:
+		var rng = randi_range(0, shop_parts.size() - 1)
+		if part != shop_parts[rng]:
+			part = shop_parts[rng]
+			get_viewport().warp_mouse(part.global_position)
+	
 	if GameManager.blood >= part.cost:
 		GameManager.blood -= part.cost
 		$Blood/Label.text = str(GameManager.blood)

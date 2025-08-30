@@ -90,10 +90,10 @@ var num_enemies: int = ENEMIES.size()
 @export var bugs_fought = []
 
 var default_bug_names = [
-	["John D. Cockroach"], 
-	["Man-Spider"],
-	["White Anglo-Saxon Parasite"],
-	["Paul McMandible"]
+	["John D. Cockroach", "Davy Crockroachett", "The Roach", "Cocktavian", "Roachester", "Floormaster", "John Hancockroach", "Roachefort", "Radroach", "Scuttlebug", "Fallout Fella", "Filthy Fred"], 
+	["Man-Spider", "Eight-Eyes", "Mrs. Webb", "Herrah the Beast", "Silktune", "Arachned", "Webster", "Webelyn", "Daddy Shortlegs", "Widowmaker", "Vriskan't", "Ariadon't", "Gladys Webface"],
+	["White Anglo-Saxon Parasite", "Buzz Buzz", "Hornet", "Beeverly", "Sting King", "Hive Clive", "The Bastard", "Buzz Fightyear", "Yellow Jacked", "Cazador", "Buck Bumble", "Lawrence J. Stingley"],
+	["Paul McMandible", "Dung Defender", "Stagley", "Beetle Bailey", "The Maw", "Volkswagen", "Beetlehoven", "The Wall", "Hardtack", "Horny Bastard", "Bretta", "Willoh", "The Nailsmith", "Crunch", "Pincer Pete", "Ringo Stagg"]
 ]
 
 var player_bugID: int = 0
@@ -116,6 +116,7 @@ var no_liver = false
 var no_stomach = false
 var no_right_arm = false
 var no_left_arm = false
+var no_brain = false
 var upper_boundary: Vector2
 var lower_boundary: Vector2
 var match_num = 1
@@ -169,6 +170,7 @@ func _reset():
 	no_stomach = false
 	no_right_arm = false
 	no_left_arm = false
+	no_brain = false
 	reset_rarities()
 
 func reset_rarities():
@@ -184,8 +186,7 @@ func lose_part(partID: int):
 			BODYPARTS.HEART:
 				game_over()
 			BODYPARTS.BRAIN:
-				#make stupid
-				pass
+				no_brain = true
 			BODYPARTS.LUNGS:
 				no_lungs = true
 			BODYPARTS.EYES:
@@ -225,8 +226,7 @@ func bought_part(partID: int):
 			BODYPARTS.HEART:
 				pass
 			BODYPARTS.BRAIN:
-				# reverse make stupid
-				pass
+				no_brain = false
 			BODYPARTS.LUNGS:
 				no_lungs = false
 			BODYPARTS.EYES:
@@ -254,11 +254,11 @@ func bought_part(partID: int):
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 
-func create_part(partID: int) -> Node2D:
+func create_part(partID: int, isShop: bool) -> Node2D:
 	var part = BODY_PART.instantiate()
 	part.partID = partID
 	part.get_node("Sprite2D").texture = load(partImages[partID])
-	if no_eyes:
+	if no_eyes and isShop:
 		part.get_node("Censor").show()
 	part.cost = partCost[partID]
 	return part
