@@ -293,7 +293,8 @@ func determine_enemy() -> PackedScene:
 		enemyID = randi_range(0, GameManager.num_enemies - 1)
 	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
 	var enemy_bug = load(path)
-	$UI/Enemy/NameLabel.text = GameManager.default_bug_names[enemyID]
+	var enemy_names = GameManager.default_bug_names[enemyID]
+	$UI/Enemy/NameLabel.text = enemy_names[randi_range(0, enemy_names.size() - 1)]
 	match enemyID:
 		GameManager.BUGS.COCKROACH:
 			$UI/Enemy/IconBG/Icon.texture = COCKROACHICON
