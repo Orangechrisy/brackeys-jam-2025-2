@@ -54,3 +54,7 @@ func _on_sfxvolume_value_changed(value: float) -> void:
 func _on_back_pressed() -> void:
 	$CenterContainer/MenuButtons.visible = true
 	$CenterContainer/SettingsMenu.visible = false
+
+func _on_mouse_entered() -> void:
+	$MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
+	$MouseOverSound.play()

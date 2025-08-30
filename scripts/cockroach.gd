@@ -10,7 +10,6 @@ func enemy_process(delta):
 		look_at(velocity/speed + global_position)
 
 
-
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if not spidersnared:
 		if body != self:

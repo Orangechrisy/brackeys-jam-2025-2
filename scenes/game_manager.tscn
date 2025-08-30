@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://btrwbc3jombcx" path="res://scripts/game_manager.gd" id="1_hwd4i"]
 [ext_resource type="PackedScene" uid="uid://bc0xjk24cdtpk" path="res://scenes/pause_menu.tscn" id="2_glms7"]
-[ext_resource type="AudioStream" uid="uid://0nyrnuk0vrr5" path="res://assets/audio/Professor E. Groove.wav" id="3_udu3i"]
-[ext_resource type="AudioStream" uid="uid://vmrvrhx6pruj" path="res://assets/audio/the cockroach has breached containment.wav" id="4_oo155"]
+[ext_resource type="AudioStream" uid="uid://0nyrnuk0vrr5" path="res://audio/music/Professor E. Groove.wav" id="3_udu3i"]
+[ext_resource type="AudioStream" uid="uid://vmrvrhx6pruj" path="res://audio/music/the cockroach has breached containment.wav" id="4_oo155"]
 
 [node name="GameManager" type="Node2D"]
 process_mode = 3

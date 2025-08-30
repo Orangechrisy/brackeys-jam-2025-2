@@ -25,4 +25,7 @@ shape = SubResource("CircleShape2D_el1v0")
 [node name="ArmAttackArea" parent="LeftArm" index="1"]
 position = Vector2(29, -28)
 
+[node name="Damage" parent="Sounds" index="4"]
+volume_db = 5.0
+
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

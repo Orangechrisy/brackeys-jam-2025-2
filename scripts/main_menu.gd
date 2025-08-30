@@ -62,3 +62,8 @@ func _on_musicvolume_value_changed(value: float) -> void:
 
 func _on_sfxvolume_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), value)
+
+
+func _on_mouse_entered() -> void:
+	$MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
+	$MouseOverSound.play()

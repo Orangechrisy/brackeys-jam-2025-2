@@ -50,9 +50,15 @@ func _ready() -> void:
 	#speed=0
 	$IdleAnim.play("idle")
 
+@onready var dead: bool = false
 func _physics_process(delta: float) -> void:
-	if health <= 0:
+	if (health <= 0) and (not dead):
+		dead=true
 		$GlobalAnimationPlayer.play("death")
+		$Sounds/Death.pitch_scale = randf_range(0.8, 1.0)
+		$Sounds/Death.play()
+		await get_tree().create_timer(0.5, false).timeout
+		hide()
 		await get_tree().create_timer(0.5, false).timeout
 		death()
 	
@@ -143,7 +149,7 @@ const DODGED = preload("res://scenes/dodged.tscn")
 
 # this bug got attacked
 func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
-	if not invincible:
+	if (not invincible) and (not dead):
 		# make sure different bodies
 		if attackingBug != attackedBug:
 			# player bug attacked and doesnt have a stomach
@@ -169,6 +175,7 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 						attackingBug.health += floor(attackingBug.damage / 3)
 			
 			# Handling damage dealt
+			damage_sound()
 			health -= dmg
 			print("health after hit: ", health, " ", dmg)
 			if dmg > 0:
@@ -177,7 +184,10 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 				$BugTimers/InvincibilityTimer.start()
 				if not $GlobalAnimationPlayer.animation_started:
 					$GlobalAnimationPlayer.play("damage")
-	
+
+func damage_sound():
+	$Sounds/Damage.pitch_scale = randf_range(0.9, 1.1)
+	$Sounds/Damage.play()
 
 func _on_arm_attack_area_body_entered(body: Node2D) -> void:
 	if body != self:
@@ -205,6 +215,8 @@ func _on_timer_stomach_timeout(timer: Timer):
 	get_parent().add_child(acid)
 	acid.global_position = global_position
 	acid.direction = (to_global(Vector2.RIGHT)-global_position).normalized()
+	$Sounds/AcidSpit.pitch_scale = randf_range(0.8, 1.1)
+	$Sounds/AcidSpit.play()
 	timer.wait_time = randi_range(2, 4)
 	timer.start()
 
@@ -227,6 +239,8 @@ var spidersnared: bool = false:
 	set(value):
 		if value == true:
 			print("snared")
+			$Sounds/Snared.pitch_scale = randf_range(0.9, 1.1)
+			$Sounds/Snared.play()
 			speed=0
 			$BugTimers/SnaredTimer.start()
 			if GameManager.enemy_bug == self:
@@ -235,7 +249,13 @@ var spidersnared: bool = false:
 				GameManager.enemy_bug.web_area_active = true 
 		spidersnared = value
 
-
 func _on_snared_timer_timeout() -> void:
 	speed=default_speed
 	spidersnared=false
+
+
+func _on_idle_sound_timer_timeout() -> void:
+	$Sounds/Idle.pitch_scale = randf_range(0.9, 1.1)
+	$Sounds/Idle.play()
+	$BugTimers/IdleSoundTimer.wait_time = randi_range(5, 10)
+	$BugTimers/IdleSoundTimer.start()
