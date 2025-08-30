@@ -230,7 +230,8 @@ func set_enemy_body():
 	for part in range(GameManager.num_bodyparts):
 		GameManager.enemy_body_parts.append(part)
 		update_part_count(part, false)
-	for i in range(5):
+	var extra_body_parts = 2 + GameManager.match_num
+	for i in range(extra_body_parts):
 		var partID = randi_range(0, GameManager.num_bodyparts - 1)
 		GameManager.enemy_body_parts.append(partID)
 		update_part_count(partID, false)
@@ -238,7 +239,8 @@ func set_enemy_body():
 
 func enemy_play_parts():
 	GameManager.enemy_body_parts.shuffle()
-	for i in range(min(5, GameManager.enemy_body_parts.size())):
+	var part_play_count = min(1 + floor(GameManager.match_num / 2), 8)
+	for i in range(min(part_play_count, GameManager.enemy_body_parts.size())):
 		var partID = GameManager.enemy_body_parts.pop_back()
 		GameManager.enemy_played_parts.append(partID)
 		activate_part(partID, false)

@@ -25,6 +25,7 @@ func enemy_process(delta):
 		look_at(last_enemy_pos)
 
 func start_bug_timers():
+	$BugTimers/ChargeTimer.wait_time = randf_range(1.5, 2.5)
 	$BugTimers/ChargeTimer.start()
 
 func _on_charge_timer_timeout() -> void:
@@ -40,6 +41,7 @@ func _on_charge_timer_timeout() -> void:
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 	tween.tween_property(self, "global_position", to_global($RayCast2D.target_position), 0.5)
 	await tween.finished
+	$BugTimers/ChargeTimer.wait_time = randf_range(1.5, 2.5)
 	$BugTimers/ChargeTimer.start()
 	speed=default_speed
 	charging=false

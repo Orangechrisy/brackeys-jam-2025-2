@@ -16,11 +16,11 @@ radius = 9.05539
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tcmtr"]
 radius = 12.0
-height = 42.0
+height = 36.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_srpgu"]
 radius = 12.0
-height = 42.0
+height = 36.0
 
 [sub_resource type="Animation" id="Animation_glhb6"]
 length = 0.001
@@ -140,7 +140,6 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_glhb6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 scale = Vector2(0.4, 0.4)
 shape = SubResource("CircleShape2D_a3pup")
 
@@ -162,7 +161,7 @@ visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftArm"]
 z_index = -1
-position = Vector2(17, -24)
+position = Vector2(9, -24)
 rotation = -1.91463
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_tcmtr")
@@ -200,7 +199,7 @@ visible = false
 position = Vector2(0.64232, -36.6686)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea"]
-position = Vector2(-0.404377, -8.05211)
+position = Vector2(-0.64232, -14.3314)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tcmtr")
 disabled = true
@@ -215,7 +214,6 @@ position = Vector2(0, 51)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_srpgu")
 disabled = true
-metadata/_edit_lock_ = true
 
 [node name="GlobalAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -75,4 +75,5 @@ func buy_part(part):
 		print("cant buy")
 
 func _on_button_pressed() -> void:
+	GameManager.match_num += 1 # Updates which match we're on to scale difficulty
 	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
