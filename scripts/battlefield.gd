@@ -1,5 +1,7 @@
 extends Node2D
 
+
+
 signal update_health_bar(player: bool, health: int)
 signal reset(won: bool)
 signal allow_clicking(allow: bool)
@@ -9,7 +11,11 @@ var player_scene
 var enemy_bug
 var enemy_scene
 var round_ended = false
-	
+
+func _ready() -> void:
+	GameManager.upper_boundary = to_global(Vector2(275.0, 325.0))
+	GameManager.lower_boundary = to_global(Vector2(-300.0, -225.0))
+
 func place_bugs(player: PackedScene, enemy: PackedScene):
 	player_scene = player
 	player_bug = player.instantiate()

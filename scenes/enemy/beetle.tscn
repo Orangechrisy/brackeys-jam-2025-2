@@ -1,15 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfm2i4ew4o57y"]
+[gd_scene load_steps=5 format=3 uid="uid://cfm2i4ew4o57y"]
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_je6nb"]
 [ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="2_2kdek"]
+[ext_resource type="Script" uid="uid://1asjr718dvk8" path="res://scripts/beetle.gd" id="2_70bpk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_je6nb"]
+radius = 29.0172
 
 [node name="Beetle" instance=ExtResource("1_je6nb")]
+script = ExtResource("2_70bpk")
+health = 30
+damage = 10
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_2kdek")
 
-[node name="LeftArm" parent="." index="6"]
+[node name="RayCast2D" type="RayCast2D" parent="." index="2"]
+target_position = Vector2(300, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+position = Vector2(42, -4)
+shape = SubResource("CircleShape2D_je6nb")
+
+[node name="ChargeTimer" type="Timer" parent="BugTimers" index="2"]
+wait_time = 2.0
+one_shot = true
+
+[node name="LeftArm" parent="." index="7"]
 position = Vector2(2, -2)
 
-[node name="RightArm" parent="." index="7"]
+[node name="RightArm" parent="." index="8"]
 position = Vector2(0, -2)
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="BugTimers/ChargeTimer" to="." method="_on_charge_timer_timeout"]

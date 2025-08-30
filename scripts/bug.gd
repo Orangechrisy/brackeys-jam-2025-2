@@ -24,6 +24,8 @@ class_name Bug
 @onready var max_health = health
  
 @onready var battlefield = get_parent().get_parent()
+@onready var upper_boundary: Vector2 = GameManager.upper_boundary
+@onready var lower_boundary: Vector2 = GameManager.lower_boundary
 
 var direction: Vector2 
 var played_parts = GameManager.played_parts
@@ -53,6 +55,16 @@ func _physics_process(delta: float) -> void:
 		$GlobalAnimationPlayer.play("death")
 		await get_tree().create_timer(0.5, false).timeout
 		death()
+	
+	#THEY CANNOT ESCAPE
+	if global_position.x > upper_boundary.x:
+		global_position.x = (upper_boundary.x - 50.0)
+	elif global_position.x < lower_boundary.x:
+		global_position.x = (lower_boundary.x + 50.0)
+	if global_position.y > upper_boundary.y:
+		global_position.y = (upper_boundary.y - 50.0)
+	elif global_position.y < lower_boundary.y:
+		global_position.y = (lower_boundary.y + 50.0)
 	
 
 	if not spidersnared:

@@ -24,7 +24,6 @@ shape = SubResource("CircleShape2D_656li")
 
 [node name="ShootTimer" type="Timer" parent="BugTimers" index="1"]
 wait_time = 3.0
-autostart = true
 
 [node name="MeleeTimer" type="Timer" parent="BugTimers" index="3"]
 wait_time = 1.5

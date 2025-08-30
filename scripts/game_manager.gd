@@ -114,6 +114,8 @@ var player_max_health = 50
 var player_health = 50
 var no_liver = false
 var no_stomach = false
+var upper_boundary: Vector2
+var lower_boundary: Vector2
 
 func game_over():
 	print("game over :(")
