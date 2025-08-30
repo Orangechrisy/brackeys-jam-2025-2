@@ -154,7 +154,6 @@ func play_part(part: Area2D):
 	part.get_node("CollisionShape2D").disabled = true
 	$"Hand/AnimatedSprite2D".frame = 1
 	$Tooltip.HidePopup()
-	#print("body played, tt hide")
 	# fades the part away
 	var tween = create_tween()
 	tween.tween_property(part, "modulate", Color("#ffffff00"), 0.2)

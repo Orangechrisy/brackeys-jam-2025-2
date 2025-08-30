@@ -87,7 +87,6 @@ func start_timers():
 		match part:
 			GameManager.BODYPARTS.LEFTLEG:
 				# Instantiate a timer
-				print("Left leg found!")
 				var timer = Timer.new()
 				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
@@ -95,7 +94,6 @@ func start_timers():
 				timer.timeout.connect(_on_timer_leg_timeout.bind(timer))
 				timer.start()
 			GameManager.BODYPARTS.RIGHTLEG:
-				print("Right leg found!")
 				var timer = Timer.new()
 				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
@@ -103,7 +101,6 @@ func start_timers():
 				timer.timeout.connect(_on_timer_leg_timeout.bind(timer))
 				timer.start()
 			GameManager.BODYPARTS.STOMACH:
-				print("Stomach found!")
 				var timer = Timer.new()
 				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
@@ -111,7 +108,6 @@ func start_timers():
 				timer.timeout.connect(_on_timer_stomach_timeout.bind(timer))
 				timer.start()
 			GameManager.BODYPARTS.LIVER:
-				print("Liver found!")
 				var timer = Timer.new()
 				$BodyPartTimers.add_child(timer)
 				timer.wait_time = randi_range(1, 5)
@@ -128,7 +124,6 @@ func start_timers():
 			timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
 			timer.start()
 		elif GameManager.no_left_leg or GameManager.no_right_leg:
-			print("no leg?")
 			speed = 0
 			var timer = Timer.new()
 			$BodyPartTimers.add_child(timer)
@@ -163,24 +158,21 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 			# attacked bug has a brain
 			for part in played_parts:
 				if part == GameManager.BODYPARTS.BRAIN:
-					print("Defender has brain!")
 					if randi_range(1, 2) == 2:
 						dmg = 0
 						battlefield.create_area(DODGED, global_position)
-						print("Dodged!")
 						
 			# attacking bug has a tongue
 			if dmg > 0:
 				for part in enemy_played_parts:
 					if part == GameManager.BODYPARTS.TONGUE:
 						# Restores a third of the damage dealt as health
-						print("Attacker has tongue!")
 						attackingBug.health += floor(attackingBug.damage / 3)
 			
 			# Handling damage dealt
 			damage_sound()
 			health -= dmg
-			print("health after hit: ", health, " ", dmg)
+			print("health after hit: ", health, ", dmg: ", dmg)
 			if dmg > 0:
 				#Taking Damage: play animation and get 0.3s of i-frames
 				invincible=true
@@ -200,7 +192,6 @@ func _on_arm_attack_area_body_entered(body: Node2D) -> void:
 # Body part timeout functions
 # In a just world this would just be stored in the body part itself but this is not a just world
 func _on_timer_leg_timeout(timer: Timer):
-	print("Leg timer timeout")
 	speed += 100
 	await get_tree().create_timer(1).timeout
 	speed -= 100
@@ -208,11 +199,9 @@ func _on_timer_leg_timeout(timer: Timer):
 	timer.start()
 
 func _on_timer_leg_lost_timeout(_timer: Timer):
-	print("Leg lost timer timeout")
 	speed = default_speed
 	
 func _on_timer_stomach_timeout(timer: Timer):
-	print("Stomach timer timeout")
 	var acid = STOMACH_ACID.instantiate()
 	acid.origin_bug = self
 	get_parent().add_child(acid)
@@ -224,7 +213,6 @@ func _on_timer_stomach_timeout(timer: Timer):
 	timer.start()
 
 func _on_timer_liver_timeout(timer: Timer):
-	print("Liver timer timeout")
 	health += 2
 	timer.wait_time = randi_range(1, 5)
 	timer.start()
@@ -241,7 +229,6 @@ func _on_invincibility_timer_timeout() -> void:
 var spidersnared: bool = false:
 	set(value):
 		if value == true:
-			print("snared")
 			$Sounds/Snared.pitch_scale = randf_range(0.9, 1.1)
 			$Sounds/Snared.play()
 			speed=0

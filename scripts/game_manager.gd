@@ -175,7 +175,7 @@ func reset_rarities():
 
 func lose_part(partID: int):
 	# to account for playing two of the same part (and ensuring theres no more of the part left)
-	if played_parts.count(partID) == 0 and body_parts.count(partID) != 0:
+	if played_parts.count(partID) == 0 and body_parts.count(partID) == 0:
 		match partID:
 			BODYPARTS.HEART:
 				game_over()
@@ -205,9 +205,9 @@ func lose_part(partID: int):
 			BODYPARTS.LIVER:
 				no_liver = true
 			BODYPARTS.LEFTKIDNEY:
-				less_blood -= 1
+				less_blood += 1
 			BODYPARTS.RIGHTKIDNEY:
-				less_blood -= 1
+				less_blood += 1
 	player_health = max(0, player_health - partHPLoss[partID])
 	if player_health == 0:
 		game_over()
@@ -242,9 +242,9 @@ func bought_part(partID: int):
 			BODYPARTS.LIVER:
 				no_liver = false
 			BODYPARTS.LEFTKIDNEY:
-				less_blood += 1
+				less_blood -= 1
 			BODYPARTS.RIGHTKIDNEY:
-				less_blood += 1
+				less_blood -= 1
 
 const BODY_PART = preload("res://scenes/body_part.tscn")
 

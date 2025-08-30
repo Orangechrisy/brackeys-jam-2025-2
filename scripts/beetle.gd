@@ -51,8 +51,8 @@ func _on_charge_timer_timeout() -> void:
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if (not spidersnared) and charging:
 		if body != self:
-			print("Collision with" + str(body))
+			#print("Collision with" + str(body))
 			if body.is_in_group("hurtbox"):
-				print("Is in group!")
+				#print("Is in group!")
 				if "health" in body:
 					body.hit(damage, self, body)
