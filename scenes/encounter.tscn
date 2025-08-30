@@ -59,13 +59,14 @@ texture = ExtResource("2_se0eo")
 [node name="Player" type="Node2D" parent="UI"]
 
 [node name="IconBG" type="Sprite2D" parent="UI/Player"]
-position = Vector2(384, 383)
 scale = Vector2(3, 3)
 texture = ExtResource("2_nw3qf")
+centered = false
 
 [node name="Icon" type="Sprite2D" parent="UI/Player/IconBG"]
 position = Vector2(-2.86102e-06, 0.333328)
 texture = ExtResource("3_mw7nh")
+centered = false
 
 [node name="NameLabel" type="Label" parent="UI/Player"]
 offset_top = 423.0
@@ -102,13 +103,16 @@ libraries = {
 position = Vector2(-3, -24)
 
 [node name="IconBG" type="Sprite2D" parent="UI/Enemy"]
-position = Vector2(1541, 406)
+position = Vector2(1506, 24)
 scale = Vector2(3, 3)
 texture = ExtResource("4_ip0ee")
+centered = false
 
 [node name="Icon" type="Sprite2D" parent="UI/Enemy/IconBG"]
-position = Vector2(125, 2.33345)
+position = Vector2(-1.52588e-05, -5.00679e-06)
 texture = ExtResource("3_mw7nh")
+centered = false
+flip_h = true
 
 [node name="NameLabel" type="Label" parent="UI/Enemy"]
 offset_left = 1518.0
