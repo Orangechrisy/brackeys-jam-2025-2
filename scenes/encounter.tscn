@@ -210,6 +210,7 @@ offset_right = 311.0
 offset_bottom = 463.0
 
 [node name="StartingReward" type="Node2D" parent="."]
+visible = false
 z_index = 2048
 
 [node name="Background" type="Sprite2D" parent="StartingReward"]
@@ -286,21 +287,29 @@ texture = ExtResource("9_nw3qf")
 centered = false
 
 [node name="Reward" type="Sprite2D" parent="EndingReward"]
+visible = false
 position = Vector2(960, 540)
 texture = ExtResource("10_mw7nh")
 
 [node name="Label" type="Label" parent="EndingReward"]
-offset_top = 105.0
-offset_right = 1917.0
-offset_bottom = 942.0
+offset_top = 165.0
+offset_right = 1920.0
+offset_bottom = 282.0
+theme = ExtResource("5_8lsj0")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
-text = "You Won A Wet $5 Bill! 
+text = "You Won A Wet $5 Bill! "
+horizontal_alignment = 1
 
-
-
-
-And A Little Extra"
+[node name="Label2" type="Label" parent="EndingReward"]
+visible = false
+offset_top = 804.0
+offset_right = 1920.0
+offset_bottom = 902.0
+theme = ExtResource("5_8lsj0")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 85
+text = "And a little extra... (+1 Blood)"
 horizontal_alignment = 1
 
 [node name="Lungs" type="Node2D" parent="."]

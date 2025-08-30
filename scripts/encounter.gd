@@ -7,8 +7,8 @@ var lungs_timer_ended = false
 
 func _ready():
 	GameManager.stop_other_music(GameManager.battleMusic)
-	GameManager.play_audio(GameManager.battleMusic, false)
 	await start_of_battle()
+	GameManager.play_audio(GameManager.battleMusic, false)
 	create_hand()
 	set_body()
 	set_enemy_body()
@@ -75,13 +75,16 @@ func end_of_battle():
 	$EndingReward.show()
 	$StartingReward/Reward.texture = load(reward_images[reward])
 	if wins == 3:
-		$EndingReward/Label.text = "You Won " + rewards[reward] + "\n\n\n\n\nAnd A Little Extra"
+		$EndingReward/Label.text = "You Won " + rewards[reward]
+		$EndingReward/Label2.show()
+		$EndingReward/Reward.show()
 		GameManager.blood += 1
 	elif wins == 2:
 		$EndingReward/Label.text = "You Won " + rewards[reward]
+		$EndingReward/Reward.show()
 	else:
 		$EndingReward/Label.text = "You Didn't Win " + rewards[reward]
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(4.0).timeout
 
 func set_health_bars():
 	$UI/Player/HealthBar.max_value = GameManager.player_bug.max_health
@@ -370,6 +373,8 @@ func _on_battlefield_reset(won: bool) -> void:
 	else:
 		GameManager.enemy_body_parts.clear()
 		GameManager.enemy_played_parts.clear()
+		#GameManager.stop_other_music(GameManager.shopMusic)
+		await get_tree().create_timer(2.0).timeout
 		await end_of_battle()
 		get_tree().change_scene_to_file("res://scenes/shop.tscn")
 	can_click = true
