@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://1w40r4kv1mqt"]
+[gd_scene load_steps=7 format=3 uid="uid://1w40r4kv1mqt"]
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_xtqu1"]
 [ext_resource type="Script" uid="uid://dg2uq7s8tc0jp" path="res://scripts/spider.gd" id="2_656li"]
 [ext_resource type="Texture2D" uid="uid://ba8d2f2m40pp1" path="res://assets/bugs/spider.png" id="3_pf1qy"]
+[ext_resource type="AudioStream" uid="uid://pcybc468cuac" path="res://audio/sfx/spider_idle.wav" id="4_nt8et"]
+[ext_resource type="AudioStream" uid="uid://b672qexgl3wr3" path="res://audio/sfx/spider_hit.wav" id="5_scdb1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_656li"]
 radius = 32.0624
@@ -42,6 +44,12 @@ position = Vector2(0, -37)
 
 [node name="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea" index="0"]
 position = Vector2(0, -9)
+
+[node name="Idle" parent="Sounds" index="0"]
+stream = ExtResource("4_nt8et")
+
+[node name="Damage" parent="Sounds" index="4"]
+stream = ExtResource("5_scdb1")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="BugTimers/ShootTimer" to="." method="_on_shoot_timer_timeout"]

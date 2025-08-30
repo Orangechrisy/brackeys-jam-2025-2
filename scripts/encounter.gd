@@ -60,7 +60,7 @@ var reward_images = [
 
 func start_of_battle():
 	$StartingReward.show()
-	$StartingReward/Drumroll.play()
+	$Sounds/Drumroll.play()
 	reward = randi_range(0, rewards.size() - 1)
 	await get_tree().create_timer(2.0).timeout
 	$StartingReward/LabelReward.text = rewards[reward]
@@ -188,6 +188,9 @@ func play_part(part: Area2D):
 		# grab animation
 		$"Hand/AnimatedSprite2D".frame = 1
 		$Tooltip.HidePopup()
+		
+		$Sounds/PlayBodyPart.pitch_scale = randf_range(0.9, 1.1)
+		$Sounds/PlayBodyPart.play()
 		
 		# fades the part away
 		var tween = create_tween()

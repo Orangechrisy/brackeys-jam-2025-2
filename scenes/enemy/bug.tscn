@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dm5m0f20omtaj"]
+[gd_scene load_steps=26 format=3 uid="uid://dm5m0f20omtaj"]
 
 [ext_resource type="Script" uid="uid://b5vidvlpr235r" path="res://scripts/bug.gd" id="1_7dv1t"]
 [ext_resource type="Texture2D" uid="uid://c1463vedwu8i" path="res://icon.svg" id="2_glhb6"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://ojynpwk62vw5" path="res://audio/sfx/death.wav" id="7_nw6e0"]
 [ext_resource type="AudioStream" uid="uid://bwgcj764kekvt" path="res://audio/sfx/spider_snare.wav" id="7_obpch"]
 [ext_resource type="AudioStream" uid="uid://n0snpyptf6c2" path="res://audio/sfx/cockroach_hit.wav" id="8_cj633"]
+[ext_resource type="AudioStream" uid="uid://cj6vowfsxpnh1" path="res://audio/sfx/dodge.wav" id="13_4df1f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
 radius = 95.5249
@@ -265,6 +266,11 @@ bus = &"SFX"
 
 [node name="Damage" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_cj633")
+bus = &"SFX"
+
+[node name="Dodge" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("13_4df1f")
+volume_db = 5.0
 bus = &"SFX"
 
 [connection signal="timeout" from="BugTimers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

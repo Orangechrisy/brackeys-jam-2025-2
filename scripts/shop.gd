@@ -76,6 +76,8 @@ func buy_part(part):
 	else:
 		# do a shake or some sound to indicate cant buy?
 		var x = part.position.x
+		$Sounds/CantBuy.pitch_scale = randf_range(0.6, 0.8)
+		$Sounds/CantBuy.play()
 		
 		var tween = create_tween()
 		tween.tween_property(part, "position:x", x - 15, .05)

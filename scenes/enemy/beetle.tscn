@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfm2i4ew4o57y"]
+[gd_scene load_steps=8 format=3 uid="uid://cfm2i4ew4o57y"]
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_je6nb"]
 [ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="2_2kdek"]
 [ext_resource type="Script" uid="uid://1asjr718dvk8" path="res://scripts/beetle.gd" id="2_70bpk"]
 [ext_resource type="AudioStream" uid="uid://dq2lbed52lsg" path="res://audio/sfx/beetle_hit.wav" id="4_70bpk"]
+[ext_resource type="AudioStream" uid="uid://cqp4a0mvhg428" path="res://audio/sfx/beetle_idle.wav" id="4_pt1vy"]
+[ext_resource type="AudioStream" uid="uid://dckek5n2f86xe" path="res://audio/sfx/beetle_charge.wav" id="6_xeqee"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_je6nb"]
 radius = 29.0172
@@ -11,7 +13,7 @@ radius = 29.0172
 [node name="Beetle" instance=ExtResource("1_je6nb")]
 script = ExtResource("2_70bpk")
 health = 30
-damage = 10
+damage = 7
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_2kdek")
@@ -38,8 +40,16 @@ rotation = -0.392699
 position = Vector2(0, 3)
 rotation = 0.392699
 
+[node name="Idle" parent="Sounds" index="0"]
+stream = ExtResource("4_pt1vy")
+
 [node name="Damage" parent="Sounds" index="4"]
 stream = ExtResource("4_70bpk")
+
+[node name="Charge" type="AudioStreamPlayer2D" parent="Sounds" index="5"]
+stream = ExtResource("6_xeqee")
+volume_db = 5.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="BugTimers/ChargeTimer" to="." method="_on_charge_timer_timeout"]

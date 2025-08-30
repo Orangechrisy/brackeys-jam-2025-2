@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://db2tk6155hprg"
+path="res://.godot/imported/Empty Rook.wav-35f93fad35cd8a229ed6d406f4041516.sample"
+
+[deps]
+
+source_file="res://audio/music/Empty Rook.wav"
+dest_files=["res://.godot/imported/Empty Rook.wav-35f93fad35cd8a229ed6d406f4041516.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

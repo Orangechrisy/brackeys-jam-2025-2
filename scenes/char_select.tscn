@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://dx8ppinnq61ma"]
+[gd_scene load_steps=23 format=3 uid="uid://dx8ppinnq61ma"]
 
 [ext_resource type="Script" uid="uid://58hmccvtfua6" path="res://scripts/char_select.gd" id="1_a2t0j"]
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="1_qjq5y"]
 [ext_resource type="Texture2D" uid="uid://7rxiyy310ajm" path="res://assets/bugs/cockroach.png" id="2_11wwc"]
+[ext_resource type="Texture2D" uid="uid://dll87vj7wjc8h" path="res://assets/choosebug_bg.png" id="2_gx4en"]
 [ext_resource type="Texture2D" uid="uid://ba8d2f2m40pp1" path="res://assets/bugs/spider.png" id="4_lcdbo"]
 [ext_resource type="Texture2D" uid="uid://dmv4gxls0h0pq" path="res://assets/bugs/wasp.png" id="5_dgebt"]
 [ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="6_5kqyn"]
@@ -164,6 +165,10 @@ _data = {
 
 [node name="CharSelect" type="Node2D"]
 script = ExtResource("1_a2t0j")
+
+[node name="ChoosebugBg" type="Sprite2D" parent="."]
+texture = ExtResource("2_gx4en")
+centered = false
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
