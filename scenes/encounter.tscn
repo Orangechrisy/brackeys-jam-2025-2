@@ -324,8 +324,9 @@ offset_bottom = 282.0
 theme = ExtResource("5_8lsj0")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
-text = "You Won A Wet $5 Bill! "
+text = "You won"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Label2" type="Label" parent="EndingReward"]
 visible = false
