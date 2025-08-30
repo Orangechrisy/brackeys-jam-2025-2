@@ -17,6 +17,20 @@ texture = ExtResource("2_j68fe")
 [node name="Edges" type="Node2D" parent="."]
 scale = Vector2(1.5, 1.5)
 
+[node name="Area2D" type="StaticBody2D" parent="Edges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D"]
+position = Vector2(-173.333, -125.333)
+rotation = 0.523598
+shape = SubResource("RectangleShape2D_ixbtv")
+
+[node name="Area2D8" type="StaticBody2D" parent="Edges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D8"]
+position = Vector2(154.667, 174.667)
+rotation = 0.523598
+shape = SubResource("RectangleShape2D_ixbtv")
+
 [node name="Area2D2" type="StaticBody2D" parent="Edges"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D2"]
@@ -41,6 +55,20 @@ shape = SubResource("RectangleShape2D_ixbtv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D4"]
 position = Vector2(2.66667, 210.667)
 rotation = 1.5708
+shape = SubResource("RectangleShape2D_ixbtv")
+
+[node name="Area2D5" type="StaticBody2D" parent="Edges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D5"]
+position = Vector2(-164.667, 188.667)
+rotation = -0.523599
+shape = SubResource("RectangleShape2D_ixbtv")
+
+[node name="Area2D6" type="StaticBody2D" parent="Edges"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edges/Area2D6"]
+position = Vector2(129.333, -168.667)
+rotation = -0.523599
 shape = SubResource("RectangleShape2D_ixbtv")
 
 [node name="Bugs" type="Node2D" parent="."]

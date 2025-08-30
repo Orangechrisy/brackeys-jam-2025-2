@@ -36,7 +36,6 @@ func set_as_enemy():
 
 func start_movement():
 	#speed=default_speed
-	can_move=true
 	rotation = randf_range(0, deg_to_rad(360))
 	direction = Vector2(1,0).rotated(rotation)
 	velocity = direction*speed
