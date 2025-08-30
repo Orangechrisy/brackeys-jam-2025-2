@@ -82,5 +82,5 @@ func _on_button_pressed() -> void:
 
 
 func _on_button_mouse_entered() -> void:
-	$MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
-	$MouseOverSound.play()
+	$Sounds/MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
+	$Sounds/MouseOverSound.play()

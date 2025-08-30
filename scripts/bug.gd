@@ -53,6 +53,7 @@ func _ready() -> void:
 @onready var dead: bool = false
 func _physics_process(delta: float) -> void:
 	if (health <= 0) and (not dead):
+		$CollisionShape2D.scale = Vector2.ZERO
 		dead=true
 		$GlobalAnimationPlayer.play("death")
 		$Sounds/Death.pitch_scale = randf_range(0.8, 1.0)
@@ -153,6 +154,8 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 		# make sure different bodies
 		if attackingBug != attackedBug:
 			# player bug attacked and doesnt have a stomach
+			if attackingBug.dead:
+				return
 			if attackedBug == GameManager.player_bug:
 				if GameManager.no_stomach:
 					dmg += 1
