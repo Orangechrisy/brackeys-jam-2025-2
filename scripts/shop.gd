@@ -57,6 +57,8 @@ func buy_part(part):
 	if GameManager.blood >= part.cost:
 		GameManager.blood -= part.cost
 		$Blood/Label.text = str(GameManager.blood)
+		#$Sounds/Buy.pitch_scale = randf_range(0.95, 1.05)
+		$Sounds/Buy.play()
 		GameManager.bought_part(part.partID)
 		GameManager.body_parts.append(part.partID)
 		if part.partID == GameManager.BODYPARTS.EYES and GameManager.no_eyes == false:
@@ -77,3 +79,8 @@ func buy_part(part):
 func _on_button_pressed() -> void:
 	GameManager.match_num += 1 # Updates which match we're on to scale difficulty
 	get_tree().change_scene_to_file("res://scenes/encounter.tscn")
+
+
+func _on_button_mouse_entered() -> void:
+	$MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
+	$MouseOverSound.play()

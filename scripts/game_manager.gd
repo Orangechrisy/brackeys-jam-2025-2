@@ -310,9 +310,10 @@ func stop_other_music(path: String):
 			$ShopMusic.volume_linear = 1.0
 
 #DAMAGE NUMBERS
+var theme: Theme = preload("res://button_theme.tres")
 func display_number(value: int, pos: Vector2, heal: bool):
 	var number = Label.new()
-	#number.theme = theme
+	number.theme = theme
 	number.global_position = pos+Vector2(0,-30)
 	number.text = str(value)
 	number.z_index = 5

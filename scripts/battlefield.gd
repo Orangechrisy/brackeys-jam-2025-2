@@ -71,6 +71,8 @@ func round_change(bug: CharacterBody2D):
 
 func _on_button_pressed() -> void:
 	if get_parent().can_click == true:
+		#$Sounds/MatchBell.pitch_scale = randf_range(0.95, 1.05)
+		$Sounds/MatchBell.play()
 		player_bug.start_movement()
 		player_bug.start_timers()
 		enemy_bug.start_movement()
@@ -79,3 +81,8 @@ func _on_button_pressed() -> void:
 		if GameManager.no_lungs:
 			$"../Lungs/LungsTimer".start()
 	$Button.release_focus()
+
+
+func _on_button_mouse_entered() -> void:
+	$Sounds/MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
+	$Sounds/MouseOverSound.play()

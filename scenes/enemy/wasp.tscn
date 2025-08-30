@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo3ja1cj1kcuk"]
+[gd_scene load_steps=7 format=3 uid="uid://bo3ja1cj1kcuk"]
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_8u2kk"]
 [ext_resource type="Script" uid="uid://cni3oi7hbubnq" path="res://scripts/wasp.gd" id="2_pc0kl"]
 [ext_resource type="Texture2D" uid="uid://dmv4gxls0h0pq" path="res://assets/bugs/wasp.png" id="2_t855c"]
+[ext_resource type="AudioStream" uid="uid://dqud5v4u2e5k7" path="res://audio/sfx/wasp_idle.wav" id="4_pc0kl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t855c"]
 radius = 107.229
@@ -36,6 +37,10 @@ position = Vector2(12, 6)
 
 [node name="RightArm" parent="." index="8"]
 position = Vector2(11, -8)
+
+[node name="Idle" parent="Sounds" index="0"]
+stream = ExtResource("4_pc0kl")
+volume_db = 10.0
 
 [connection signal="body_entered" from="MeleeRange" to="." method="_on_melee_range_body_entered"]
 [connection signal="body_exited" from="MeleeRange" to="." method="_on_melee_range_body_exited"]

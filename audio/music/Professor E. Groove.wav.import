@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://0nyrnuk0vrr5"
-path="res://.godot/imported/Professor E. Groove.wav-13c9f96701113c50f4748ec454be2181.sample"
+path="res://.godot/imported/Professor E. Groove.wav-6c5b84f253868f94e9272805d4d0459f.sample"
 
 [deps]
 
-source_file="res://assets/audio/Professor E. Groove.wav"
-dest_files=["res://.godot/imported/Professor E. Groove.wav-13c9f96701113c50f4748ec454be2181.sample"]
+source_file="res://audio/music/Professor E. Groove.wav"
+dest_files=["res://.godot/imported/Professor E. Groove.wav-6c5b84f253868f94e9272805d4d0459f.sample"]
 
 [params]
 

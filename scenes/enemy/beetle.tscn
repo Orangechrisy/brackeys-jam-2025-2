@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfm2i4ew4o57y"]
+[gd_scene load_steps=6 format=3 uid="uid://cfm2i4ew4o57y"]
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_je6nb"]
 [ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="2_2kdek"]
 [ext_resource type="Script" uid="uid://1asjr718dvk8" path="res://scripts/beetle.gd" id="2_70bpk"]
+[ext_resource type="AudioStream" uid="uid://dq2lbed52lsg" path="res://audio/sfx/beetle_hit.wav" id="4_70bpk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_je6nb"]
 radius = 29.0172
@@ -36,6 +37,9 @@ rotation = -0.392699
 [node name="RightArm" parent="." index="8"]
 position = Vector2(0, 3)
 rotation = 0.392699
+
+[node name="Damage" parent="Sounds" index="4"]
+stream = ExtResource("4_70bpk")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="BugTimers/ChargeTimer" to="." method="_on_charge_timer_timeout"]

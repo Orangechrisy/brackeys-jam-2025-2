@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dm5m0f20omtaj"]
+[gd_scene load_steps=25 format=3 uid="uid://dm5m0f20omtaj"]
 
 [ext_resource type="Script" uid="uid://b5vidvlpr235r" path="res://scripts/bug.gd" id="1_7dv1t"]
 [ext_resource type="Texture2D" uid="uid://c1463vedwu8i" path="res://icon.svg" id="2_glhb6"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://byjcw8csynqn4" path="res://assets/abilities/rightarm_small.png" id="5_cj633"]
 [ext_resource type="Texture2D" uid="uid://b0ad7qr5cdst" path="res://assets/abilities/leftkidney_small.png" id="6_obpch"]
 [ext_resource type="Texture2D" uid="uid://ml71ftblyaqv" path="res://assets/abilities/rightkidney_small.png" id="7_ljp81"]
+[ext_resource type="AudioStream" uid="uid://bnkvurdmgprjl" path="res://audio/sfx/acid_spit.wav" id="6_ev3hl"]
+[ext_resource type="AudioStream" uid="uid://qp5m6kjnwlb7" path="res://audio/sfx/cockroach_idle.wav" id="6_ljp81"]
+[ext_resource type="AudioStream" uid="uid://ojynpwk62vw5" path="res://audio/sfx/death.wav" id="7_nw6e0"]
+[ext_resource type="AudioStream" uid="uid://bwgcj764kekvt" path="res://audio/sfx/spider_snare.wav" id="7_obpch"]
+[ext_resource type="AudioStream" uid="uid://n0snpyptf6c2" path="res://audio/sfx/cockroach_hit.wav" id="8_cj633"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
 radius = 95.5249
@@ -156,6 +161,11 @@ one_shot = true
 [node name="SnaredTimer" type="Timer" parent="BugTimers"]
 one_shot = true
 
+[node name="IdleSoundTimer" type="Timer" parent="BugTimers"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
 [node name="BodyPartTimers" type="Node2D" parent="."]
 
 [node name="LeftArm" type="Marker2D" parent="."]
@@ -234,7 +244,31 @@ libraries = {
 &"": SubResource("AnimationLibrary_nw6e0")
 }
 
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Idle" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_ljp81")
+bus = &"SFX"
+
+[node name="AcidSpit" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_ev3hl")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="Snared" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_obpch")
+bus = &"SFX"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_nw6e0")
+bus = &"SFX"
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("8_cj633")
+bus = &"SFX"
+
 [connection signal="timeout" from="BugTimers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="BugTimers/SnaredTimer" to="." method="_on_snared_timer_timeout"]
+[connection signal="timeout" from="BugTimers/IdleSoundTimer" to="." method="_on_idle_sound_timer_timeout"]
 [connection signal="body_entered" from="LeftArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]
 [connection signal="body_entered" from="RightArm/ArmAttackArea" to="." method="_on_arm_attack_area_body_entered"]

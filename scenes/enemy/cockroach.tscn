@@ -33,5 +33,7 @@ position = Vector2(0, -37)
 
 [node name="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea" index="0"]
 position = Vector2(0, -9)
+[node name="Damage" parent="Sounds" index="4"]
+volume_db = 5.0
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

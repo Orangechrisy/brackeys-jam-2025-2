@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxho170gbbxx1"]
+[gd_scene load_steps=7 format=3 uid="uid://bxho170gbbxx1"]
 
 [ext_resource type="Script" uid="uid://ca0qjmx55oaai" path="res://scripts/battlefield.gd" id="1_j68fe"]
 [ext_resource type="Texture2D" uid="uid://cmokynj8pyjol" path="res://assets/box.png" id="2_j68fe"]
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="3_j68fe"]
+[ext_resource type="AudioStream" uid="uid://ch4btsidfoc6s" path="res://audio/sfx/match_bell.wav" id="4_21s54"]
+[ext_resource type="AudioStream" uid="uid://65j4g5g4ork8" path="res://audio/sfx/select.wav" id="5_jsyt3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ixbtv"]
 size = Vector2(28.6119, 441.583)
@@ -82,4 +84,14 @@ theme = ExtResource("3_j68fe")
 theme_override_font_sizes/font_size = 50
 text = "fight"
 
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="MatchBell" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("4_21s54")
+bus = &"SFX"
+
+[node name="MouseOverSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_jsyt3")
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
