@@ -6,6 +6,10 @@ class_name Bug
 @export var health: int = 20:
 	set(value):
 		if max_health != null:
+			if health > value:
+				GameManager.display_number(health-value,global_position,false)
+			else:
+				GameManager.display_number(value-health,global_position,true)
 			if value > max_health:
 				health = max_health
 			else:
@@ -153,10 +157,10 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 							#print("checking areas: ", $LeftKidney/KidneyDefenseArea.get_overlapping_areas())
 						#GameManager.BODYPARTS.RIGHTKIDNEY:
 							#print("checking areas: ", $RightKidney/KidneyDefenseArea.get_overlapping_areas())
-		
-		# Handling damage dealt
-		health -= dmg
-		print("health after hit: ", health, " ", dmg)
+			
+			# Handling damage dealt
+			health -= dmg
+			print("health after hit: ", health, " ", dmg)
 	
 
 func _on_arm_attack_area_body_entered(body: Node2D) -> void:
@@ -185,7 +189,7 @@ func _on_timer_stomach_timeout(timer: Timer):
 	get_parent().add_child(acid)
 	acid.global_position = global_position
 	acid.direction = (to_global(Vector2.RIGHT)-global_position).normalized()
-	timer.wait_time = 0.5 #randi_range(1, 5)
+	timer.wait_time = randi_range(2, 4)
 	timer.start()
 
 func _on_timer_liver_timeout(timer: Timer):

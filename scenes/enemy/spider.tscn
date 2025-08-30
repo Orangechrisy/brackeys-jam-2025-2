@@ -9,7 +9,6 @@ radius = 32.0624
 
 [node name="Spider" instance=ExtResource("1_xtqu1")]
 script = ExtResource("2_656li")
-health = 15
 damage = 3
 speed = 100
 

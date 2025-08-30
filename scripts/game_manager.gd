@@ -282,3 +282,38 @@ func stop_other_music(path: String):
 			await tween.finished
 			$ShopMusic.stop()
 			$ShopMusic.volume_linear = 1.0
+
+#DAMAGE NUMBERS
+func display_number(value: int, pos: Vector2, heal: bool):
+	var number = Label.new()
+	#number.theme = theme
+	number.global_position = pos+Vector2(0,-30)
+	number.text = str(value)
+	number.z_index = 5
+	number.label_settings = LabelSettings.new()
+	
+	var color = "#FFF"
+	if heal:
+		color = "#00ff00"
+	else:
+		color = "#B22"
+	
+	number.label_settings.font_color = color
+	number.label_settings.font_size = 30
+	number.label_settings.outline_color = "#000"
+	number.label_settings.outline_size = 10
+	
+	call_deferred("add_child", number)
+	
+	await number.resized
+	number.pivot_offset = Vector2(number.size / 2)
+	
+	var tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+	tween.set_parallel()
+	tween.tween_property(number, "position:y", number.position.y-24, 0.25).set_ease(Tween.EASE_OUT)
+	tween.tween_property(number, "position:y", number.position.y, 0.5).set_ease(Tween.EASE_IN).set_delay(0.25)
+	tween.tween_property(number, "scale", Vector2.ZERO, 0.25).set_ease(Tween.EASE_IN).set_delay(0.5)
+	
+	await tween.finished
+	number.queue_free()
