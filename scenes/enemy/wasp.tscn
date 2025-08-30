@@ -1,15 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo3ja1cj1kcuk"]
+[gd_scene load_steps=6 format=3 uid="uid://bo3ja1cj1kcuk"]
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_8u2kk"]
+[ext_resource type="Script" uid="uid://cni3oi7hbubnq" path="res://scripts/wasp.gd" id="2_pc0kl"]
 [ext_resource type="Texture2D" uid="uid://dmv4gxls0h0pq" path="res://assets/bugs/wasp.png" id="2_t855c"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_t855c"]
+radius = 107.229
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uy746"]
+radius = 24.0832
+
 [node name="Wasp" instance=ExtResource("1_8u2kk")]
+script = ExtResource("2_pc0kl")
+health = 15
+damage = 3
+speed = 500
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_t855c")
 
-[node name="LeftArm" parent="." index="6"]
+[node name="MeleeRange" type="Area2D" parent="." index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeRange" index="0"]
+shape = SubResource("CircleShape2D_t855c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+position = Vector2(-40, 0)
+shape = SubResource("CircleShape2D_uy746")
+
+[node name="DirectionTimer" type="Timer" parent="BugTimers" index="2"]
+wait_time = 0.5
+
+[node name="LeftArm" parent="." index="7"]
 position = Vector2(12, 6)
 
-[node name="RightArm" parent="." index="7"]
+[node name="RightArm" parent="." index="8"]
 position = Vector2(11, -8)
+
+[connection signal="body_entered" from="MeleeRange" to="." method="_on_melee_range_body_entered"]
+[connection signal="body_exited" from="MeleeRange" to="." method="_on_melee_range_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="BugTimers/DirectionTimer" to="." method="_on_direction_timer_timeout"]
