@@ -121,6 +121,8 @@ var match_num = 1
 func game_over():
 	match_num = 1
 	print("game over :(")
+	await get_tree().create_timer(0.5).timeout
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
 
 func _input(event):
 	if event.is_action_pressed("escape"):
@@ -312,6 +314,8 @@ func stop_other_music(path: String):
 #DAMAGE NUMBERS
 var theme: Theme = preload("res://button_theme.tres")
 func display_number(value: int, pos: Vector2, heal: bool):
+	if value == 0:
+		return
 	var number = Label.new()
 	number.theme = theme
 	number.global_position = pos+Vector2(0,-30)

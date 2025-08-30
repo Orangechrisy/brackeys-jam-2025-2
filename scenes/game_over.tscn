@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://4jehy2pbnw7g"]
+
+[ext_resource type="Script" uid="uid://wuyi4bk8gxpp" path="res://scripts/game_over.gd" id="1_tbwuq"]
+[ext_resource type="Texture2D" uid="uid://f57woh5gu5x5" path="res://assets/gameover.png" id="2_racf3"]
+[ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="3_7m3ot"]
+[ext_resource type="AudioStream" uid="uid://65j4g5g4ork8" path="res://audio/sfx/select.wav" id="4_racf3"]
+
+[node name="Game Over" type="Node2D"]
+script = ExtResource("1_tbwuq")
+
+[node name="Gameover" type="Sprite2D" parent="."]
+texture = ExtResource("2_racf3")
+centered = false
+
+[node name="quit" type="Button" parent="."]
+offset_left = 1427.0
+offset_top = 934.0
+offset_right = 1882.0
+offset_bottom = 1049.0
+theme = ExtResource("3_7m3ot")
+theme_override_font_sizes/font_size = 75
+text = "MAIN MENU"
+
+[node name="MouseOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_racf3")
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

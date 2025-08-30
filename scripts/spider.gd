@@ -55,7 +55,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if web_area_active:
 		if body.is_in_group("hurtbox"):
 			if "health" in body:
-				body.hit(7, self, body)
+				body.hit(10, self, body)
 				web_area_active=false
 				# TODO this should totally cause the little portrait to have an effect
 

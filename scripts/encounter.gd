@@ -58,7 +58,7 @@ var reward_images = [
 
 func start_of_battle():
 	$StartingReward.show()
-	$StartingReward/Drumroll.play()
+	$Sounds/Drumroll.play()
 	reward = randi_range(0, rewards.size() - 1)
 	await get_tree().create_timer(2.0).timeout
 	$StartingReward/LabelReward.text = rewards[reward]
@@ -161,6 +161,8 @@ func body_part_part_exited(part: Area2D) -> void:
 
 func play_part(part: Area2D):
 	part.get_node("CollisionShape2D").disabled = true
+	$Sounds/PlayBodyPart.pitch_scale = randf_range(0.9, 1.1)
+	$Sounds/PlayBodyPart.play()
 	$"Hand/AnimatedSprite2D".frame = 1
 	$Tooltip.HidePopup()
 	# fades the part away

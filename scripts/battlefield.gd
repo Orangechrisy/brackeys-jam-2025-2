@@ -1,7 +1,5 @@
 extends Node2D
 
-
-
 signal update_health_bar(player: bool, health: int)
 signal reset(won: bool)
 signal allow_clicking(allow: bool)
