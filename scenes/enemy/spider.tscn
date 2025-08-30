@@ -30,13 +30,18 @@ wait_time = 1.5
 one_shot = true
 
 [node name="LeftArm" parent="." index="6"]
-position = Vector2(22, 1)
+position = Vector2(16, 3)
+rotation = -0.785398
 
 [node name="RightArm" parent="." index="7"]
-position = Vector2(22, -6)
+position = Vector2(16, -3)
+rotation = 0.785398
+
+[node name="KidneyDefenseArea" parent="LeftKidney" index="1"]
+position = Vector2(0, -37)
 
 [node name="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea" index="0"]
-position = Vector2(0.35768, -14.3314)
+position = Vector2(0, -9)
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="BugTimers/ShootTimer" to="." method="_on_shoot_timer_timeout"]
