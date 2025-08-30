@@ -12,20 +12,10 @@ func _ready():
 	create_hand()
 	set_body()
 	set_enemy_body()
-	var path = "res://scenes/enemy/" + GameManager.ENEMIES[GameManager.player_bugID] + ".tscn"
-	var player = load(path)
-	$UI/Player/NameLabel.text = GameManager.player_bug_name
-	match GameManager.player_bugID:
-		GameManager.BUGS.COCKROACH:
-			$UI/Player/IconBG/Icon.texture = COCKROACHICON
-		GameManager.BUGS.SPIDER:
-			$UI/Player/IconBG/Icon.texture = SPIDERICON
-		GameManager.BUGS.WASP:
-			$UI/Player/IconBG/Icon.texture = WASPICON
-		GameManager.BUGS.BEETLE:
-			$UI/Player/IconBG/Icon.texture = BEETLEICON
+	
 	
 	var enemy = determine_enemy()
+	var player = determine_player()
 	#var enemy = load("res://scenes/enemy/spider.tscn")
 	$Battlefield.place_bugs(player, enemy)
 	enemy_play_parts()
@@ -279,6 +269,23 @@ const SPIDERICON: Texture2D = preload("res://assets/bugs/spidericon.png")
 const WASPICON: Texture2D = preload("res://assets/bugs/waspicon.png")
 const BEETLEICON: Texture2D = preload("res://assets/bugs/beetleicon.png")
 
+func determine_player() -> PackedScene:
+	var path = "res://scenes/enemy/" + GameManager.ENEMIES[GameManager.player_bugID] + ".tscn"
+	var player_bug = load(path)
+	$UI/Player/NameLabel.text = GameManager.player_bug_name
+	match GameManager.player_bugID:
+		GameManager.BUGS.COCKROACH:
+			$UI/Player/IconBG/Icon.texture = COCKROACHICON
+		GameManager.BUGS.SPIDER:
+			$UI/Player/IconBG/Icon.texture = SPIDERICON
+		GameManager.BUGS.WASP:
+			$UI/Player/IconBG/Icon.texture = WASPICON
+		GameManager.BUGS.BEETLE:
+			$UI/Player/IconBG/Icon.texture = BEETLEICON
+	
+	return player_bug
+
+
 @onready var enemyID: int = -1
 func determine_enemy() -> PackedScene:
 	enemyID = randi_range(0, GameManager.num_enemies - 1)
@@ -335,7 +342,7 @@ func _on_battlefield_reset(won: bool) -> void:
 	if curr_round < num_rounds:
 		await get_tree().create_timer(2.0).timeout
 		# these two temp
-		var player = load("res://scenes/enemy/cockroach.tscn")
+		var player = determine_player()
 		var enemy
 		if enemyID == -1:
 			enemy = determine_enemy()
