@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnd8cyp88dacp"]
+[gd_scene load_steps=8 format=3 uid="uid://cnd8cyp88dacp"]
 
 [ext_resource type="Texture2D" uid="uid://c6i4yvdijufoe" path="res://assets/surgeon shop.png" id="1_lx5au"]
 [ext_resource type="Script" uid="uid://btwfcbs0jau78" path="res://scripts/shop.gd" id="1_xfvoa"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="3_8r1wq"]
 [ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="4_032fp"]
 [ext_resource type="PackedScene" uid="uid://csbtxgx5jy0d8" path="res://scenes/blood.tscn" id="5_2fc2m"]
+[ext_resource type="PackedScene" uid="uid://xtjsrk8ye6fr" path="res://scenes/hp_bar.tscn" id="7_ajxib"]
 
 [node name="shop" type="Node2D"]
 script = ExtResource("1_xfvoa")
@@ -72,5 +73,11 @@ visible = false
 
 [node name="Blood" parent="." instance=ExtResource("5_2fc2m")]
 position = Vector2(150, 570)
+
+[node name="HPBar" parent="." instance=ExtResource("7_ajxib")]
+offset_left = 32.0
+offset_top = 706.0
+offset_right = 32.0
+offset_bottom = 706.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

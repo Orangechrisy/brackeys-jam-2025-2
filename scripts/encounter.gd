@@ -29,7 +29,7 @@ func _process(_delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	# can maybe instead do this by viewport size instead of hardcoded...
 	$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
-	if not GameManager.has_lungs:
+	if GameManager.no_lungs:
 		$Lungs.show()
 		if $Lungs/LungsTimer.is_stopped() and not lungs_timer_ended:
 			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.wait_time
@@ -170,6 +170,8 @@ func play_part(part: Area2D):
 	
 	activate_part(partID, true)
 	$"Hand/AnimatedSprite2D".frame = 0
+	if not $Battlefield/Button.visible:
+		$Battlefield/Button.show()
 	
 func activate_part(partID: int, isPlayer: bool):
 	var bug
@@ -338,6 +340,8 @@ func _on_battlefield_reset(won: bool) -> void:
 	for part in GameManager.body_parts:
 		update_part_count(part, true)
 	reset_enemy_parts(won)
+	
+	GameManager.liver_check()
 	
 	if curr_round < num_rounds:
 		await get_tree().create_timer(2.0).timeout

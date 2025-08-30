@@ -69,6 +69,6 @@ func _on_button_pressed() -> void:
 		enemy_bug.start_movement()
 		enemy_bug.start_timers()
 		allow_clicking.emit(false)
-		if not GameManager.has_lungs:
+		if GameManager.no_lungs:
 			$"../Lungs/LungsTimer".start()
 	$Button.release_focus()

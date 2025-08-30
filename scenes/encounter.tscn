@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=21 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="7_2dnca"]
 [ext_resource type="Texture2D" uid="uid://bycvo8s5a5x75" path="res://assets/start_of_battle.png" id="9_nw3qf"]
 [ext_resource type="Texture2D" uid="uid://mxsa58q0xw7u" path="res://assets/reward_bill.png" id="10_mw7nh"]
+[ext_resource type="PackedScene" uid="uid://xtjsrk8ye6fr" path="res://scenes/hp_bar.tscn" id="14_034qn"]
 
 [sub_resource type="Theme" id="Theme_75kek"]
 
@@ -163,7 +164,7 @@ z_index = 4
 position = Vector2(970, 424)
 
 [node name="Blood" parent="." instance=ExtResource("5_3l52i")]
-position = Vector2(59, 533)
+position = Vector2(170, 532)
 
 [node name="Hand" type="Control" parent="."]
 z_index = 5
@@ -259,6 +260,12 @@ offset_right = 633.0
 offset_bottom = 119.0
 theme_override_font_sizes/font_size = 60
 text = "30.0"
+
+[node name="HPBar" parent="." instance=ExtResource("14_034qn")]
+offset_left = 19.0
+offset_top = 479.0
+offset_right = 19.0
+offset_bottom = 479.0
 
 [connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]
 [connection signal="reset" from="Battlefield" to="." method="_on_battlefield_reset"]
