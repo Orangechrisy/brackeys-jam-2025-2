@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_w45cp"]
 [ext_resource type="Texture2D" uid="uid://cwh0yxkvfu8ee" path="res://assets/bugs/grasshopper.png" id="2_d35bs"]
-[ext_resource type="Script" path="res://scripts/grasshopper.gd" id="2_ihgd1"]
+[ext_resource type="Script" uid="uid://ce76luagnvhqn" path="res://scripts/grasshopper.gd" id="2_ihgd1"]
 [ext_resource type="Texture2D" uid="uid://c0wv2g1amlodj" path="res://assets/bugs/dustcloud.png" id="4_ihgd1"]
 [ext_resource type="AudioStream" uid="uid://cqp4a0mvhg428" path="res://audio/sfx/beetle_idle.wav" id="5_0a4n6"]
 [ext_resource type="AudioStream" uid="uid://dgl8fe2kb7a8l" path="res://audio/sfx/grasshopper_jump.wav" id="6_xejck"]
@@ -96,7 +96,7 @@ stream = ExtResource("7_7tchi")
 bus = &"SFX"
 metadata/_edit_lock_ = true
 
-[node name="Damage" parent="Sounds" index="6"]
+[node name="Damage" parent="Sounds" index="7"]
 stream = ExtResource("8_gyjvv")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

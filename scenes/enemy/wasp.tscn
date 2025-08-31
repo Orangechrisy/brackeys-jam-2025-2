@@ -46,7 +46,7 @@ metadata/_edit_lock_ = true
 stream = ExtResource("4_pc0kl")
 volume_db = 15.0
 
-[node name="Damage" parent="Sounds" index="4"]
+[node name="Damage" parent="Sounds" index="5"]
 stream = ExtResource("5_uy746")
 volume_db = 5.0
 
