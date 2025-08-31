@@ -165,3 +165,17 @@ func play_mouse_over_sound():
 
 func _on_start_button_mouse_entered() -> void:
 	play_mouse_over_sound()
+
+
+func _on_how_to_play_pressed() -> void:
+	$HowToPlay.show()
+	$ChoosebugBg.hide()
+	$Control.hide()
+	$IconBG.hide()
+
+
+func _on_how_to_play_back_pressed() -> void:
+	$HowToPlay.hide()
+	$ChoosebugBg.show()
+	$Control.show()
+	$IconBG.show()

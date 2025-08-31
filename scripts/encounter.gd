@@ -248,9 +248,11 @@ func activate_part(partID: int, isPlayer: bool):
 			bug.get_node("AttackArea/CollisionShape2D").scale = Vector2(1.2, 1.2)
 		GameManager.BODYPARTS.LEFTARM:
 			bug.get_node("LeftArm").show()
+			print(bug, "showing left arm")
 			bug.get_node("LeftArm/ArmAttackArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.RIGHTARM:
 			bug.get_node("RightArm").show()
+			print(bug, "showing right arm")
 			bug.get_node("RightArm/ArmAttackArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.LEFTLEG:
 			# in bug script
@@ -266,9 +268,11 @@ func activate_part(partID: int, isPlayer: bool):
 			pass
 		GameManager.BODYPARTS.LEFTKIDNEY:
 			bug.get_node("LeftKidney").show()
+			print(bug, "showing left kidney")
 			bug.get_node("LeftKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
 		GameManager.BODYPARTS.RIGHTKIDNEY:
 			bug.get_node("RightKidney").show()
+			print(bug, "showing right kidney")
 			bug.get_node("RightKidney/KidneyDefenseArea/CollisionShape2D").disabled = false
 
 # sets the little body at the start of the encounter
