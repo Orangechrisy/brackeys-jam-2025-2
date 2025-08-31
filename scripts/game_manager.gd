@@ -105,6 +105,7 @@ var player_bugID: int = 0
 var player_bug_name: String = "John D. Cockroach"
 var player_bug: CharacterBody2D
 var enemy_bug: CharacterBody2D
+var last_enemy_bugID: int = -2
 var current_parts = []
 var played_parts = []
 var enemy_played_parts = []
@@ -192,6 +193,8 @@ func _reset():
 	
 	init_json_data()
 	
+	game_over_bool=false
+	last_enemy_bugID=-2
 	player_bug = null
 	enemy_bug = null
 	current_parts.clear()

@@ -6,5 +6,5 @@ const WEB_AREA = preload("res://scenes/web_area.tscn")
 
 func death(hitenemy: bool):
 	if not hitenemy:
-		battlefield.create_area(WEB_AREA, global_position)
+		battlefield.create_area(WEB_AREA, global_position, origin_bug)
 	queue_free()

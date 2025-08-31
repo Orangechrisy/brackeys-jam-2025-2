@@ -54,7 +54,7 @@ position = Vector2(0, 8)
 [node name="Idle" parent="Sounds" index="0"]
 stream = ExtResource("4_nt8et")
 
-[node name="Damage" parent="Sounds" index="4"]
+[node name="Damage" parent="Sounds" index="5"]
 stream = ExtResource("5_scdb1")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
