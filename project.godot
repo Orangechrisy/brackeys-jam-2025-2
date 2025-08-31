@@ -13,7 +13,8 @@ config_version=5
 config/name="Organized Fight Club"
 run/main_scene="uid://vnmrxbjra12c"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://b57h0pwd6tm21"
+config/windows_native_icon="res://assets/appicon.ico"
 
 [autoload]
 
