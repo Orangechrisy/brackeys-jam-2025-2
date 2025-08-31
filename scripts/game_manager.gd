@@ -70,7 +70,7 @@ func parse_json(ID: int, json: Dictionary):
 			print("Error: Body Part "+str(ID)+" has unknown rarity.")
 	partShadowImages[ID] += json["SHADOWPATH"]
 	partImages[ID] += json["PATH"]
-	partTooltip[ID] = "Bug: [color=green]"+json["BUGDESCR"] +  "[/color]\n\nPlayer: [color=red]" + json["PLAYERDESCR"]+"[/color]"
+	partTooltip[ID] = "On Bet: [color=green]"+json["BUGDESCR"] +  "[/color]\n\n On Loss: [color=red]" + json["PLAYERDESCR"]+"[/color]"
 	partCost[ID] = json["COST"]
 	partHPLoss[ID] = json["HPLOSS"]
 

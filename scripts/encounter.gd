@@ -126,8 +126,8 @@ func create_hand():
 
 # updates the parts so they are in the right positions in the "hand"
 func update_part_positions():
-	var x_pos = get_viewport().size.x / 2
-	var y_pos = get_viewport().size.y - get_viewport().size.y / 6
+	var x_pos = 1920.0 / 2
+	var y_pos = 1080.0 - 1080.0 / 6
 	for i in range(GameManager.current_parts.size()):
 		calc_and_move_part(i, x_pos, y_pos, 0.1)
 
