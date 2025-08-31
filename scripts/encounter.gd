@@ -91,9 +91,11 @@ func end_of_battle():
 		$EndingReward/Label2.show()
 		$EndingReward/Reward.show()
 		GameManager.blood += 1
+		$Sounds/Victory.play()
 	elif wins == 2:
 		$EndingReward/Label.text = "You Won " + rewards[reward]
 		$EndingReward/Reward.show()
+		$Sounds/Victory.play()
 	else:
 		$EndingReward/Label.text = "You Didn't Win " + rewards[reward]
 	await get_tree().create_timer(4.0).timeout
@@ -428,7 +430,8 @@ func _on_battlefield_reset(won: bool) -> void:
 		#GameManager.stop_other_music(GameManager.shopMusic)
 		await get_tree().create_timer(2.0).timeout
 		await end_of_battle()
-		get_tree().change_scene_to_file("res://scenes/shop.tscn")
+		if not GameManager.game_over_bool:
+			get_tree().change_scene_to_file("res://scenes/shop.tscn")
 	can_click = true
 
 func reset_enemy_parts(won: bool):

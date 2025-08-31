@@ -42,6 +42,8 @@ func _on_jump_timer_timeout() -> void:
 	$RightKidney/KidneyDefenseArea.set_collision_layer_value(1, false)
 	
 	speed=600
+	$Sounds/Jump.pitch_scale = randf_range(0.7, 1.1)
+	$Sounds/Jump.play()
 	$AnimationPlayer.play("jump")
 	$BugTimers/JumpTimer.wait_time = randf_range(4.0, 5.0)
 	$BugTimers/JumpTimer.start()
@@ -58,6 +60,8 @@ func _on_jump_timer_timeout() -> void:
 	
 	$AttackArea.scale = Vector2.ZERO
 	jumpattack=true
+	$Sounds/Land.pitch_scale = randf_range(0.9, 1.1)
+	$Sounds/Land.play()
 	var tween = create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 	tween.tween_property($AttackArea, "scale", Vector2(1.0,1.0), 0.1)

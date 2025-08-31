@@ -50,6 +50,21 @@ _data = {
 &"hovered": SubResource("Animation_gx4en")
 }
 
+[sub_resource type="Animation" id="Animation_jy37n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
 [sub_resource type="Animation" id="Animation_nxft4"]
 resource_name = "hovered"
 length = 0.4
@@ -65,21 +80,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.39626, 1.74533]
-}
-
-[sub_resource type="Animation" id="Animation_jy37n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_snw3k"]
@@ -370,7 +370,7 @@ texture = ExtResource("7_dgebt")
 
 [node name="Icon" type="Sprite2D" parent="IconBG"]
 position = Vector2(69.3337, -69.3333)
-scale = Vector2(-1, 1)
+scale = Vector2(-0.333, 0.333)
 texture = ExtResource("8_dgebt")
 centered = false
 metadata/_edit_lock_ = true
