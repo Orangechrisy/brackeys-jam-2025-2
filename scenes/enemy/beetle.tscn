@@ -11,6 +11,7 @@
 radius = 29.0172
 
 [node name="Beetle" instance=ExtResource("1_je6nb")]
+z_index = 2
 collision_layer = 3
 script = ExtResource("2_70bpk")
 health = 30
