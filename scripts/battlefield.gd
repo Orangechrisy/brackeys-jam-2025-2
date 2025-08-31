@@ -44,9 +44,11 @@ func health_change(bug: CharacterBody2D, health: int):
 	else:
 		update_health_bar.emit(false, health)
 
-func create_area(area_scene: PackedScene, pos):
+func create_area(area_scene: PackedScene, pos: Vector2, origin_bug: CharacterBody2D):
 	var area = area_scene.instantiate() as Area2D
 	area.global_position = pos
+	if origin_bug != null:
+		area.origin_bug = origin_bug
 	get_parent().call_deferred("add_child", area)
 
 # if rounds left, reset, otherwise end the encounter

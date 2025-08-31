@@ -397,6 +397,7 @@ offset_bottom = 550.0
 
 [node name="Victory" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("25_ay0yr")
+volume_db = 15.0
 bus = &"SFX"
 
 [node name="Drumroll" type="AudioStreamPlayer2D" parent="Sounds"]
@@ -410,6 +411,7 @@ bus = &"SFX"
 
 [node name="PlayerHit" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("27_a3ycy")
+volume_db = 10.0
 bus = &"SFX"
 
 [connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]

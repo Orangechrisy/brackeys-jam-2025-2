@@ -100,7 +100,7 @@ func end_of_battle():
 		$Sounds/Victory.play()
 	else:
 		$EndingReward/Label.text = "You Didn't Win " + rewards[reward]
-	await get_tree().create_timer(4.0).timeout
+	await get_tree().create_timer(5.0).timeout
 
 func set_health_bars():
 	$UI/Player/HealthBar.max_value = GameManager.player_bug.max_health
@@ -355,6 +355,8 @@ func determine_player() -> PackedScene:
 func determine_enemy() -> PackedScene:
 	if enemyID == -1:
 		enemyID = randi_range(0, GameManager.num_enemies - 1)
+		while (enemyID == GameManager.last_enemy_bugID):
+			enemyID = randi_range(0, GameManager.num_enemies - 1)
 	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
 	var enemy_bug = load(path)
 	var enemy_names = GameManager.default_bug_names[enemyID]

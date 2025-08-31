@@ -49,6 +49,7 @@ func enemy_process(delta):
 		tween_started=false
 
 func start_bug_timers():
+	$BugTimers/ShootTimer.wait_time = randf_range(2.5, 3.5)
 	$BugTimers/ShootTimer.start()
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
