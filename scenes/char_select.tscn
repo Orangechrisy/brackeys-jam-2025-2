@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://dx8ppinnq61ma"]
+[gd_scene load_steps=27 format=3 uid="uid://dx8ppinnq61ma"]
 
 [ext_resource type="Script" uid="uid://58hmccvtfua6" path="res://scripts/char_select.gd" id="1_a2t0j"]
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="1_qjq5y"]
 [ext_resource type="Texture2D" uid="uid://7rxiyy310ajm" path="res://assets/bugs/cockroach.png" id="2_11wwc"]
 [ext_resource type="Texture2D" uid="uid://dll87vj7wjc8h" path="res://assets/choosebug_bg.png" id="2_gx4en"]
 [ext_resource type="Texture2D" uid="uid://ba8d2f2m40pp1" path="res://assets/bugs/spider.png" id="4_lcdbo"]
+[ext_resource type="Texture2D" uid="uid://cwh0yxkvfu8ee" path="res://assets/bugs/grasshopper.png" id="5_0k605"]
 [ext_resource type="Texture2D" uid="uid://dmv4gxls0h0pq" path="res://assets/bugs/wasp.png" id="5_dgebt"]
 [ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="6_5kqyn"]
 [ext_resource type="Texture2D" uid="uid://d2t0tuapfisbb" path="res://assets/bugs/portrait_bg2.png" id="7_dgebt"]
@@ -47,6 +48,44 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_0k605"),
 &"hovered": SubResource("Animation_gx4en")
+}
+
+[sub_resource type="Animation" id="Animation_nxft4"]
+resource_name = "hovered"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.39626, 1.74533]
+}
+
+[sub_resource type="Animation" id="Animation_jy37n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_snw3k"]
+_data = {
+&"RESET": SubResource("Animation_jy37n"),
+&"hovered": SubResource("Animation_nxft4")
 }
 
 [sub_resource type="Animation" id="Animation_a2t0j"]
@@ -212,9 +251,9 @@ autowrap_mode = 2
 [node name="CockroachButton" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 201.0
-offset_top = 771.0
+offset_top = 500.0
 offset_right = 482.0
-offset_bottom = 995.0
+offset_bottom = 724.0
 toggle_mode = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/CockroachButton"]
@@ -226,6 +265,25 @@ metadata/_edit_lock_ = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/CockroachButton"]
 libraries = {
 &"": SubResource("AnimationLibrary_nxft4")
+}
+
+[node name="GrasshopperButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 771.0
+offset_right = 482.0
+offset_bottom = 995.0
+toggle_mode = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/GrasshopperButton"]
+position = Vector2(137, 118)
+rotation = 1.5708
+texture = ExtResource("5_0k605")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/GrasshopperButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_snw3k")
 }
 
 [node name="SpiderButton" type="Button" parent="Control"]
@@ -326,6 +384,9 @@ bus = &"SFX"
 [connection signal="mouse_entered" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_exited"]
 [connection signal="pressed" from="Control/CockroachButton" to="." method="_on_cockroach_button_pressed"]
+[connection signal="mouse_entered" from="Control/GrasshopperButton" to="." method="_on_grasshopper_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/GrasshopperButton" to="." method="_on_grasshopper_button_mouse_exited"]
+[connection signal="pressed" from="Control/GrasshopperButton" to="." method="_on_grasshopper_button_pressed"]
 [connection signal="mouse_entered" from="Control/SpiderButton" to="." method="_on_spider_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/SpiderButton" to="." method="_on_spider_button_mouse_exited"]
 [connection signal="pressed" from="Control/SpiderButton" to="." method="_on_spider_button_pressed"]

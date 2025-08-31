@@ -9,6 +9,7 @@ const COCKROACHICON: Texture2D = preload("res://assets/bugs/cockroachicon.png")
 const SPIDERICON: Texture2D = preload("res://assets/bugs/spidericon.png")
 const WASPICON: Texture2D = preload("res://assets/bugs/waspicon.png")
 const BEETLEICON: Texture2D = preload("res://assets/bugs/beetleicon.png")
+const GRASSHOPPERICON = preload("res://assets/bugs/grasshoppericon.png")
 
 #SELECTING BUGS
 func show_bug_icon(BugID: int):
@@ -25,6 +26,9 @@ func show_bug_icon(BugID: int):
 		GameManager.BUGS.BEETLE:
 			$IconBG/Icon.texture = BEETLEICON
 			$Control/Label.text = "BEETLE"
+		GameManager.BUGS.GRASSHOPPER:
+			$IconBG/Icon.texture = GRASSHOPPERICON
+			$Control/Label.text = "GRASSHOPPER"
 
 func show_selected_icon():
 	show_bug_icon(selected_bug)
@@ -34,11 +38,13 @@ func toggle_all_off():
 	$Control/SpiderButton.button_pressed = false
 	$Control/WaspButton.button_pressed = false
 	$Control/BeetleButton.button_pressed = false
+	$Control/GrasshopperButton.button_pressed = false
 	
 	_on_cockroach_button_mouse_exited()
 	_on_spider_button_mouse_exited()
 	_on_wasp_button_mouse_exited()
 	_on_beetle_button_mouse_exited()
+	_on_grasshopper_button_mouse_exited()
 
 func _on_cockroach_button_pressed() -> void:
 	toggle_all_off()
@@ -75,6 +81,16 @@ func _on_beetle_button_pressed() -> void:
 	$Control/BugNameInput.placeholder_text = bug_names[randi_range(0, bug_names.size() - 1)]
 	selected_bug=GameManager.BUGS.BEETLE
 	_on_beetle_button_mouse_entered()
+
+func _on_grasshopper_button_pressed() -> void:
+	toggle_all_off()
+	await get_tree().physics_frame
+	$Control/GrasshopperButton.button_pressed = true
+	var bug_names = GameManager.default_bug_names[GameManager.BUGS.GRASSHOPPER]
+	$Control/BugNameInput.placeholder_text = bug_names[randi_range(0, bug_names.size() - 1)]
+	selected_bug=GameManager.BUGS.GRASSHOPPER
+	_on_grasshopper_button_mouse_exited()
+	$Control/GrasshopperButton/AnimationPlayer.play("hovered") #idk why i did to do this
 
 #STARTING GAME
 func _on_start_button_pressed() -> void:
@@ -127,6 +143,16 @@ func _on_beetle_button_mouse_exited() -> void:
 	show_selected_icon()
 	if not $Control/BeetleButton.button_pressed:
 		$Control/BeetleButton/AnimationPlayer.play("RESET")
+
+func _on_grasshopper_button_mouse_entered() -> void:
+	$Control/GrasshopperButton/AnimationPlayer.play("hovered")
+	play_mouse_over_sound()
+	show_bug_icon(GameManager.BUGS.GRASSHOPPER)
+
+func _on_grasshopper_button_mouse_exited() -> void:
+	show_selected_icon()
+	if not $Control/GrasshopperButton.button_pressed:
+		$Control/GrasshopperButton/AnimationPlayer.play("RESET")
 
 #BUG NAME CHANGING
 func _on_bug_name_input_text_changed(new_text: String) -> void:

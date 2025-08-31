@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://2vmj5q8dyyau"]
+[gd_resource type="Theme" load_steps=19 format=3 uid="uid://2vmj5q8dyyau"]
 
 [ext_resource type="FontFile" uid="uid://bplxgqurm75c1" path="res://assets/fonts/ZeroCool.ttf" id="1_2kni4"]
 [ext_resource type="Texture2D" uid="uid://c2w2gbye0cywr" path="res://assets/button_hover.png" id="1_5nl6s"]
 [ext_resource type="Texture2D" uid="uid://daofn56q8n63d" path="res://assets/button.png" id="2_22sbv"]
 [ext_resource type="Texture2D" uid="uid://cajwhavrf8yhu" path="res://assets/button_pressed.png" id="3_2kni4"]
 [ext_resource type="Texture2D" uid="uid://c4crpmtmcenmt" path="res://assets/slider_button.png" id="4_22sbv"]
+[ext_resource type="Texture2D" uid="uid://bmi72envq2f5w" path="res://assets/tooltip.png" id="6_k2yff"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77pb7"]
 content_margin_left = 4.0
@@ -96,6 +97,10 @@ corner_detail = 6
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k2yff"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x6ffq"]
+texture = ExtResource("6_k2yff")
+modulate_color = Color(0.847059, 0.780392, 0.596078, 0.87451)
+
 [resource]
 Button/colors/font_color = Color(1, 0.814272, 0.794291, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -140,6 +145,7 @@ Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_2kni4")
 Label/styles/normal = SubResource("StyleBoxEmpty_k2yff")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_x6ffq")
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/constants/outline_size = 20
 RichTextLabel/fonts/normal_font = ExtResource("1_2kni4")

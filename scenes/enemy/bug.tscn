@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://cj6vowfsxpnh1" path="res://audio/sfx/dodge.wav" id="13_4df1f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
-radius = 95.5249
+radius = 90.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ev3hl"]
 radius = 9.05539
@@ -135,6 +135,7 @@ _data = {
 }
 
 [node name="Bug" type="CharacterBody2D" groups=["hurtbox"]]
+collision_mask = 3
 script = ExtResource("1_7dv1t")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -246,32 +247,39 @@ libraries = {
 }
 
 [node name="Sounds" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="Idle" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("6_ljp81")
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [node name="AcidSpit" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("6_ev3hl")
 volume_db = 5.0
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [node name="Snared" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("7_obpch")
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("7_nw6e0")
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [node name="Damage" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("8_cj633")
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [node name="Dodge" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("13_4df1f")
 volume_db = 5.0
 bus = &"SFX"
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="BugTimers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
 [connection signal="timeout" from="BugTimers/SnaredTimer" to="." method="_on_snared_timer_timeout"]

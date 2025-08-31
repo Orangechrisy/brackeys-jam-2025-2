@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://dit74hpodrqrv"]
+
+[ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_w45cp"]
+[ext_resource type="Texture2D" uid="uid://cwh0yxkvfu8ee" path="res://assets/bugs/grasshopper.png" id="2_d35bs"]
+[ext_resource type="Script" uid="uid://ce76luagnvhqn" path="res://scripts/grasshopper.gd" id="2_ihgd1"]
+[ext_resource type="Texture2D" uid="uid://c0wv2g1amlodj" path="res://assets/bugs/dustcloud.png" id="4_ihgd1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d35bs"]
+radius = 168.027
+
+[sub_resource type="Animation" id="Animation_d35bs"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(5, 5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ihgd1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_swxpr"]
+_data = {
+&"RESET": SubResource("Animation_ihgd1"),
+&"jump": SubResource("Animation_d35bs")
+}
+
+[node name="Grasshopper" instance=ExtResource("1_w45cp")]
+z_index = 2
+script = ExtResource("2_ihgd1")
+speed = 400
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_d35bs")
+
+[node name="Dustcloud" type="Sprite2D" parent="AttackArea" index="0"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_ihgd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="1"]
+shape = SubResource("CircleShape2D_d35bs")
+
+[node name="JumpTimer" type="Timer" parent="BugTimers" index="3"]
+
+[node name="LeftArm" parent="." index="6"]
+position = Vector2(11, 1)
+
+[node name="RightArm" parent="." index="7"]
+position = Vector2(14, -5)
+
+[node name="LeftKidney" parent="." index="8"]
+position = Vector2(2, -4)
+
+[node name="RightKidney" parent="." index="9"]
+position = Vector2(1, 5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+libraries = {
+&"": SubResource("AnimationLibrary_swxpr")
+}
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="BugTimers/JumpTimer" to="." method="_on_jump_timer_timeout"]
