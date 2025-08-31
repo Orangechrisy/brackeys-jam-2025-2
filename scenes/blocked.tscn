@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmf00hq25fgxm"]
+
+[ext_resource type="PackedScene" uid="uid://cy4wfqaq56xog" path="res://scenes/dodged.tscn" id="1_amhkd"]
+[ext_resource type="Texture2D" uid="uid://c0b0v43smtdhx" path="res://assets/abilities/blocked.png" id="2_11ypf"]
+
+[node name="blocked" instance=ExtResource("1_amhkd")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_11ypf")

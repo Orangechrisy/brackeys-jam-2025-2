@@ -23,6 +23,7 @@ var num_bodyparts: int = BODYPARTS.size()
 var partName: Array = []
 var partChance: Array = []
 var partImages: Array = []
+var partShadowImages: Array = []
 var partTooltip : Array = []
 var partCost: Array = []
 var partHPLoss: Array = []
@@ -67,8 +68,9 @@ func parse_json(ID: int, json: Dictionary):
 			partChance[ID] = legendary
 		_:
 			print("Error: Body Part "+str(ID)+" has unknown rarity.")
+	partShadowImages[ID] += json["SHADOWPATH"]
 	partImages[ID] += json["PATH"]
-	partTooltip[ID] = json["BUGDESCR"] +  "\n\n" + json["PLAYERDESCR"]
+	partTooltip[ID] = "Bug: [color=green]"+json["BUGDESCR"] +  "[/color]\n\nPlayer: [color=red]" + json["PLAYERDESCR"]+"[/color]"
 	partCost[ID] = json["COST"]
 	partHPLoss[ID] = json["HPLOSS"]
 
@@ -93,7 +95,7 @@ var default_bug_names = [
 	["John D. Cockroach", "Davy Crockroachett", "The Roach", "Cocktavian", "Roachester", "Floormaster", "John Hancockroach", "Roachefort", "Radroach", "Scuttlebug", "Fallout Fella", "Filthy Fred"], 
 	["Man-Spider", "Eight-Eyes", "Mrs. Webb", "Herrah the Beast", "Silktune", "Arachned", "Webster", "Webelyn", "Daddy Shortlegs", "Widowmaker", "Vriskan't", "Ariadon't", "Gladys Webface"],
 	["White Anglo-Saxon Parasite", "Buzz Buzz", "Hornet", "Beeverly", "Sting King", "Hive Clive", "The Bastard", "Buzz Fightyear", "Yellow Jacked", "Cazador", "Buck Bumble", "Lawrence J. Stingley"],
-	["Paul McMandible", "Dung Defender", "Stagley", "Beetle Bailey", "The Maw", "Volkswagen", "Beetlehoven", "The Wall", "Hardtack", "Horny Bastard", "Bretta", "Willoh", "The Nailsmith", "Crunch", "Pincer Pete", "Ringo Stagg"]
+	["Paul McMandible", "Dung Defender", "Stagley", "Beetle Bailey", "The Maw", "Volkswagen", "Beetlehoven", "The Wall", "Hardtack", "Bretta", "Willoh", "The Nailsmith", "Crunch", "Pincer Pete", "Ringo Stagg"]
 ]
 
 var player_bugID: int = 0
@@ -142,6 +144,8 @@ func _reset():
 	partChance.fill(0)
 	partImages.resize(num_bodyparts)
 	partImages.fill("res://assets/bodyparts/")
+	partShadowImages.resize(num_bodyparts)
+	partShadowImages.fill("res://assets/bodyparts/shadows/")
 	partTooltip.resize(num_bodyparts)
 	partTooltip.fill("null")
 	partCost.resize(num_bodyparts)
@@ -260,6 +264,7 @@ func create_part(partID: int, isShop: bool) -> Node2D:
 	var part = BODY_PART.instantiate()
 	part.partID = partID
 	part.get_node("Sprite2D").texture = load(partImages[partID])
+	part.get_node("Shadow").texture = load(partShadowImages[partID])
 	if no_eyes and isShop:
 		part.get_node("Censor").show()
 	part.cost = partCost[partID]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=33 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
@@ -9,9 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://csbtxgx5jy0d8" path="res://scenes/blood.tscn" id="5_3l52i"]
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="5_8lsj0"]
 [ext_resource type="Texture2D" uid="uid://c0x2cgeflwr2k" path="res://assets/hands/hand_open.png" id="5_75kek"]
+[ext_resource type="Texture2D" uid="uid://34fbqb64wwjc" path="res://assets/portrait_bg2_full.png" id="6_2kmb0"]
 [ext_resource type="Texture2D" uid="uid://fnpn2wbrcxqv" path="res://assets/healthbar.png" id="6_dmrgg"]
 [ext_resource type="Texture2D" uid="uid://c5cixqhk35u2i" path="res://assets/hands/hand_closed.png" id="6_woaxd"]
-[ext_resource type="Texture2D" uid="uid://34fbqb64wwjc" path="res://assets/portrait_bg2_full.png" id="6_2kmb0"]
 [ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="7_2dnca"]
 [ext_resource type="Texture2D" uid="uid://bvqx8uj6qtevn" path="res://assets/healthfluid_blue.png" id="7_xjdyn"]
 [ext_resource type="Texture2D" uid="uid://drs2q5nr4kihs" path="res://assets/healthfluid.png" id="9_a3ycy"]
@@ -97,8 +97,10 @@ animations = [{
 script = ExtResource("1_kb58x")
 
 [node name="Concrete" type="Sprite2D" parent="."]
+modulate = Color(0.728822, 0.728822, 0.728822, 1)
 z_index = -10
-position = Vector2(960, 360)
+position = Vector2(981, 535)
+scale = Vector2(0.958724, 0.760069)
 texture = ExtResource("2_se0eo")
 
 [node name="UI" type="Node2D" parent="."]
@@ -111,14 +113,15 @@ texture = ExtResource("3_2rix4")
 centered = false
 
 [node name="Icon" type="Sprite2D" parent="UI/Player/IconBG"]
+z_index = 6
 position = Vector2(-2.86102e-06, 0.333328)
 texture = ExtResource("3_mw7nh")
 centered = false
 
 [node name="NameLabel" type="Label" parent="UI/Player"]
-offset_top = 423.0
-offset_right = 412.0
-offset_bottom = 465.0
+offset_top = 492.0
+offset_right = 384.0
+offset_bottom = 534.0
 theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 30
 text = "John D. Cockroach"
@@ -127,7 +130,7 @@ autowrap_mode = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/Player"]
 offset_top = 417.0
-offset_right = 417.0
+offset_right = 384.0
 offset_bottom = 467.0
 value = 100.0
 nine_patch_stretch = true
@@ -149,6 +152,7 @@ theme_override_font_sizes/font_size = 32
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Player"]
 libraries = {
@@ -165,16 +169,17 @@ texture = ExtResource("6_2kmb0")
 centered = false
 
 [node name="Icon" type="Sprite2D" parent="UI/Enemy/IconBG"]
+z_index = 6
 position = Vector2(34.0001, -5.00679e-06)
 texture = ExtResource("3_mw7nh")
 centered = false
 flip_h = true
 
 [node name="NameLabel" type="Label" parent="UI/Enemy"]
-offset_left = 1518.0
-offset_top = 447.0
+offset_left = 1541.0
+offset_top = 519.0
 offset_right = 1924.0
-offset_bottom = 489.0
+offset_bottom = 561.0
 theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 30
 text = "John D. Cockroach"
@@ -182,10 +187,10 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/Enemy"]
-offset_left = 1506.0
-offset_top = 441.0
+offset_left = 1540.0
+offset_top = 444.0
 offset_right = 1923.0
-offset_bottom = 491.0
+offset_bottom = 494.0
 value = 100.0
 nine_patch_stretch = true
 stretch_margin_left = 6
@@ -212,6 +217,7 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Enemy"]
 libraries = {
@@ -228,10 +234,10 @@ position = Vector2(1750, 845)
 z_index = 4
 
 [node name="Battlefield" parent="." instance=ExtResource("3_ensgf")]
-position = Vector2(970, 424)
+position = Vector2(954, 458)
 
 [node name="Blood" parent="." instance=ExtResource("5_3l52i")]
-position = Vector2(170, 532)
+position = Vector2(50, 595)
 
 [node name="Hand" type="Control" parent="."]
 z_index = 5
@@ -247,12 +253,11 @@ mouse_filter = 1
 sprite_frames = SubResource("SpriteFrames_2dnca")
 
 [node name="Tooltip" parent="." instance=ExtResource("7_2dnca")]
-visible = false
 z_index = 6
-offset_left = 311.0
-offset_top = 463.0
-offset_right = 311.0
-offset_bottom = 463.0
+offset_left = 1300.0
+offset_top = 500.0
+offset_right = 1300.0
+offset_bottom = 500.0
 
 [node name="StartingReward" type="Node2D" parent="."]
 visible = false
@@ -371,10 +376,10 @@ theme_override_font_sizes/font_size = 60
 text = "30.0"
 
 [node name="HPBar" parent="." instance=ExtResource("14_034qn")]
-offset_left = 18.0
-offset_top = 483.0
-offset_right = 18.0
-offset_bottom = 483.0
+offset_left = 322.0
+offset_top = 550.0
+offset_right = 322.0
+offset_bottom = 550.0
 
 [node name="Sounds" type="Node2D" parent="."]
 

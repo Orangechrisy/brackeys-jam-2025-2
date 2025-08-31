@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://df0egfto1tkjr"]
+[gd_scene load_steps=6 format=3 uid="uid://df0egfto1tkjr"]
 
 [ext_resource type="Script" uid="uid://bs711bncijoyg" path="res://scripts/body_part.gd" id="1_law5b"]
+[ext_resource type="Texture2D" uid="uid://c6n40xinbr1wc" path="res://assets/bodyparts/shadows/shadow_heart.png" id="2_fg6du"]
 [ext_resource type="Texture2D" uid="uid://jc3jhakn7mi" path="res://assets/bodyparts/heart.png" id="2_law5b"]
 [ext_resource type="Texture2D" uid="uid://btgqjcmr7mnop" path="res://assets/black_bar.png" id="3_lnhhf"]
 
@@ -10,6 +11,9 @@ height = 308.0
 
 [node name="BodyPart" type="Area2D"]
 script = ExtResource("1_law5b")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+texture = ExtResource("2_fg6du")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_law5b")

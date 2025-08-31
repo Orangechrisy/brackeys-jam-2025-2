@@ -1,7 +1,34 @@
 [gd_scene load_steps=6 format=3 uid="uid://cy4wfqaq56xog"]
 
-[ext_resource type="Texture2D" uid="uid://c0b0v43smtdhx" path="res://assets/abilities/blocked.png" id="1_3se5x"]
 [ext_resource type="Script" uid="uid://emep0yrtp7ec" path="res://scripts/dodged.gd" id="1_7tggc"]
+[ext_resource type="Texture2D" uid="uid://c2uw651ipt86h" path="res://assets/abilities/dodged.png" id="2_7tggc"]
+
+[sub_resource type="Animation" id="Animation_0q2uf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
 
 [sub_resource type="Animation" id="Animation_7tggc"]
 resource_name = "active"
@@ -31,33 +58,6 @@ tracks/1/keys = {
 "values": [Vector2(0.1, 0.1), Vector2(1, 1), Vector2(1, 1), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_0q2uf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.1, 0.1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ryme"]
 _data = {
 &"RESET": SubResource("Animation_0q2uf"),
@@ -69,7 +69,7 @@ script = ExtResource("1_7tggc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_3se5x")
+texture = ExtResource("2_7tggc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

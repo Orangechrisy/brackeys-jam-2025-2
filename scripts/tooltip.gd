@@ -1,7 +1,7 @@
 extends Control
 
 @onready var ItemLabel: Label = $PanelContainer/MarginContainer/VBoxContainer/ItemLabel
-@onready var DescLabel: Label = $PanelContainer/MarginContainer/VBoxContainer/DescriptionLabel
+@onready var DescLabel: RichTextLabel = $PanelContainer/MarginContainer/VBoxContainer/DescriptionLabel
 
 var on_mouse: bool = true
 
@@ -22,7 +22,7 @@ func _physics_process(_delta: float) -> void:
 				$PanelContainer.global_position = mouse_pos
 		else:
 			show()
-			$PanelContainer.global_position = Vector2(310.0,460.0)
+			$PanelContainer.global_position = Vector2(1300.0,500.0)
 
 func InfoPopup(itemID: int, nextToMouse: bool):
 	
@@ -36,7 +36,7 @@ func InfoPopup(itemID: int, nextToMouse: bool):
 		tooltip_pos = mouse_pos
 	else:
 		on_mouse=false
-		tooltip_pos = Vector2(310.0,460.0)
+		tooltip_pos = Vector2(1300.0,500.0)
 		
 	$PanelContainer.global_position = tooltip_pos
 	popup_active=true
@@ -49,9 +49,9 @@ func InfoPopup(itemID: int, nextToMouse: bool):
 	elif GameManager.partChance[itemID] == GameManager.uncommon:
 		ItemLabel.add_theme_color_override("font_color", "#00f102")
 	elif GameManager.partChance[itemID] == GameManager.rare:
-		ItemLabel.add_theme_color_override("font_color", "#ff0002")
-	else:
 		ItemLabel.add_theme_color_override("font_color", "#dc28ff")
+	else:
+		ItemLabel.add_theme_color_override("font_color", "#f4f021")
 	
 	ItemLabel.text = GameManager.partName[itemID]
 	DescLabel.text = GameManager.partTooltip[itemID]
