@@ -27,7 +27,7 @@ texture = ExtResource("2_t855c")
 shape = SubResource("CircleShape2D_t855c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
-position = Vector2(-40, 0)
+position = Vector2(-35, 0)
 shape = SubResource("CircleShape2D_uy746")
 
 [node name="DirectionTimer" type="Timer" parent="BugTimers" index="2"]
@@ -37,7 +37,10 @@ wait_time = 0.5
 position = Vector2(12, 6)
 
 [node name="RightArm" parent="." index="8"]
-position = Vector2(11, -8)
+position = Vector2(12, -8)
+
+[node name="Sprite2D" parent="RightArm" index="0"]
+metadata/_edit_lock_ = true
 
 [node name="Idle" parent="Sounds" index="0"]
 stream = ExtResource("4_pc0kl")

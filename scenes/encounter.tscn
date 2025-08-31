@@ -164,7 +164,7 @@ libraries = {
 position = Vector2(-3, -24)
 
 [node name="IconBG" type="Sprite2D" parent="UI/Enemy"]
-position = Vector2(1405, 27)
+position = Vector2(1405, 26)
 scale = Vector2(3, 3)
 texture = ExtResource("6_2kmb0")
 centered = false
@@ -178,9 +178,9 @@ flip_h = true
 
 [node name="NameLabel" type="Label" parent="UI/Enemy"]
 offset_left = 1541.0
-offset_top = 519.0
+offset_top = 518.0
 offset_right = 1924.0
-offset_bottom = 561.0
+offset_bottom = 560.0
 theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 30
 text = "John D. Cockroach"
@@ -189,9 +189,9 @@ autowrap_mode = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/Enemy"]
 offset_left = 1540.0
-offset_top = 444.0
+offset_top = 443.0
 offset_right = 1923.0
-offset_bottom = 494.0
+offset_bottom = 493.0
 value = 100.0
 nine_patch_stretch = true
 stretch_margin_left = 6

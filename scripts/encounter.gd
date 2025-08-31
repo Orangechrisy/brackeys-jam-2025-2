@@ -17,7 +17,8 @@ func _ready():
 	
 	var enemy = determine_enemy()
 	var player = determine_player()
-	#var enemy = load("res://scenes/enemy/spider.tscn")
+	#$UI/Enemy/IconBG/Icon.texture = GRASSHOPPERICON
+	#var enemy = load("res://scenes/enemy/grasshopper.tscn")
 	$Battlefield.place_bugs(player, enemy)
 	enemy_play_parts()
 	set_health_bars()
@@ -321,6 +322,7 @@ const COCKROACHICON: Texture2D = preload("res://assets/bugs/cockroachicon.png")
 const SPIDERICON: Texture2D = preload("res://assets/bugs/spidericon.png")
 const WASPICON: Texture2D = preload("res://assets/bugs/waspicon.png")
 const BEETLEICON: Texture2D = preload("res://assets/bugs/beetleicon.png")
+const GRASSHOPPERICON = preload("res://assets/bugs/grasshoppericon.png")
 
 func determine_player() -> PackedScene:
 	var path = "res://scenes/enemy/" + GameManager.ENEMIES[GameManager.player_bugID] + ".tscn"
@@ -335,6 +337,8 @@ func determine_player() -> PackedScene:
 			$UI/Player/IconBG/Icon.texture = WASPICON
 		GameManager.BUGS.BEETLE:
 			$UI/Player/IconBG/Icon.texture = BEETLEICON
+		GameManager.BUGS.GRASSHOPPER:
+			$UI/Player/IconBG/Icon.texture = GRASSHOPPERICON
 	
 	return player_bug
 
@@ -359,6 +363,8 @@ func determine_enemy() -> PackedScene:
 			$UI/Enemy/IconBG/Icon.texture = WASPICON
 		GameManager.BUGS.BEETLE:
 			$UI/Enemy/IconBG/Icon.texture = BEETLEICON
+		GameManager.BUGS.GRASSHOPPER:
+			$UI/Enemy/IconBG/Icon.texture = GRASSHOPPERICON
 	return enemy_bug
 
 #health bars

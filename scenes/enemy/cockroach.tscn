@@ -23,16 +23,25 @@ position = Vector2(42, -4)
 shape = SubResource("CircleShape2D_el1v0")
 
 [node name="LeftArm" parent="." index="6"]
-position = Vector2(0, -3)
+position = Vector2(9, -1)
 
 [node name="ArmAttackArea" parent="LeftArm" index="1"]
 position = Vector2(29, -28)
+
+[node name="RightArm" parent="." index="7"]
+position = Vector2(9, -2)
+
+[node name="LeftKidney" parent="." index="8"]
+position = Vector2(0, -9)
 
 [node name="KidneyDefenseArea" parent="LeftKidney" index="1"]
 position = Vector2(0, -37)
 
 [node name="CollisionShape2D" parent="LeftKidney/KidneyDefenseArea" index="0"]
 position = Vector2(0, -9)
+
+[node name="RightKidney" parent="." index="9"]
+position = Vector2(0, 8)
 
 [node name="Damage" parent="Sounds" index="4"]
 volume_db = 5.0

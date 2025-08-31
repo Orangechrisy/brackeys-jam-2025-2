@@ -79,23 +79,26 @@ enum BUGS {
 	COCKROACH,
 	SPIDER,
 	WASP,
-	BEETLE
+	BEETLE,
+	GRASSHOPPER
 }
 
 const ENEMIES = [
 	"Cockroach",
 	"Spider",
 	"Wasp",
-	"Beetle"
+	"Beetle",
+	"Grasshopper"
 ]
 var num_enemies: int = ENEMIES.size()
 @export var bugs_fought = []
 
 var default_bug_names = [
-	["John D. Cockroach", "Davy Crockroachett", "The Roach", "Cocktavian", "Roachester", "Floormaster", "John Hancockroach", "Roachefort", "Radroach", "Scuttlebug", "Fallout Fella", "Filthy Fred"], 
+	["John D. Cockroach", "The Roach", "Cocktavian", "Roachester", "Floormaster", "John Hancockroach", "Roachefort", "Radroach", "Scuttlebug", "Fallout Fella", "Filthy Fred", "Destroyer of Evil"], 
 	["Man-Spider", "Eight-Eyes", "Mrs. Webb", "Herrah the Beast", "Silktune", "Arachned", "Webster", "Webelyn", "Daddy Shortlegs", "Widowmaker", "Vriskan't", "Ariadon't", "Gladys Webface"],
 	["White Anglo-Saxon Parasite", "Buzz Buzz", "Hornet", "Beeverly", "Sting King", "Hive Clive", "The Bastard", "Buzz Fightyear", "Yellow Jacked", "Cazador", "Buck Bumble", "Lawrence J. Stingley"],
-	["Paul McMandible", "Dung Defender", "Stagley", "Beetle Bailey", "The Maw", "Volkswagen", "Beetlehoven", "The Wall", "Hardtack", "Bretta", "Willoh", "The Nailsmith", "Crunch", "Pincer Pete", "Ringo Stagg"]
+	["Paul McMandible", "Dung Defender", "Stagley", "Beetle Bailey", "The Maw", "Volkswagen", "Beetlehoven", "The Wall", "Hardtack", "Bretta", "Willoh", "The Nailsmith", "Crunch", "Pincer Pete", "Ringo Stagg"],
+	["Jump King", "Grassy", "Hoppenheimer", "Hopper", "Highkix", "Davy Crickett", "Jiminy", "Wayne F. Hopton", "Wyatt Chirp", "Hopkins", "Leaping Larry", "Penelhoppe", "Locust Lord", "The Pestilence"]
 ]
 
 var player_bugID: int = 0

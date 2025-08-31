@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://df0egfto1tkjr"]
+[gd_scene load_steps=7 format=3 uid="uid://df0egfto1tkjr"]
 
 [ext_resource type="Script" uid="uid://bs711bncijoyg" path="res://scripts/body_part.gd" id="1_law5b"]
 [ext_resource type="Texture2D" uid="uid://c6n40xinbr1wc" path="res://assets/bodyparts/shadows/shadow_heart.png" id="2_fg6du"]
 [ext_resource type="Texture2D" uid="uid://jc3jhakn7mi" path="res://assets/bodyparts/heart.png" id="2_law5b"]
 [ext_resource type="Texture2D" uid="uid://btgqjcmr7mnop" path="res://assets/black_bar.png" id="3_lnhhf"]
+[ext_resource type="AudioStream" uid="uid://65j4g5g4ork8" path="res://audio/sfx/select.wav" id="5_jspeq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_law5b"]
 radius = 100.0
@@ -25,6 +26,11 @@ texture = ExtResource("3_lnhhf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CapsuleShape2D_law5b")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="MouseOverSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_jspeq")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
