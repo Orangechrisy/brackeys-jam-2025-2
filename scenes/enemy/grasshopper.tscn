@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://dit74hpodrqrv"]
+[gd_scene load_steps=13 format=3 uid="uid://c3y557fdk7uj2"]
 
-[ext_resource type="PackedScene" uid="uid://dm5m0f20omtaj" path="res://scenes/enemy/bug.tscn" id="1_w45cp"]
+[ext_resource type="PackedScene" uid="uid://b4tdpnrnwxojk" path="res://scenes/enemy/Bug.tscn" id="1_w45cp"]
 [ext_resource type="Texture2D" uid="uid://cwh0yxkvfu8ee" path="res://assets/bugs/grasshopper.png" id="2_d35bs"]
 [ext_resource type="Script" uid="uid://ce76luagnvhqn" path="res://scripts/grasshopper.gd" id="2_ihgd1"]
 [ext_resource type="Texture2D" uid="uid://c0wv2g1amlodj" path="res://assets/bugs/dustcloud.png" id="4_ihgd1"]
