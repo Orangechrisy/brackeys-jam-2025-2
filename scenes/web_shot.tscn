@@ -6,7 +6,6 @@
 
 [node name="Web Shot" instance=ExtResource("1_crbfv")]
 script = ExtResource("2_dytd2")
-speed = 200
 
 [node name="Sprite2D" parent="." index="0"]
 rotation = 1.5708

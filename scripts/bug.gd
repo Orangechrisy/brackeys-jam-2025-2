@@ -8,8 +8,10 @@ class_name Bug
 		if max_health != null:
 			if health > value:
 				GameManager.display_number(health-value,global_position,false)
-			else:
+			elif health < value:
 				GameManager.display_number(value-health,global_position,true)
+				$Sounds/Heal.pitch_scale = randf_range(0.9, 1.1)
+				$Sounds/Heal.play()
 			if value > max_health:
 				health = max_health
 			else:

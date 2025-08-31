@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxho170gbbxx1"]
+[gd_scene load_steps=8 format=3 uid="uid://bxho170gbbxx1"]
 
 [ext_resource type="Script" uid="uid://ca0qjmx55oaai" path="res://scripts/battlefield.gd" id="1_j68fe"]
+[ext_resource type="Texture2D" uid="uid://d2lqkviev5824" path="res://assets/boxshadow.png" id="2_ixbtv"]
 [ext_resource type="Texture2D" uid="uid://cmokynj8pyjol" path="res://assets/box.png" id="2_j68fe"]
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="3_j68fe"]
 [ext_resource type="AudioStream" uid="uid://ch4btsidfoc6s" path="res://audio/sfx/match_bell.wav" id="4_21s54"]
@@ -12,6 +13,10 @@ size = Vector2(40.5376, 441.583)
 [node name="Battlefield" type="Node2D"]
 z_index = -6
 script = ExtResource("1_j68fe")
+
+[node name="Boxshadow" type="Sprite2D" parent="."]
+position = Vector2(-29, 20)
+texture = ExtResource("2_ixbtv")
 
 [node name="Battlefield" type="Sprite2D" parent="."]
 texture = ExtResource("2_j68fe")
@@ -101,6 +106,8 @@ bus = &"SFX"
 
 [node name="MouseOverSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("5_jsyt3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
