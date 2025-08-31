@@ -357,6 +357,8 @@ func determine_player() -> PackedScene:
 func determine_enemy() -> PackedScene:
 	if enemyID == -1:
 		enemyID = randi_range(0, GameManager.num_enemies - 1)
+		while (enemyID == GameManager.last_enemy_bugID):
+			enemyID = randi_range(0, GameManager.num_enemies - 1)
 	var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
 	var enemy_bug = load(path)
 	var enemy_names = GameManager.default_bug_names[enemyID]

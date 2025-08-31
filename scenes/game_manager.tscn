@@ -29,6 +29,7 @@ bus = &"MUSIC"
 [node name="Death" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("6_ternb")
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="FadeBlack" type="ColorRect" parent="."]
