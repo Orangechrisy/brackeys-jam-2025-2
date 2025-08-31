@@ -125,6 +125,7 @@ var no_brain = false
 var upper_boundary: Vector2
 var lower_boundary: Vector2
 var match_num = 1
+var rewards = [0, 0, 0, 0, 0]
 
 var game_over_bool = false
 
@@ -211,6 +212,7 @@ func _reset():
 	no_left_arm = false
 	no_brain = false
 	match_num = 1
+	rewards = [0, 0, 0, 0, 0]
 	reset_rarities()
 
 func reset_rarities():

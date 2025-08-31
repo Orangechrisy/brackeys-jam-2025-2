@@ -91,9 +91,11 @@ func end_of_battle():
 		$EndingReward/Label2.show()
 		$EndingReward/Reward.show()
 		GameManager.blood += 1
+		GameManager.rewards.append(reward)
 	elif wins == 2:
 		$EndingReward/Label.text = "You Won " + rewards[reward]
 		$EndingReward/Reward.show()
+		GameManager.rewards.append(reward)
 	else:
 		$EndingReward/Label.text = "You Didn't Win " + rewards[reward]
 	await get_tree().create_timer(4.0).timeout
