@@ -123,11 +123,41 @@ var upper_boundary: Vector2
 var lower_boundary: Vector2
 var match_num = 1
 
+var game_over_bool = false
+
 func game_over():
-	match_num = 1
-	print("game over :(")
-	await get_tree().create_timer(0.5).timeout
+	game_over_bool = true
+	stop_other_music(endMusic)
+	get_tree().paused = true
+	$Red.show()
+	await get_tree().create_timer(0.15).timeout
+	$Red.hide()
+	await get_tree().create_timer(1).timeout
+	var tweenShake = create_tween()
+	tweenShake.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	#tween.set_parallel()
+	var x = get_viewport().position.x
+	tweenShake.tween_property(get_viewport(), "position:x", x - 50, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x + 100, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x - 50, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x + 100, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x - 50, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x, 0.1)
+	await tweenShake.finished
+	$Death.play()
+	$FadeBlack.show()
+	var tweenBlack = create_tween()
+	tweenBlack.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tweenBlack.tween_property($FadeBlack, "modulate", Color("000000ff"), 1)
+	await tweenBlack.finished
+	await get_tree().create_timer(1).timeout
+	play_audio(endMusic, true)
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+	var tweenBlack2 = create_tween()
+	tweenBlack2.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tweenBlack2.tween_property($FadeBlack, "modulate", Color("00000000"), 1)
+	await tweenBlack2.finished
+	$FadeBlack.hide()
 
 func _input(event):
 	if event.is_action_pressed("escape"):
@@ -177,6 +207,7 @@ func _reset():
 	no_right_arm = false
 	no_left_arm = false
 	no_brain = false
+	match_num = 1
 	reset_rarities()
 
 func reset_rarities():
@@ -278,16 +309,23 @@ func liver_check():
 
 var shopMusic = "ShopMusic"
 var battleMusic = "BattleMusic"
+var endMusic = "EndMusic"
+
 func play_audio(path: String, fadeIn: bool):
 	var audio_to_play
-	if path == shopMusic:
-		if $ShopMusic.playing:
-			return
-		audio_to_play = $ShopMusic
-	elif path == battleMusic:
-		if $BattleMusic.playing:
-			return
-		audio_to_play = $BattleMusic
+	match path:
+		shopMusic:
+			if $ShopMusic.playing:
+				return
+			audio_to_play = $ShopMusic
+		battleMusic:
+			if $BattleMusic.playing:
+				return
+			audio_to_play = $BattleMusic
+		endMusic:
+			if $EndMusic.playing:
+				return
+			audio_to_play = $EndMusic
 	if fadeIn:
 		var tween = create_tween()
 		tween.parallel()
@@ -299,28 +337,28 @@ func play_audio(path: String, fadeIn: bool):
 		audio_to_play.play(0.0)
 
 func stop_other_music(path: String):
-	if path == shopMusic:
-		if $ShopMusic.playing:
-			return
-		if $BattleMusic.playing:
-			var tween = create_tween()
-			tween.tween_property($BattleMusic, "volume_linear", 0.0, 1.0)
-			tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-			#tween.tween_callback($BattleMusic.stop)
-			await tween.finished
-			$BattleMusic.stop()
-			$BattleMusic.volume_linear = 1.0
-	elif path == battleMusic:
-		if $BattleMusic.playing:
-			return
-		if $ShopMusic.playing:
-			var tween = create_tween()
-			tween.tween_property($ShopMusic, "volume_linear", 0.0, 1.0)
-			tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-			#tween.tween_callback($ShopMusic.stop)
-			await tween.finished
-			$ShopMusic.stop()
-			$ShopMusic.volume_linear = 1.0
+	var music_to_stop = null
+	var musicNodes = [$ShopMusic, $BattleMusic, $EndMusic]
+	for music in musicNodes:
+		if music.playing:
+			music_to_stop = music
+	match path:
+		shopMusic:
+			if $ShopMusic.playing:
+				return
+		battleMusic:
+			if $BattleMusic.playing:
+				return
+		endMusic:
+			if $EndMusic.playing:
+				return
+	if music_to_stop != null:
+		var tween = create_tween()
+		tween.tween_property(music_to_stop, "volume_linear", 0.0, 1.0)
+		tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		await tween.finished
+		music_to_stop.stop()
+		music_to_stop.volume_linear = 1.0
 
 #DAMAGE NUMBERS
 var theme: Theme = preload("res://button_theme.tres")
@@ -351,7 +389,7 @@ func display_number(value: int, pos: Vector2, heal: bool):
 	number.pivot_offset = Vector2(number.size / 2)
 	
 	var tween = get_tree().create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.set_parallel()
 	tween.tween_property(number, "position:y", number.position.y-24, 0.25).set_ease(Tween.EASE_OUT)
 	tween.tween_property(number, "position:y", number.position.y, 0.5).set_ease(Tween.EASE_IN).set_delay(0.25)

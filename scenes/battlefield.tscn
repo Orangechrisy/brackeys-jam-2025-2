@@ -76,6 +76,7 @@ shape = SubResource("RectangleShape2D_ixbtv")
 [node name="Bugs" type="Node2D" parent="."]
 
 [node name="Button" type="Button" parent="."]
+visible = false
 offset_left = -84.0
 offset_top = -443.0
 offset_right = 86.0

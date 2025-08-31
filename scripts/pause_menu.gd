@@ -5,13 +5,15 @@ var fullscreen: bool = false
 func _notification(what: int) -> void:
 	match what:
 		Node.NOTIFICATION_PAUSED:
-			hide()
+			if not GameManager.game_over_bool:
+				hide()
 		Node.NOTIFICATION_UNPAUSED:
-			show()
-			if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-				fullscreen = true
-			else:
-				fullscreen = false
+			if not GameManager.game_over_bool:
+				show()
+				if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+					fullscreen = true
+				else:
+					fullscreen = false
 
 func _on_resume_pressed() -> void:
 	get_tree().paused = !get_tree().paused
