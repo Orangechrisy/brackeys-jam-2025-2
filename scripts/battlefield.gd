@@ -64,7 +64,7 @@ func round_change(bug: CharacterBody2D):
 		player_bug.remove_timers()
 		player_bug.queue_free()
 		enemy_bug.queue_free()
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(1, false).timeout
 		reset.emit(won)
 
 func _on_button_pressed() -> void:

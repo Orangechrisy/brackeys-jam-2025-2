@@ -32,6 +32,10 @@ func _process(_delta: float) -> void:
 	# can maybe instead do this by viewport size instead of hardcoded...
 	if not brain_move_tween:
 		$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
+	if hovered_part == null:
+		$Tooltip.hide()
+
+func do_lungs():
 	if GameManager.no_lungs:
 		$Lungs.show()
 		$Lungs/ColorRect.show()
@@ -49,8 +53,6 @@ func _process(_delta: float) -> void:
 			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.time_left
 	else:
 		$Lungs.hide()
-	if hovered_part == null:
-		$Tooltip.hide()
 
 var reward: int
 var rewards = [
@@ -72,7 +74,7 @@ func start_of_battle():
 	$StartingReward.show()
 	$Sounds/Drumroll.play()
 	reward = randi_range(0, rewards.size() - 1)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(2.0, false).timeout
 	$StartingReward/LabelReward.text = rewards[reward]
 	$StartingReward/LabelReward.show()
 	$StartingReward/Rays.show()
@@ -80,7 +82,7 @@ func start_of_battle():
 	$StartingReward/Reward.show()
 	$StartingReward/Label2.show()
 	$StartingReward/Label3.show()
-	await get_tree().create_timer(4.0).timeout
+	await get_tree().create_timer(4.0, false).timeout
 	$StartingReward.hide()
 
 func end_of_battle():
@@ -92,15 +94,15 @@ func end_of_battle():
 		$EndingReward/Reward.show()
 		GameManager.blood += 1
 		$Sounds/Victory.play()
-		GameManager.rewards.append(reward)
+		GameManager.rewards[reward] += 1
 	elif wins == 2:
 		$EndingReward/Label.text = "You Won " + rewards[reward]
 		$EndingReward/Reward.show()
-		GameManager.rewards.append(reward)
+		GameManager.rewards[reward] += 1
 		$Sounds/Victory.play()
 	else:
 		$EndingReward/Label.text = "You Didn't Win " + rewards[reward]
-	await get_tree().create_timer(4.0).timeout
+	await get_tree().create_timer(5.5, false).timeout
 
 func set_health_bars():
 	$UI/Player/HealthBar.max_value = GameManager.player_bug.max_health
@@ -415,29 +417,29 @@ func _on_battlefield_reset(won: bool) -> void:
 	
 	GameManager.liver_check()
 	check_hand_sprite()
-	
-	if curr_round < num_rounds:
-		await get_tree().create_timer(2.0).timeout
-		# these two temp
-		var player = determine_player()
-		var enemy
-		if enemyID == -1:
-			enemy = determine_enemy()
+	if not GameManager.game_over_bool:
+		if curr_round < num_rounds:
+			await get_tree().create_timer(2.0, false).timeout
+			# these two temp
+			var player = determine_player()
+			var enemy
+			if enemyID == -1:
+				enemy = determine_enemy()
+			else:
+				var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
+				enemy = load(path)
+			$Battlefield.place_bugs(player, enemy)
+			create_hand()
+			enemy_play_parts()
+			set_health_bars()
 		else:
-			var path = "res://scenes/enemy/" + GameManager.ENEMIES[enemyID] + ".tscn"
-			enemy = load(path)
-		$Battlefield.place_bugs(player, enemy)
-		create_hand()
-		enemy_play_parts()
-		set_health_bars()
-	else:
-		GameManager.enemy_body_parts.clear()
-		GameManager.enemy_played_parts.clear()
-		#GameManager.stop_other_music(GameManager.shopMusic)
-		await get_tree().create_timer(2.0).timeout
-		await end_of_battle()
-		if not GameManager.game_over_bool:
-			get_tree().change_scene_to_file("res://scenes/shop.tscn")
+			GameManager.enemy_body_parts.clear()
+			GameManager.enemy_played_parts.clear()
+			GameManager.stop_other_music(GameManager.shopMusic)
+			await get_tree().create_timer(1.2, false).timeout
+			await end_of_battle()
+			if not GameManager.game_over_bool:
+				get_tree().change_scene_to_file("res://scenes/shop.tscn")
 	can_click = true
 
 func reset_enemy_parts(won: bool):

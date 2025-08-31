@@ -371,10 +371,10 @@ wait_time = 30.0
 one_shot = true
 
 [node name="Label" type="Label" parent="Lungs"]
-offset_left = 1336.0
-offset_top = 19.0
-offset_right = 1455.0
-offset_bottom = 102.0
+offset_left = 1348.0
+offset_top = 28.0
+offset_right = 1467.0
+offset_bottom = 111.0
 theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 60
 text = "30.0"

@@ -28,6 +28,9 @@ func _on_quit_pressed() -> void:
 func _on_settings_pressed() -> void:
 	$CenterContainer/MenuButtons.visible = false
 	$CenterContainer/SettingsMenu.visible = true
+	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("Master"))
+	$CenterContainer/SettingsMenu/musicvolume.value = db_to_linear(AudioServer.get_bus_index("MUSIC"))
+	$CenterContainer/SettingsMenu/sfxvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
 
 
 func _on_fullscreen_pressed() -> void:

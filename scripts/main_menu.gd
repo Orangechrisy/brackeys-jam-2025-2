@@ -8,8 +8,8 @@ func _ready() -> void:
 	# TODO starting value of volume should probably be .5 i think? or maybe make it go up to 2? idk
 	$CenterContainer/SettingsMenu/fullscreen.button_pressed = true if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN else false
 	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("Master"))
-	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("MUSIC"))
-	$CenterContainer/SettingsMenu/mainvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
+	$CenterContainer/SettingsMenu/musicvolume.value = db_to_linear(AudioServer.get_bus_index("MUSIC"))
+	$CenterContainer/SettingsMenu/sfxvolume.value = db_to_linear(AudioServer.get_bus_index("SFX"))
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		fullscreen = true
 	else:

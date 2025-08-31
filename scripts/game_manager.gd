@@ -169,6 +169,7 @@ func _input(event):
 			get_tree().paused = !get_tree().paused
 
 func _reset():
+	game_over_bool = false
 	body_parts.clear()
 	enemy_body_parts.clear()
 	
@@ -226,6 +227,7 @@ func lose_part(partID: int):
 	if played_parts.count(partID) == 0 and body_parts.count(partID) == 0:
 		match partID:
 			BODYPARTS.HEART:
+				player_health = 0
 				game_over()
 			BODYPARTS.BRAIN:
 				no_brain = true
