@@ -34,18 +34,18 @@ func adjust_ray_cast():
 	$RayCast2D.target_position -= Vector2(20.0, 0.0)
 
 func fix_if_ray_cast_OoB():
-	if to_global($RayCast2D.target_position).x > upper_boundary.x:
-		while to_global($RayCast2D.target_position).x > upper_boundary.x:
+	if to_global($RayCast2D.target_position).x > GameManager.upper_boundary.x:
+		while to_global($RayCast2D.target_position).x > GameManager.upper_boundary.x:
 			adjust_ray_cast()
-	elif to_global($RayCast2D.target_position).x < lower_boundary.x:
-		while to_global($RayCast2D.target_position).x < lower_boundary.x:
+	elif to_global($RayCast2D.target_position).x < GameManager.lower_boundary.x:
+		while to_global($RayCast2D.target_position).x < GameManager.lower_boundary.x:
 			adjust_ray_cast()
 	
-	if to_global($RayCast2D.target_position).y > upper_boundary.y:
-		while to_global($RayCast2D.target_position).y > upper_boundary.y:
+	if to_global($RayCast2D.target_position).y > GameManager.upper_boundary.y:
+		while to_global($RayCast2D.target_position).y > GameManager.upper_boundary.y:
 			adjust_ray_cast()
-	elif to_global($RayCast2D.target_position).y < lower_boundary.y:
-		while to_global($RayCast2D.target_position).y < lower_boundary.y:
+	elif to_global($RayCast2D.target_position).y < GameManager.lower_boundary.y:
+		while to_global($RayCast2D.target_position).y < GameManager.lower_boundary.y:
 			adjust_ray_cast()
 
 func _on_charge_timer_timeout() -> void:

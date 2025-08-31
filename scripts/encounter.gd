@@ -75,7 +75,7 @@ func start_of_battle():
 
 func end_of_battle():
 	$EndingReward.show()
-	$StartingReward/Reward.texture = load(reward_images[reward])
+	$EndingReward/Reward.texture = load(reward_images[reward])
 	if wins == 3:
 		$EndingReward/Label.text = "You Won " + rewards[reward]
 		$EndingReward/Label2.show()
@@ -277,6 +277,7 @@ func set_enemy_body():
 
 func enemy_play_parts():
 	GameManager.enemy_body_parts.shuffle()
+	@warning_ignore("integer_division")
 	var part_play_count = min(1 + floor(GameManager.match_num / 2), 8)
 	for i in range(min(part_play_count, GameManager.enemy_body_parts.size())):
 		var partID = GameManager.enemy_body_parts.pop_back()
@@ -434,4 +435,5 @@ func _on_battlefield_allow_clicking(allow: bool) -> void:
 
 
 func _on_lungs_timer_timeout() -> void:
+	lungs_timer_ended = true
 	GameManager.game_over()

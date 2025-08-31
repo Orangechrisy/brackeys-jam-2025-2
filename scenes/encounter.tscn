@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=33 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
@@ -9,9 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://csbtxgx5jy0d8" path="res://scenes/blood.tscn" id="5_3l52i"]
 [ext_resource type="Theme" uid="uid://2vmj5q8dyyau" path="res://button_theme.tres" id="5_8lsj0"]
 [ext_resource type="Texture2D" uid="uid://c0x2cgeflwr2k" path="res://assets/hands/hand_open.png" id="5_75kek"]
+[ext_resource type="Texture2D" uid="uid://34fbqb64wwjc" path="res://assets/portrait_bg2_full.png" id="6_2kmb0"]
 [ext_resource type="Texture2D" uid="uid://fnpn2wbrcxqv" path="res://assets/healthbar.png" id="6_dmrgg"]
 [ext_resource type="Texture2D" uid="uid://c5cixqhk35u2i" path="res://assets/hands/hand_closed.png" id="6_woaxd"]
-[ext_resource type="Texture2D" uid="uid://34fbqb64wwjc" path="res://assets/portrait_bg2_full.png" id="6_2kmb0"]
 [ext_resource type="PackedScene" uid="uid://bbx7eyc7lgxem" path="res://scenes/tooltip.tscn" id="7_2dnca"]
 [ext_resource type="Texture2D" uid="uid://bvqx8uj6qtevn" path="res://assets/healthfluid_blue.png" id="7_xjdyn"]
 [ext_resource type="Texture2D" uid="uid://drs2q5nr4kihs" path="res://assets/healthfluid.png" id="9_a3ycy"]

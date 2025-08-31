@@ -127,11 +127,10 @@ func start_timers():
 			speed = 0
 			var timer = Timer.new()
 			$BodyPartTimers.add_child(timer)
-			timer.wait_time = randi_range(1, 1)
+			timer.wait_time = randi_range(3, 6)
 			timer.one_shot = true
 			timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
 			timer.start()
-	
 	start_bug_timers()
 
 func start_bug_timers():
@@ -174,7 +173,6 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 			# Handling damage dealt
 			damage_sound()
 			health -= dmg
-			print("health after hit: ", health, ", dmg: ", dmg)
 			if dmg > 0:
 				#Taking Damage: play animation and get 0.3s of i-frames
 				invincible=true
