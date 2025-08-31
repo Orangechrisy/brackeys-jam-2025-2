@@ -447,17 +447,19 @@ func reset_enemy_parts(won: bool):
 			var part = GameManager.enemy_played_parts.pop_back()
 			update_part_count(part, false)
 			blood_gain += 1
-		GameManager.blood += max(0, blood_gain - GameManager.less_blood)
-		var blood_sprite = Sprite2D.new()
-		blood_sprite.texture = load("res://assets/blood.png")
-		blood_sprite.position = $enemybody.position
-		add_child(blood_sprite)
-		var tween = create_tween()
-		tween.parallel()
-		tween.tween_property(blood_sprite, "position", $Blood.position, 1)
-		await tween.finished
-		blood_sprite.queue_free()
-		$Blood/Label.text = str(GameManager.blood)
+		blood_gain -= GameManager.less_blood
+		if blood_gain > 0:
+			GameManager.blood += blood_gain
+			var blood_sprite = Sprite2D.new()
+			blood_sprite.texture = load("res://assets/blood.png")
+			blood_sprite.position = $enemybody.position
+			add_child(blood_sprite)
+			var tween = create_tween()
+			tween.parallel()
+			tween.tween_property(blood_sprite, "position", $Blood.position, 1)
+			await tween.finished
+			blood_sprite.queue_free()
+			$Blood/Label.text = str(GameManager.blood)
 	else:
 		# put the parts back into enemy's body parts pool since they didnt lose any
 		for i in range(GameManager.enemy_played_parts.size()):
