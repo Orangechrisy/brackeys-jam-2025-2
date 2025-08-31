@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cda83b6vq6mnk"]
+[gd_scene load_steps=34 format=3 uid="uid://cda83b6vq6mnk"]
 
 [ext_resource type="Script" uid="uid://cmq5djgffo3y4" path="res://scripts/encounter.gd" id="1_kb58x"]
 [ext_resource type="PackedScene" uid="uid://dsvf6lqslsu2t" path="res://scenes/body.tscn" id="1_lp88p"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://mqt2my0tnaa3" path="res://assets/hands/hand_closed_left.png" id="15_x7m0v"]
 [ext_resource type="AudioStream" uid="uid://dxw2iopbsf3bh" path="res://audio/sfx/reward.wav" id="17_2kmb0"]
 [ext_resource type="AudioStream" uid="uid://cuavti33owfqv" path="res://audio/sfx/play_body_part.wav" id="19_2rix4"]
+[ext_resource type="AudioStream" uid="uid://b8xqd6pj43vd1" path="res://audio/sfx/player_hit.wav" id="27_a3ycy"]
 
 [sub_resource type="Animation" id="Animation_2dnca"]
 resource_name = "damage"
@@ -370,6 +371,14 @@ theme = ExtResource("5_8lsj0")
 theme_override_font_sizes/font_size = 60
 text = "30.0"
 
+[node name="ColorRect" type="ColorRect" parent="Lungs"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0.0627451, 0.0627451, 0.282353)
+
 [node name="HPBar" parent="." instance=ExtResource("14_034qn")]
 offset_left = 18.0
 offset_top = 483.0
@@ -385,6 +394,10 @@ bus = &"SFX"
 [node name="PlayBodyPart" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("19_2rix4")
 volume_db = 10.0
+bus = &"SFX"
+
+[node name="PlayerHit" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("27_a3ycy")
 bus = &"SFX"
 
 [connection signal="allow_clicking" from="Battlefield" to="." method="_on_battlefield_allow_clicking"]

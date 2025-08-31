@@ -236,7 +236,6 @@ shape = SubResource("CapsuleShape2D_srpgu")
 disabled = true
 
 [node name="GlobalAnimationPlayer" type="AnimationPlayer" parent="."]
-process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_tcmtr")
 }

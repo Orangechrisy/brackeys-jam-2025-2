@@ -33,7 +33,16 @@ func _process(_delta: float) -> void:
 		$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
 	if GameManager.no_lungs:
 		$Lungs.show()
-		if $Lungs/LungsTimer.is_stopped() and not lungs_timer_ended:
+		$Lungs/ColorRect.show()
+		if not $Lungs/LungsTimer.is_stopped():
+			var out_of_time = 1 - ($Lungs/LungsTimer.time_left / $Lungs/LungsTimer.wait_time)
+			$Lungs/ColorRect.modulate = Color(1, 1, 1, out_of_time)
+		elif not lungs_timer_ended:
+			$Lungs/ColorRect.hide()
+		if lungs_timer_ended:
+			$Lungs/Label.text = "0.00"
+			$Lungs/ColorRect.modulate = Color(1, 1, 1, 1)
+		elif $Lungs/LungsTimer.is_stopped():
 			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.wait_time
 		else:
 			$Lungs/Label.text = "%0.2f" % $Lungs/LungsTimer.time_left
@@ -373,6 +382,8 @@ func _on_battlefield_reset(won: bool) -> void:
 	curr_round += 1
 	if won:
 		wins += 1
+	else:
+		$Sounds/PlayerHit.play()
 	#for part in GameManager.played_parts:
 	for i in range(GameManager.played_parts.size()):
 		var part = GameManager.played_parts.pop_back()
@@ -436,4 +447,5 @@ func _on_battlefield_allow_clicking(allow: bool) -> void:
 
 func _on_lungs_timer_timeout() -> void:
 	lungs_timer_ended = true
+	$Lungs/Label.text = "0.00"
 	GameManager.game_over()

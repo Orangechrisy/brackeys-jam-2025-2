@@ -127,9 +127,35 @@ func game_over():
 	game_over_bool = true
 	stop_other_music(endMusic)
 	get_tree().paused = true
-	await get_tree().create_timer(2).timeout
+	$Red.show()
+	await get_tree().create_timer(0.15).timeout
+	$Red.hide()
+	await get_tree().create_timer(1).timeout
+	var tweenShake = create_tween()
+	tweenShake.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	#tween.set_parallel()
+	var x = get_viewport().position.x
+	tweenShake.tween_property(get_viewport(), "position:x", x - 50, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x + 100, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x - 50, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x + 100, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x - 50, 0.1)
+	tweenShake.tween_property(get_viewport(), "position:x", x, 0.1)
+	await tweenShake.finished
+	$Death.play()
+	$FadeBlack.show()
+	var tweenBlack = create_tween()
+	tweenBlack.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tweenBlack.tween_property($FadeBlack, "modulate", Color("000000ff"), 1)
+	await tweenBlack.finished
+	await get_tree().create_timer(1).timeout
 	play_audio(endMusic, true)
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
+	var tweenBlack2 = create_tween()
+	tweenBlack2.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tweenBlack2.tween_property($FadeBlack, "modulate", Color("00000000"), 1)
+	await tweenBlack2.finished
+	$FadeBlack.hide()
 
 func _input(event):
 	if event.is_action_pressed("escape"):
@@ -358,7 +384,7 @@ func display_number(value: int, pos: Vector2, heal: bool):
 	number.pivot_offset = Vector2(number.size / 2)
 	
 	var tween = get_tree().create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.set_parallel()
 	tween.tween_property(number, "position:y", number.position.y-24, 0.25).set_ease(Tween.EASE_OUT)
 	tween.tween_property(number, "position:y", number.position.y, 0.5).set_ease(Tween.EASE_IN).set_delay(0.25)

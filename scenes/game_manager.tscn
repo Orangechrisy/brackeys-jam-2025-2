@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://wsl2rcamd0fy"]
+[gd_scene load_steps=7 format=3 uid="uid://wsl2rcamd0fy"]
 
 [ext_resource type="Script" uid="uid://btrwbc3jombcx" path="res://scripts/game_manager.gd" id="1_hwd4i"]
 [ext_resource type="PackedScene" uid="uid://bc0xjk24cdtpk" path="res://scenes/pause_menu.tscn" id="2_glms7"]
 [ext_resource type="AudioStream" uid="uid://0nyrnuk0vrr5" path="res://audio/music/Professor E. Groove.wav" id="3_udu3i"]
 [ext_resource type="AudioStream" uid="uid://vmrvrhx6pruj" path="res://audio/music/the cockroach has breached containment.wav" id="4_oo155"]
 [ext_resource type="AudioStream" uid="uid://db2tk6155hprg" path="res://audio/music/Empty Rook.wav" id="5_eaq8r"]
+[ext_resource type="AudioStream" uid="uid://cqfwwf4i1glq1" path="res://audio/sfx/player_death.wav" id="6_ternb"]
 
 [node name="GameManager" type="Node2D"]
 process_mode = 3
@@ -23,3 +24,26 @@ bus = &"MUSIC"
 
 [node name="EndMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_eaq8r")
+bus = &"MUSIC"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("6_ternb")
+bus = &"SFX"
+
+[node name="FadeBlack" type="ColorRect" parent="."]
+process_mode = 3
+visible = false
+modulate = Color(0, 0, 0, 0)
+z_index = 4096
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Red" type="ColorRect" parent="."]
+process_mode = 3
+visible = false
+z_index = 4096
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(1, 0, 0, 0.443137)
