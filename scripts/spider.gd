@@ -6,6 +6,7 @@ var spider: bool = true
 var melee_state: bool = false
 var enemy: CharacterBody2D
 var enemy_found: bool = false
+@export var proj_dmg: int = 3
 
 var tween_started: bool = false
 func enemy_process(delta):
@@ -26,8 +27,10 @@ func enemy_process(delta):
 			velocity = velocity.rotated(deg_to_rad(randf_range(-10.0, 10.0)))
 			direction = velocity/speed
 	elif not tween_started:
+		$BugTimers/ShootTimer.stop()
 		tween_started=true
 		invincible=true
+		$AttackArea.scale = Vector2.ZERO
 		var dist = global_position.distance_to(enemy.global_position)
 		var time = dist / 350.0
 		var tween = create_tween()
@@ -44,6 +47,7 @@ func enemy_process(delta):
 		
 		tween.tween_property(self, "global_position", attack_pos, time)
 		await tween.finished
+		$BugTimers/ShootTimer.start()
 		invincible=false
 		web_area_active=false
 		tween_started=false
@@ -56,7 +60,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if web_area_active:
 		if body.is_in_group("hurtbox"):
 			if "health" in body:
-				body.hit(10, self, body)
+				body.hit(damage, self, body)
 				web_area_active=false
 				# TODO this should totally cause the little portrait to have an effect
 
@@ -65,9 +69,13 @@ const WEB_SHOT = preload("res://scenes/web_shot.tscn")
 func _on_shoot_timer_timeout() -> void:
 	var webshot = WEB_SHOT.instantiate()
 	webshot.origin_bug = self
+	webshot.damage = proj_dmg
 	get_parent().add_child(webshot)
 	webshot.global_position = global_position
 	webshot.direction = (to_global(Vector2.RIGHT)-global_position).normalized()
+	
+	$BugTimers/ShootTimer.wait_time = randf_range(2.5, 3.5)
+	$BugTimers/ShootTimer.start()
 
 
 func _on_melee_timer_timeout() -> void:

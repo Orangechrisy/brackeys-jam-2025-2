@@ -409,8 +409,9 @@ theme = ExtResource("1_qjq5y")
 theme_override_font_sizes/font_size = 80
 text = "BACK"
 
-[connection signal="mouse_entered" from="Control/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_entered" from="Control/StartButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="Control/HowToPlay" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="Control/HowToPlay" to="." method="_on_how_to_play_pressed"]
 [connection signal="mouse_entered" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/CockroachButton" to="." method="_on_cockroach_button_mouse_exited"]
@@ -428,4 +429,5 @@ text = "BACK"
 [connection signal="mouse_exited" from="Control/BeetleButton" to="." method="_on_beetle_button_mouse_exited"]
 [connection signal="pressed" from="Control/BeetleButton" to="." method="_on_beetle_button_pressed"]
 [connection signal="text_changed" from="Control/BugNameInput" to="." method="_on_bug_name_input_text_changed"]
+[connection signal="mouse_entered" from="HowToPlay/HowToPlayBack" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="HowToPlay/HowToPlayBack" to="." method="_on_how_to_play_back_pressed"]

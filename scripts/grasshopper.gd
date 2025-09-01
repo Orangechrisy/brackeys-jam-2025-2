@@ -30,7 +30,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 
 func _on_jump_timer_timeout() -> void:
 	if spidersnared:
-		$BugTimers/JumpTimer.wait_time = randf_range(2.0, 3.0)
+		$BugTimers/JumpTimer.wait_time = randf_range(1.0, 2.0)
 		$BugTimers/JumpTimer.start()
 		return
 	$CollisionShape2D.scale = Vector2(0.01, 0.01)
@@ -45,7 +45,7 @@ func _on_jump_timer_timeout() -> void:
 	$Sounds/Jump.pitch_scale = randf_range(0.7, 1.1)
 	$Sounds/Jump.play()
 	$AnimationPlayer.play("jump")
-	$BugTimers/JumpTimer.wait_time = randf_range(4.0, 5.0)
+	$BugTimers/JumpTimer.wait_time = randf_range(3.0, 4.0)
 	$BugTimers/JumpTimer.start()
 	await $AnimationPlayer.animation_finished
 	speed=default_speed

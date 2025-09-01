@@ -51,6 +51,7 @@ _data = {
 [node name="Grasshopper" instance=ExtResource("1_w45cp")]
 z_index = 2
 script = ExtResource("2_ihgd1")
+damage = 7
 speed = 350
 
 [node name="Sprite2D" parent="." index="1"]

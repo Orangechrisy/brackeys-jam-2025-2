@@ -15,7 +15,7 @@ radius = 24.0832
 [node name="Wasp" instance=ExtResource("1_8u2kk")]
 z_index = 2
 script = ExtResource("2_pc0kl")
-health = 15
+health = 17
 damage = 3
 speed = 500
 

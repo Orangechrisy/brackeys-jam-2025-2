@@ -162,8 +162,8 @@ func hit(dmg: int, attackingBug: CharacterBody2D, attackedBug: CharacterBody2D):
 					if randi_range(1, 2) == 2:
 						$Sounds/Dodge.pitch_scale = randf_range(0.9, 1.1)
 						$Sounds/Dodge.play()
-						dmg = 0
 						battlefield.create_area(DODGED, global_position, null)
+						return
 						
 			# attacking bug has a tongue
 			if dmg > 0:

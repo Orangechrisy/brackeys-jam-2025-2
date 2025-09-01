@@ -168,7 +168,7 @@ func play_mouse_over_sound():
 	$MouseOverSound.pitch_scale = randf_range(0.9, 1.4)
 	$MouseOverSound.play()
 
-func _on_start_button_mouse_entered() -> void:
+func _on_mouse_entered() -> void:
 	play_mouse_over_sound()
 
 

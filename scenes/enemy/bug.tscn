@@ -283,7 +283,7 @@ metadata/_edit_lock_ = true
 
 [node name="Dodge" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("13_4df1f")
-volume_db = 5.0
+volume_db = 18.0
 bus = &"SFX"
 metadata/_edit_lock_ = true
 

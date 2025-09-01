@@ -12,7 +12,8 @@ radius = 32.0624
 [node name="Spider" instance=ExtResource("1_xtqu1")]
 z_index = 2
 script = ExtResource("2_656li")
-damage = 3
+proj_dmg = 3
+damage = 10
 speed = 100
 
 [node name="Sprite2D" parent="." index="1"]
@@ -23,10 +24,12 @@ texture = ExtResource("3_pf1qy")
 position = Vector2(50, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+position = Vector2(-16, 0)
 shape = SubResource("CircleShape2D_656li")
 
 [node name="ShootTimer" type="Timer" parent="BugTimers" index="1"]
 wait_time = 3.0
+one_shot = true
 
 [node name="MeleeTimer" type="Timer" parent="BugTimers" index="3"]
 wait_time = 1.5

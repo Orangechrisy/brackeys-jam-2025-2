@@ -34,6 +34,7 @@ func _process(_delta: float) -> void:
 		$Hand.position = Vector2(clamp(mouse_pos.x, 440, 1440), clamp(mouse_pos.y, 830, 1080))
 	if hovered_part == null:
 		$Tooltip.hide()
+	do_lungs()
 
 func do_lungs():
 	if GameManager.no_lungs:
@@ -377,6 +378,7 @@ func determine_enemy() -> PackedScene:
 			$UI/Enemy/IconBG/Icon.texture = BEETLEICON
 		GameManager.BUGS.GRASSHOPPER:
 			$UI/Enemy/IconBG/Icon.texture = GRASSHOPPERICON
+	GameManager.last_enemy_bugID = enemyID
 	return enemy_bug
 
 #health bars
