@@ -37,9 +37,13 @@ func _on_jump_timer_timeout() -> void:
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
 	$LeftArm/ArmAttackArea.set_collision_layer_value(1, false)
+	$LeftArm/ArmAttackArea.set_collision_mask_value(1, false)
 	$RightArm/ArmAttackArea.set_collision_layer_value(1, false)
+	$RightArm/ArmAttackArea.set_collision_mask_value(1, false)
 	$LeftKidney/KidneyDefenseArea.set_collision_layer_value(1, false)
+	$LeftKidney/KidneyDefenseArea.set_collision_mask_value(1, false)
 	$RightKidney/KidneyDefenseArea.set_collision_layer_value(1, false)
+	$RightKidney/KidneyDefenseArea.set_collision_mask_value(1, false)
 	
 	speed=600
 	$Sounds/Jump.pitch_scale = randf_range(0.7, 1.1)
@@ -54,9 +58,13 @@ func _on_jump_timer_timeout() -> void:
 	set_collision_layer_value(1, true)
 	set_collision_mask_value(1, true)
 	$LeftArm/ArmAttackArea.set_collision_layer_value(1, true)
+	$LeftArm/ArmAttackArea.set_collision_mask_value(1, true)
 	$RightArm/ArmAttackArea.set_collision_layer_value(1, true)
+	$RightArm/ArmAttackArea.set_collision_mask_value(1, true)
 	$LeftKidney/KidneyDefenseArea.set_collision_layer_value(1, true)
+	$LeftKidney/KidneyDefenseArea.set_collision_mask_value(1, true)
 	$RightKidney/KidneyDefenseArea.set_collision_layer_value(1, true)
+	$RightKidney/KidneyDefenseArea.set_collision_mask_value(1, true)
 	
 	$AttackArea.scale = Vector2.ZERO
 	jumpattack=true
