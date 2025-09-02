@@ -118,7 +118,7 @@ func start_timers():
 				timer.start()
 	if self == GameManager.player_bug:
 		if GameManager.no_left_leg and GameManager.no_right_leg:
-			speed = 0
+			speed = 1
 			var timer = Timer.new()
 			$BodyPartTimers.add_child(timer)
 			timer.wait_time = randi_range(6, 12)
@@ -126,7 +126,7 @@ func start_timers():
 			timer.timeout.connect(_on_timer_leg_lost_timeout.bind(timer))
 			timer.start()
 		elif GameManager.no_left_leg or GameManager.no_right_leg:
-			speed = 0
+			speed = 1
 			var timer = Timer.new()
 			$BodyPartTimers.add_child(timer)
 			timer.wait_time = randi_range(3, 6)

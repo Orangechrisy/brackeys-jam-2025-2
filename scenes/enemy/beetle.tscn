@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bde7kodk5jgdp"]
 
-[ext_resource type="PackedScene" uid="uid://b4tdpnrnwxojk" path="res://scenes/enemy/Bug.tscn" id="1_veftp"]
+[ext_resource type="PackedScene" uid="uid://b4tdpnrnwxojk" path="res://scenes/enemy/bug.tscn" id="1_veftp"]
 [ext_resource type="Script" uid="uid://1asjr718dvk8" path="res://scripts/beetle.gd" id="2_htk0y"]
 [ext_resource type="Texture2D" uid="uid://bk5ftrrn0y031" path="res://assets/bugs/beetle.png" id="3_4vggu"]
 [ext_resource type="AudioStream" uid="uid://cqp4a0mvhg428" path="res://audio/sfx/beetle_idle.wav" id="4_0hurn"]
