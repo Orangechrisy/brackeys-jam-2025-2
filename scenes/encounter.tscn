@@ -385,6 +385,7 @@ modulate = Color(1, 1, 1, 0)
 z_index = 30
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 color = Color(0, 0.0627451, 0.0627451, 0.282353)
 
 [node name="HPBar" parent="." instance=ExtResource("14_034qn")]
